@@ -1,0 +1,8 @@
+# R project files
+^.*\.Rproj$
+^\.Rproj\.user$
+
+# git and github files
+.gitignore
+README.md
+LICENCE.md
