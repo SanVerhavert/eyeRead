@@ -1,4 +1,10 @@
 
+![CRAN_Version](http://www.r-pkg.org/badges/version/BTL.CJ)  
+##### development version (in dev branch)
+[![Dev Build](https://travis-ci.org/SanVerhavert/BTL.CJ.png?branch=dev)](https://travis-ci.org/SanVerhavert/BTL.CJ)
+##### Release version (in master branch)
+[![Build](https://travis-ci.org/SanVerhavert/BTL.CJ.png?branch=master)](https://travis-ci.org/SanVerhavert/BTL.CJ)
+
 # Fixation duration
 `fixationDuration` is an R package that identifies first pass and second pass fixations and
  their respective total durations. If so specified it identifies third pass fixations and further and
