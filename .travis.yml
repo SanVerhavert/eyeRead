@@ -1,0 +1,10 @@
+
+language: r
+cache: packages
+
+# safe list
+branches:
+  only:
+   - master
+   - release
+   - dev

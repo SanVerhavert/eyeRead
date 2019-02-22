@@ -6,3 +6,6 @@
 .gitignore
 README.md
 LICENCE.md
+
+# Travis CI files
+# .travis.yml
