@@ -1,9 +1,9 @@
 
 ![CRAN_Version](http://www.r-pkg.org/badges/version/fixationDuration)  
 ##### development version (in dev branch)
-[![Dev Build](https://travis-ci.org/SanVerhavert/fixationDuration.png?branch=dev)](https://travis-ci.org/SanVerhavert/BTL.CJ) [![Dev codecov](https://codecov.io/gh/SanVerhavert/fixationDuration/branch/dev/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/BTL.CJ)
+[![Dev Build](https://travis-ci.org/SanVerhavert/fixationDuration.png?branch=dev)](https://travis-ci.org/SanVerhavert/fixationDuration) [![Dev codecov](https://codecov.io/gh/SanVerhavert/fixationDuration/branch/dev/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/fixationDuration)
 ##### Release version (in master branch)
-[![Build](https://travis-ci.org/SanVerhavert/fixationDuration.png?branch=master)](https://travis-ci.org/SanVerhavert/BTL.CJ) [![codecov](https://codecov.io/gh/SanVerhavert/fixationDuration/branch/master/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/BTL.CJ)
+[![Build](https://travis-ci.org/SanVerhavert/fixationDuration.png?branch=master)](https://travis-ci.org/SanVerhavert/fixationDuration) [![codecov](https://codecov.io/gh/SanVerhavert/fixationDuration/branch/master/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/fixationDuration)
 
 # Fixation duration
 `fixationDuration` is an R package that identifies first pass and second pass fixations and
