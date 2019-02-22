@@ -5,7 +5,7 @@
 # git and github files
 .gitignore
 README.md
-LICENCE.md
+LICENSE.md
 
 # Travis CI files
-# .travis.yml
+.travis.yml
