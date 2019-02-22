@@ -46,28 +46,20 @@ Only merge from release branch.
 - release &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Branch for preparing releases; commits to this branch only contain
 version bumps and generated documentation; only merge from dev branch; merge to
 master and dev branches
-- dev &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Branch for main development; all commits allowed; merge from master
+- dev &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Branch for main development; all commits allowed; merge from master
 and release branches  
 
 Supporting branches [optional]:
 - feature_*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Branches for developing new features; can be used to keep dev
 branch clean and the development build working; only branches from and merges to
 the dev branch
-- issue_*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Branches for solving issues; name mostly referring to issue numbers;
+- issue_*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Branches for solving issues; name mostly referring to issue numbers;
 can branch from every other branch except (!) from master; merges only with the
 branch from witch it was branched
 
 ### Overview of this repository
 
-|
-* master
-|\
-| * dev
-| |\
-| | *release
-| |/*
-| */
-| /
-|/
-* 
-
+.  
+|_ master  
+|\\_ release  
+|\\_ dev  
