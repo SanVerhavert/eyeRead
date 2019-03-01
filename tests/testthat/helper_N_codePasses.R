@@ -44,10 +44,14 @@ codePasses_Data <- list(
   rereading = "EMPTY"
 )
 
-codePasses_results <- list( fix_min_err = "Fix min should be bigger than 0",
+codePasses_results <- list( no_data.frame_err = "data should be a data frame",
+                            fix_min_err = "Fix min should be bigger than 0",
                             missing_fpx_fpy_err =
                               paste0( "If rereading is TRUE, then fpx and fpy ",
                                       "should both be provided" ),
+                            no_colname_err = paste0( "cannot find the value ",
+                                                     "provided to AOI, ABC, ", 
+                                                     "in data" ),
                             regular = c( "FP_1", "FP_1", "FP_2", "FP_2", "FP_3", "FP_4",
                                          "FP_7", "FP_7", "FP_7", "FP_7", "FP_3", "FP_3",
                                          "SP_7", "FP_4", "FP_4", "FP_4", "FP_5", "FP_2",

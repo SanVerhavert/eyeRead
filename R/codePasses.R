@@ -115,7 +115,10 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
 
 inputCheck_codePasses <- function(data, AOI, rereading, fpx, fpy, fix_min)
 {
-  if( !is.data.frame( data ) ) stop( "data should be a data frame")
+  if( !is.data.frame( data ) ) stop( "data should be a data frame" )
+  
+  if( !is.numeric( AOI ) & !( AOI %in% colnames( data ) ) )
+    stop( paste0( "cannot find the value provided to AOI, ", AOI, ", in data" ) )
   
   if( fix_min <= 0 ) stop( "Fix min should be bigger than 0" )
   
