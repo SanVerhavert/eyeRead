@@ -1,14 +1,14 @@
-Package: fixationDuration
-Title: Calculating First and Second, and Optional Third and Further, Fixation Durations
+Package: eyeRead
+Title: Some functions to prepare/analyse eye tracking data for reading
 Version: 0.0.0.1
 Authors@R: 
     person(given = "San",
            family = "Verhavert",
            role = c("aut", "cre"),
            email = "san.verhavert@uantwerpen.be")
-Description: identifies first pass and second pass fixations and their respective 
-  total durations. If so specified it identifies third pass fixations and further 
-  and their respecitve total durations.  
+Description: This package contains some functions to prepare and analyse eye 
+  tracking data of reading exersises. Essentially it identifies first pass and
+  second pass fixations and their respective total durations.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
