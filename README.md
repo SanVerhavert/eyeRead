@@ -1,14 +1,14 @@
 
-![CRAN_Version](http://www.r-pkg.org/badges/version/fixationDuration)  
+![CRAN_Version](http://www.r-pkg.org/badges/version/eyeRead)  
 ##### development version (in dev branch)
-[![Dev Build](https://travis-ci.org/SanVerhavert/fixationDuration.png?branch=dev)](https://travis-ci.org/SanVerhavert/fixationDuration) [![Dev codecov](https://codecov.io/gh/SanVerhavert/fixationDuration/branch/dev/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/fixationDuration)
+[![Dev Build](https://travis-ci.org/SanVerhavert/eyeRead.png?branch=dev)](https://travis-ci.org/SanVerhavert/eyeRead) [![Dev codecov](https://codecov.io/gh/SanVerhavert/eyeRead/branch/dev/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/eyeRead)
 ##### Release version (in master branch)
-[![Build](https://travis-ci.org/SanVerhavert/fixationDuration.png?branch=master)](https://travis-ci.org/SanVerhavert/fixationDuration) [![codecov](https://codecov.io/gh/SanVerhavert/fixationDuration/branch/master/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/fixationDuration)
+[![Build](https://travis-ci.org/SanVerhavert/eyeRead.png?branch=master)](https://travis-ci.org/SanVerhavert/eyeRead) [![codecov](https://codecov.io/gh/SanVerhavert/eyeRead/branch/master/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/eyeRead)
 
-# Fixation duration
-`fixationDuration` is an R package that identifies first pass and second pass fixations and
- their respective total durations. If so specified it identifies third pass fixations and further and
- their respecitve total durations.  
+# eyeRead
+`eyeRead` is an R package contains some functions to prepare and analyse eye 
+tracking data of reading exersises. Essentially it identifies first pass and
+second pass fixations and their respective total durations.  
 
 This package is not yet on CRAN.  
 
@@ -40,7 +40,8 @@ If you directly want to contribute code or changes, please fork this repository.
 You can then add your changes and create a pull request. Please document your
 pull request, otherwise it will be rejected.  
 This repository follows the [gitflow logic](https://nvie.com/posts/a-successful-git-branching-model/).
-Please respect this logic and the branch structure in the following section.
+Please respect this logic and the branch structure in the following section.  
+Mind that gitflow only uses non-fast-forward merges.
 
 ## Branch structure
 This repository follows the [gitflow logic](https://nvie.com/posts/a-successful-git-branching-model/).  
