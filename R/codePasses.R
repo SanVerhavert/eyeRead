@@ -16,11 +16,9 @@
 #'   split accoring to forward and rereading (\code{TRUE}) or not 
 #'   (\code{FALSE} [Default])
 #' @param fpx The name of the column containing the X coordinate of the fixation 
-#'   point. Required if \code{Rereading}
-#'   is \code{TRUE}.
+#'   point. Required if \code{Rereading} is \code{TRUE}.
 #' @param fpy The name of the column containing the Y coordinate of the fixation 
-#'   point. Required if \code{Rereading} 
-#'   is \code{TRUE}.
+#'   point. Required if \code{Rereading} is \code{TRUE}.
 #' @param fix_min [optional] minimal number of fixations for first pass. See Details.
 #'   Default is 3.
 #' 
@@ -66,3 +64,47 @@
 #' 
 #' @export codePasses
 #' 
+
+codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
+                        fix_min = 3 )
+{
+  if( fix_min <= 0 ) stop( "Fix min should be bigger than 0" )
+  
+  if( rereading & ( is.null( fpx ) | is.null( fpy ) ) )
+    stop( "If rereading is TRUE, then fpx and fpy should both be provided" )
+  
+  if( is.array( AOI ) ) stop( "Not implemented yet!" )
+  
+  passes <- array( ncol( data ) )
+  
+  lastPass <- rep( "FP", times = length( unique( data[ , AOI ] ) ) )
+  names( lastPass ) <- unique( data[ , AOI ] )
+  
+  fixCount <- rep( 0, times = length( unique( data[ , AOI ] ) ) )
+  names( fixCount ) <- unique( data[ , AOI ] )
+  fixCount[ 1, data[ , AOI ] ] <-  fixCount[ data[ 1, AOI ] ] + 1
+  
+  passes[1] <- "FP"
+  
+  for( i in 2:length( passes ) )
+  {
+    if( lastPass[ data[ i, AOI ] ] == "SP" )
+    {
+      passes[i] <- "SP"
+    } else if( data[ i, AOI ] == data[ i - 1, AOI ] )
+    {
+      passes[i] <- "FP"
+    } else if( fixCount[ data[ i, AOI ] ] < fix_min )
+    {
+      passes[i] <- "FP"
+    } else
+    {
+      passes[i] <- "SP"
+      
+      lastPass[ data[ i, AOI ] ] <- "SP"
+    }
+    
+    fixCount[ data[ i, AOI ] ] <- fixCount[ data[ i, AOI ] ] + 1
+  }
+  rm(i)
+}
