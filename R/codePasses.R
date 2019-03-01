@@ -19,6 +19,9 @@
 #'   point. Required if \code{Rereading} is \code{TRUE}.
 #' @param fpy The name of the column containing the Y coordinate of the fixation 
 #'   point. Required if \code{Rereading} is \code{TRUE}.
+#' @param origin Character string specifying where the origin of the fixation 
+#'   coordinates \code{fpx} and \code{fpy} is located. The following values are
+#'   possible: "topLeft" (default), "bottomLeft", "center", "topLeft", "topRight".
 #' @param fix_min [optional] minimal number of fixations for first pass. See Details.
 #'   Default is 3.
 #' 
@@ -66,40 +69,39 @@
 #' 
 
 codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
-                        fix_min = 3 )
+                        origin = c( "topLeft", "bottomLeft", "center", "topLeft",
+                                    "topRight" ), fix_min = 3 )
 {
-  if( fix_min <= 0 ) stop( "Fix min should be bigger than 0" )
+  inputCheck_codePasses( data = data, AOI = AOI, rereading = rereading,
+                         fpx = fpx, fpy = fpy, fix_min = fix_min )
   
-  if( rereading & ( is.null( fpx ) | is.null( fpy ) ) )
-    stop( "If rereading is TRUE, then fpx and fpy should both be provided" )
+  origin <- match.arg( origin )
   
-  if( is.array( AOI ) ) stop( "Not implemented yet!" )
-  
-  passes <- array( ncol( data ) )
+  passes <- character( nrow( data ) )
   
   lastPass <- rep( "FP", times = length( unique( data[ , AOI ] ) ) )
   names( lastPass ) <- unique( data[ , AOI ] )
   
   fixCount <- rep( 0, times = length( unique( data[ , AOI ] ) ) )
   names( fixCount ) <- unique( data[ , AOI ] )
-  fixCount[ 1, data[ , AOI ] ] <-  fixCount[ data[ 1, AOI ] ] + 1
+  fixCount[ data[ 1, AOI ] ] <-  fixCount[ data[ 1, AOI ] ] + 1
   
-  passes[1] <- "FP"
+  passes[1] <- paste0( "FP_", data[ 1, AOI ] )
   
   for( i in 2:length( passes ) )
   {
     if( lastPass[ data[ i, AOI ] ] == "SP" )
     {
-      passes[i] <- "SP"
+      passes[i] <- paste0( "SP_", data[ i, AOI ] ) 
     } else if( data[ i, AOI ] == data[ i - 1, AOI ] )
     {
-      passes[i] <- "FP"
+      passes[i] <- paste0( "FP_", data[ i, AOI ] )
     } else if( fixCount[ data[ i, AOI ] ] < fix_min )
     {
-      passes[i] <- "FP"
+      passes[i] <- paste0( "FP_", data[ i, AOI ] )
     } else
     {
-      passes[i] <- "SP"
+      passes[i] <- paste0( "SP_", data[ i, AOI ] )
       
       lastPass[ data[ i, AOI ] ] <- "SP"
     }
@@ -107,4 +109,19 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
     fixCount[ data[ i, AOI ] ] <- fixCount[ data[ i, AOI ] ] + 1
   }
   rm(i)
+  
+  passes
+}
+
+inputCheck_codePasses <- function(data, AOI, rereading, fpx, fpy, fix_min)
+{
+  if( !is.data.frame( data ) ) stop( "data should be a data frame")
+  
+  if( fix_min <= 0 ) stop( "Fix min should be bigger than 0" )
+  
+  if( rereading & ( is.null( fpx ) | is.null( fpy ) ) )
+    stop( "If rereading is TRUE, then fpx and fpy should both be provided" )
+  
+  if( is.array( AOI ) ) stop( "Not implemented yet!" )
+  
 }
