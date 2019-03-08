@@ -14,7 +14,7 @@ test_that( "Function returns the correct error when data is no data frame", {
 test_that( "Function returns the correct error when AOI specifies a colname that is not in data", {
   expect_error(
     compileAIO( data = some_Data$multiple_AOI_col, AOI = "ABC"),
-    regexp = some_results$no_colname_err
+    regexp = some_results$no_colname_err$single
   )
 } )
 
@@ -24,7 +24,7 @@ test_that( "Function returns the correct results, if AOI are names", {
                                   "AOI7" ) )
   expect_true( is.vector( results ) )
   expect_length( object = results, n = nrow( some_Data$multiple_AOI_col ) )
-  expect_equal( results, paste0( "AOI", some_Data$single_AOI_col$AOI ) )
+  expect_equal( results, some_Data$single_AOI_col$AOI )
 } )
 
 test_that( "Function returns the correct results, if AOI are numbers", {
@@ -32,7 +32,7 @@ test_that( "Function returns the correct results, if AOI are numbers", {
                          AOI = 2:8 )
   expect_true( is.vector( results ) )
   expect_length( object = results, n = nrow( some_Data$multiple_AOI_col ) )
-  expect_equal( results, paste0( "AOI", some_Data$single_AOI_col$AOI ) )
+  expect_equal( results, some_Data$single_AOI_col$AOI )
 } )
 
 test_that( "Function returns the correct results, if AOI are names and some fixations outside AOI", {

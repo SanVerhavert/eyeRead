@@ -78,6 +78,12 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   inputCheck_codePasses( data = data, AOI = AOI, rereading = rereading,
                          fpx = fpx, fpy = fpy, fix_min = fix_min )
   
+  if( length( AOI ) > 1 )
+  {
+    data <- data.frame( data, AOI = compileAIO( data = data, AOI = AOI ) )
+    AOI <- "AOI"
+  }
+  
   origin <- match.arg( origin )
   
   passes <- character( nrow( data ) )
@@ -120,14 +126,16 @@ inputCheck_codePasses <- function(data, AOI, rereading, fpx, fpy, fix_min)
 {
   if( !is.data.frame( data ) ) stop( "data should be a data frame" )
   
-  if( !is.numeric( AOI ) & !all( AOI %in% colnames( data ) ) )
+  if( length( AOI ) > 1 )
+  {
+    if( !is.numeric( AOI ) & !all( AOI %in% colnames( data ) ) )
     stop( "not all values provided to AOI are column names for data" )
+  } else if( !is.numeric( AOI ) & !( AOI %in% colnames( data ) ) )
+    stop( "the value provide to AOI is not a column name of data" )
   
   if( fix_min <= 0 ) stop( "Fix min should be bigger than 0" )
   
   if( rereading & ( is.null( fpx ) | is.null( fpy ) ) )
     stop( "If rereading is TRUE, then fpx and fpy should both be provided" )
-  
-  if( is.array( AOI ) ) stop( "Not implemented yet!" )
   
 }

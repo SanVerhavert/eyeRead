@@ -14,7 +14,7 @@ test_that( "Function returns the correct error when data is no data frame", {
 test_that( "Function returns the correct error when AOI specifies a colname that is not in data", {
   expect_error(
     codePasses( data = some_Data$single_AOI_col, AOI = "ABC"),
-    regexp = some_results$no_colname_err
+    regexp = some_results$no_colname_err$single
   )
 } )
 
@@ -52,3 +52,19 @@ test_that( "Function correctly codes fixations as first pass and second pass wit
     some_results$regular
   )
 } )
+
+test_that( "Function correctly codes fixations as first pass and second pass with multiple AOI columns [column name]", {
+  expect_equal(
+    codePasses( data = some_Data$multiple_AOI_col,
+                AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" ) ),
+    some_results$regular
+  )
+} )
+
+test_that( "Function correctly codes fixations as first pass and second pass with multiple AOI column [column number]", {
+  expect_equal(
+    codePasses( data = some_Data$multiple_AOI_col, AOI = 2:8 ),
+    some_results$regular
+  )
+} )
+

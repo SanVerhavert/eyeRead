@@ -2,9 +2,11 @@
 some_Data <- list(
   single_AOI_col = 
     data.frame( fixationIndex = 1:28,
-                AOI = c( 1, 1, 2, 2, 3, 4, 7, 7, 7, 7, 3,
-                         3, 7, 4, 4, 4, 5, 2, 2, 4, 2, 1,
-                         1, 6, 6, 3, 5, 6 )
+                AOI = c( "AOI1", "AOI1", "AOI2", "AOI2", "AOI3", "AOI4", "AOI7",
+                         "AOI7", "AOI7", "AOI7", "AOI3", "AOI3", "AOI7", "AOI4",
+                         "AOI4", "AOI4", "AOI5", "AOI2", "AOI2", "AOI4", "AOI2",
+                         "AOI1", "AOI1", "AOI6", "AOI6", "AOI3", "AOI5", "AOI6" ),
+                stringsAsFactors = F
     ),
   multiple_AOI_col = 
     data.frame( fixationIndex = 1:28,
