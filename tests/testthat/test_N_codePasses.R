@@ -11,7 +11,7 @@ test_that( "Function returns the correct error when data is no data frame", {
   )
 } )
 
-test_that( "Function returns the correct error when data is no data frame", {
+test_that( "Function returns the correct error when AOI specifies a colname that is not in data", {
   expect_error(
     codePasses( data = some_Data$single_AOI_col, AOI = "ABC"),
     regexp = some_results$no_colname_err
