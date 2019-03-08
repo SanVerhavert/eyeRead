@@ -62,9 +62,12 @@ This function takes a data frame containing information of an eye
   If \code{AOI} is a single value it indicates the name or the number of the 
   column with the name of the respective area of interest (AOI) that was fixated. 
   In this case, the AOI column consists of names or numbers identifying the AOI's. 
-  If \code{AOI} is a vector it indicated the name or number of the AOI columns. 
+  If \code{AOI} is a vector it indicates the name or number of the AOI columns. 
   In this case the AOI columns indicate if the respective fixation was in the 
-  corresponding AOI (1) or not (0).
+  corresponding AOI (1) or not (0).  
+  NOTE: if the names of the AOI columns passed to the function are just numbers, 
+  make shure to pass these as character for the function to work properly. The 
+  function does not check for this case.
   
   First pass fixations are further devided into forward and rereading 
   fixations if \code{rereading} is set to \code{TRUE}. In this case the names 
