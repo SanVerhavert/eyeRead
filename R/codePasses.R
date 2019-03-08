@@ -8,7 +8,7 @@
 #' @description The Fixations are coded as first pass and second pass.
 #' 
 #' @param data A data frame containing fixation information of an eye tracing 
-#' experiment. Each row indicates a fixation.
+#'   experiment. Each row indicates a fixation.
 #' @param AOI The name or number of the column in \code{data} containing the name
 #'   of the area of interest (AOI) that was fixated. If \code{data} contains one 
 #'   column per AOI, also a vector is accepted (see Details).
@@ -120,8 +120,8 @@ inputCheck_codePasses <- function(data, AOI, rereading, fpx, fpy, fix_min)
 {
   if( !is.data.frame( data ) ) stop( "data should be a data frame" )
   
-  if( !is.numeric( AOI ) & !( AOI %in% colnames( data ) ) )
-    stop( paste0( "cannot find the value provided to AOI, ", AOI, ", in data" ) )
+  if( !is.numeric( AOI ) & !all( AOI %in% colnames( data ) ) )
+    stop( "not all values provided to AOI are column names for data" )
   
   if( fix_min <= 0 ) stop( "Fix min should be bigger than 0" )
   
