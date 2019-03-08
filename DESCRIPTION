@@ -1,11 +1,15 @@
 Package: eyeRead
 Title: Some functions to prepare/analyse eye tracking data for reading
 Version: 0.0.0.1
-Authors@R: 
-    person(given = "San",
-           family = "Verhavert",
-           role = c("aut", "cre"),
-           email = "san.verhavert@uantwerpen.be")
+Authors@R: c(
+    person( given = "San",
+            family = "Verhavert",
+            role = c("aut", "cre"),
+            email = "san.verhavert@uantwerpen.be" ),
+    person( given = "Tine",
+            family = "van Daal",
+            role = c( "aut" ),
+            email = "tine.vandaal@uantwerpen.be" ) )
 Description: This package contains some functions to prepare and analyse eye 
   tracking data of reading exersises. Essentially it identifies first pass and
   second pass fixations and their respective total durations.
