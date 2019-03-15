@@ -21,7 +21,7 @@
 #'   fixation point. Required if \code{Rereading} is \code{TRUE}.
 #' @param origin Character string specifying where the origin of the fixation 
 #'   coordinates \code{fpx} and \code{fpy} is located. The following values are
-#'   possible: "topLeft" (default), "bottomLeft", "center", "topLeft", "topRight".
+#'   possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight".
 #' @param fix_diff The resolution of the saccade. (default = 20; see Details)
 #' @param fix_min [optional] minimal number of fixations for first pass. See Details.
 #'   Default is 3.
@@ -81,8 +81,8 @@
 #' 
 
 codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
-                        origin = c( "topLeft", "bottomLeft", "center", "topLeft",
-                                    "topRight" ), fix_res = 20, fix_min = 3 )
+                        origin = c( "topLeft", "bottomLeft", "center", "topright",
+                                    "bottomRight" ), fix_res = 20, fix_min = 3 )
 {
   inputCheck_codePasses( data = data, AOI = AOI, rereading = rereading,
                          fpx = fpx, fpy = fpy, fix_min = fix_min )
@@ -94,6 +94,22 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   }
   
   origin <- match.arg( origin )
+  
+  if( origin == "bottomLeft" )
+  {
+    fpy <- abs( fpy - max( fpy ) )
+  }else if( origin == "center" )
+  {
+    fpx <- fpx - max( fpx )
+    fpy <- fpy + min( abs( fpy ) )
+  }else if( origin == "topRight" )
+  {
+    fpx <- abs( fpx - max( fpx ) )
+  }else if( origin == "bottomRight" )
+  {
+    fpx <- fpx - max( fpx )
+    fpy <- fpy - max( fpy )
+  }
   
   passes <- character( nrow( data ) )
   
