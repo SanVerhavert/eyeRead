@@ -15,13 +15,14 @@
 #' @param rereading Logical. Indicating if the first pass fixations should be 
 #'   split accoring to forward and rereading (\code{TRUE}) or not 
 #'   (\code{FALSE} [Default])
-#' @param fpx The name of the column containing the X coordinate of the fixation 
-#'   point. Required if \code{Rereading} is \code{TRUE}.
-#' @param fpy The name of the column containing the Y coordinate of the fixation 
-#'   point. Required if \code{Rereading} is \code{TRUE}.
+#' @param fpx The name or number of the column containing the X coordinate of the 
+#'   fixation point. Required if \code{Rereading} is \code{TRUE}.
+#' @param fpy The name or number of the column containing the Y coordinate of the 
+#'   fixation point. Required if \code{Rereading} is \code{TRUE}.
 #' @param origin Character string specifying where the origin of the fixation 
 #'   coordinates \code{fpx} and \code{fpy} is located. The following values are
 #'   possible: "topLeft" (default), "bottomLeft", "center", "topLeft", "topRight".
+#' @param fix_diff The resolution of the saccade. (default = 20; see Details)
 #' @param fix_min [optional] minimal number of fixations for first pass. See Details.
 #'   Default is 3.
 #' 
@@ -47,6 +48,14 @@
 #'   of the columns containing the x and y coordinates of the fixation point 
 #'   should be suplied by \code{fpx} and \code{fpy} respectively. The unit of 
 #'   these coordinates does not matter.
+#'   It is important to set the minimal distande between fixations via 
+#'   \code{fix_diff}. When this value is to small it is possible that some 
+#'   first-pass fixations are falsly categorized as rereading fixations. 
+#'   Specifically \code{fix_diff} determines what the minimal difference between 
+#'   fixations should be in order for fixations to be considered in a different 
+#'   location. It is recommended to play around with this value for every 
+#'   participant and inspect a subset of the results to see if categorization is 
+#'   logical.
 #'   
 #'   By default this function considers the first three (3) fixations in any AOI 
 #'   as first pass fixations. And it does this regardless of whether the fixations
@@ -73,7 +82,7 @@
 
 codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
                         origin = c( "topLeft", "bottomLeft", "center", "topLeft",
-                                    "topRight" ), fix_min = 3 )
+                                    "topRight" ), fix_res = 20, fix_min = 3 )
 {
   inputCheck_codePasses( data = data, AOI = AOI, rereading = rereading,
                          fpx = fpx, fpy = fpy, fix_min = fix_min )
@@ -95,7 +104,23 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   names( fixCount ) <- unique( data[ , AOI ] )
   fixCount[ data[ 1, AOI ] ] <-  fixCount[ data[ 1, AOI ] ] + 1
   
-  passes[1] <- paste0( "FP_", data[ 1, AOI ] )
+  if( rereading )
+  {
+    passes[1] <-  paste0( "FPF_", data[ 1, AOI ] )
+    
+    firstPass <- F
+    
+    prevCoords <- data.frame( x = numeric( length( unique( data[ , AOI ] ) ) ),
+                              y = numeric( length( unique( data[ , AOI ] ) ) ),
+                              row.names = unique( data[ , AOI ] ) )
+    
+    AOIrow <- which( row.names( prevCoords ) == data[ 1, AOI ] )
+    
+    prevCoords$x[ AOIrow ] <- data[ 1, fpx ]
+    prevCoords$y[ AOIrow ] <- data[ 1, fpy ]
+    
+    rm( AOIrow )
+  } else  passes[1] <- paste0( "FP_", data[ 1, AOI ] )
   
   for( i in 2:length( passes ) )
   {
@@ -105,14 +130,63 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
     } else if( data[ i, AOI ] == data[ i - 1, AOI ] )
     {
       passes[i] <- paste0( "FP_", data[ i, AOI ] )
+      
+      firstPass <- T
     } else if( fixCount[ data[ i, AOI ] ] < fix_min )
     {
       passes[i] <- paste0( "FP_", data[ i, AOI ] )
+      
+      firstPass <- T
     } else
     {
       passes[i] <- paste0( "SP_", data[ i, AOI ] )
       
       lastPass[ data[ i, AOI ] ] <- "SP"
+    }
+    
+    if( rereading )#fix_res
+    {
+      AOIrow <- which( row.names( prevCoords ) == data[ 1, AOI ] )
+      
+      if( firstPass )
+      {
+        if( abs( prevCoords$y[ AOIrow ] - data[ i, fpy ] ) <= fix_res  )
+        {
+          if( abs( prevCoords$x[ AOIrow ] - data[ i, fpx ] ) <= fix_res )
+          {
+            passes[i] <- paste0( "FPF_", data[ i, AOI ] )
+          }else if( prevCoords$x[ AOIrow] < data[ i, fpx ] )
+          {
+            passes[i] <- paste0( "FPF_", data[ i, AOI ] )
+            prevCoords$x[ AOIrow ] <- data[ i, fpx ]
+            
+          } else if( prevCoords$x[ AOIrow ] > data[ i, fpx ] )
+          {
+            passes[i] <- paste0( "FPR_", data[ i, AOI ] )
+          }
+        }else if( prevCoords$y[ AOIrow ] < data[ i, fpy ] )
+        {
+          passes[i] <- paste0( "FPF_", data[ i, AOI ] )
+          prevCoords$y[ AOIrow ] <- data[ i, fpy ]
+          
+          if( prevCoords$x[ AOIrow ] > data[ i, fpx ] )
+          {
+            prevCoords$x[ AOIrow ] <- data[ i, fpx ]
+          }
+        } else if( prevCoords$y[ AOIrow ] > data[ i, fpy ] )
+        {
+          passes[i] <- paste0( "FPR_", data[ i, AOI ] )
+          
+        }
+        
+        if( prevCoords$x[ AOIrow ] < data[ i, fpx ] )
+        {
+          prevCoords$x[ AOIrow ] <- data[ i, fpx ]
+        }
+        
+        firstPass <- F
+        rm( AOIrow )
+      }
     }
     
     fixCount[ data[ i, AOI ] ] <- fixCount[ data[ i, AOI ] ] + 1
@@ -134,8 +208,21 @@ inputCheck_codePasses <- function(data, AOI, rereading, fpx, fpy, fix_min)
     stop( "the value provide to AOI is not a column name of data" )
   
   if( fix_min <= 0 ) stop( "Fix min should be bigger than 0" )
-  
-  if( rereading & ( is.null( fpx ) | is.null( fpy ) ) )
-    stop( "If rereading is TRUE, then fpx and fpy should both be provided" )
-  
+  # browser()
+  if( rereading )
+  {
+    if( is.null( fpx ) )
+    {
+      stop( "If rereading is TRUE, then fpx should be provided" )
+    } else if( is.null( fpy ) )
+    {
+      stop( "If rereading is TRUE, then fpy should be provided" )
+    } else if ( is.character (fpx ) & !( fpx %in% colnames( data ) ) )
+    {
+       stop( "The value provided to fpx is not a column name of data" )
+    } else if ( is.character (fpy ) & !( fpy %in% colnames( data ) ) )
+    {
+      stop( "The value provided to fpy is not a column name of data" )
+    }
+  }
 }
