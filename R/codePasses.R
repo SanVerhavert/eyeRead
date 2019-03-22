@@ -81,7 +81,7 @@
 #' 
 
 codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
-                        origin = c( "topLeft", "bottomLeft", "center", "topright",
+                        origin = c( "topLeft", "bottomLeft", "center", "topRight",
                                     "bottomRight" ), fix_res = 20, fix_min = 3 )
 {
   inputCheck_codePasses( data = data, AOI = AOI, rereading = rereading,
