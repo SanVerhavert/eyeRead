@@ -165,3 +165,15 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
     some_results$rereading
   )
 } )
+
+test_that( "Function correctly codes fixations as forward and rereading first pass; origin bottomRight [column name]", {
+  expect_equal(
+    codePasses( data = some_Data$rereading$bottomRight,
+                AOI = "AOI",
+                rereading = T,
+                fpx = "xcoord",
+                fpy = "ycoord",
+                origin = "bottomRight" ),
+    some_results$rereading
+  )
+} )

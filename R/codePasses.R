@@ -107,8 +107,8 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
     data[ , fpx ] <- abs( data[ , fpx ] - max( data[ , fpx ] ) )
   }else if( origin == "bottomRight" )
   {
-    data[ , fpx ] <- data[ , fpx ] - max( data[ , fpx ] )
-    ata[ , fpy ] <- data[ , fpy ] - max( data[ , fpy ] )
+    data[ , fpx ] <- abs( data[ , fpx ] - max( data[ , fpx ] ) )
+    data[ , fpy ] <- abs( data[ , fpy ] - max( data[ , fpy ] ) )
   }
   
   passes <- character( nrow( data ) )
@@ -165,7 +165,7 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
       AOIrow <- which( row.names( prevCoords ) == data[ 1, AOI ] )
       
       if( firstPass )
-      {#if( i == 26 ) browser()
+      {#if( origin == "bottomRight" & i == 8 ) browser()
         if( abs( prevCoords$y[ AOIrow ] - data[ i, fpy ] ) <= fix_res  )
         {
           if( abs( prevCoords$x[ AOIrow ] - data[ i, fpx ] ) <= fix_res )
