@@ -97,18 +97,18 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   
   if( origin == "bottomLeft" )
   {
-    fpy <- abs( fpy - max( fpy ) )
+    data[ , fpy ] <- abs( data[ , fpy ] - max( data[ , fpy ] ) )
   }else if( origin == "center" )
   {
-    fpx <- fpx - max( fpx )
-    fpy <- fpy + min( abs( fpy ) )
+    data[ , fpx ] <- data[ , fpx ] - max( data[ , fpx ] )
+    data[ , fpy ] <- data[ , fpy ] + min( abs( data[ , fpy ] ) )
   }else if( origin == "topRight" )
   {
-    fpx <- abs( fpx - max( fpx ) )
+    data[ , fpx ] <- abs( data[ , fpx ] - max( data[ , fpx ] ) )
   }else if( origin == "bottomRight" )
   {
-    fpx <- fpx - max( fpx )
-    fpy <- fpy - max( fpy )
+    data[ , fpx ] <- data[ , fpx ] - max( data[ , fpx ] )
+    ata[ , fpy ] <- data[ , fpy ] - max( data[ , fpy ] )
   }
   
   passes <- character( nrow( data ) )
@@ -165,7 +165,7 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
       AOIrow <- which( row.names( prevCoords ) == data[ 1, AOI ] )
       
       if( firstPass )
-      {
+      {#if( i == 26 ) browser()
         if( abs( prevCoords$y[ AOIrow ] - data[ i, fpy ] ) <= fix_res  )
         {
           if( abs( prevCoords$x[ AOIrow ] - data[ i, fpx ] ) <= fix_res )
