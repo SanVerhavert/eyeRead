@@ -1,4 +1,4 @@
-context( "codePasses" )
+context( "compileAOI" )
 
 test_that( "specFile is found", {
   expect_true( T )
