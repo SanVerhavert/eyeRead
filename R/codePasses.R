@@ -22,9 +22,12 @@
 #' @param origin Character string specifying where the origin of the fixation 
 #'   coordinates \code{fpx} and \code{fpy} is located. The following values are
 #'   possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight".
-#' @param fix_res The resolution of the saccade. (default = 20; see Details)
+#' @param fix_size The size or accuity of the saccade. (default = 42; see Details)
 #' @param fix_min [optional] minimal number of fixations for first pass. See Details.
 #'   Default is 3.
+#' @param plot logical. If \code{FALSE} (default) returns a vector? If 
+#'   \code{TRUE} plots the results. See Details.
+#' @param ... Aditional parameters accepted by the \code{plot} function.
 #' 
 #' @details This function takes a data frame containing information of an eye 
 #'   tracking reading exersise Each row indicates a fixation and the columns at 
@@ -48,14 +51,25 @@
 #'   of the columns containing the x and y coordinates of the fixation point 
 #'   should be suplied by \code{fpx} and \code{fpy} respectively. The unit of 
 #'   these coordinates does not matter.
-#'   It is important to set the minimal distande between fixations via 
-#'   \code{fix_diff}. When this value is to small it is possible that some 
-#'   first-pass fixations are falsly categorized as rereading fixations. 
-#'   Specifically \code{fix_diff} determines what the minimal difference between 
-#'   fixations should be in order for fixations to be considered in a different 
-#'   location. It is recommended to play around with this value for every 
-#'   participant and inspect a subset of the results to see if categorization is 
-#'   logical.
+#'   
+#'   It is important to set the minimal distande between fixations (or the visual 
+#'   accuity) via \code{fix_size}. This value is used to determine if two 
+#'   fixations are on the same hight or width.When this value is to small it is 
+#'   possible that some first-pass fixations are falsly categorized as rereading 
+#'   fixations. Specifically \code{fix_size} determines what the minimal distance 
+#'   between fixations should be in order for fixations to be considered in a 
+#'   different  location or on a different hight of width. The default value is 
+#'   specified in pixels. The value is the number of pixels equivalent to 2 
+#'   visual degrees, taken a screen of 102DPI. (see \code{\link{deg.px.cm}} for 
+#'   conversions). The value of 2 visual degrees is the average visual angle of 
+#'   the fovea (Llewellyn-Thomas, 1968; Haber & Hershenson, 1973). It is 
+#'   recommended to play around with the \code{fix_size} value for every 
+#'   participant and inspect the results by setting \code{plot} to \code{TRUE}.
+#'   
+#'   When \code{plot} is set to \code{TRUE}, the function draws a plot where 
+#'   fixation points are numbered according to their order in \code{data}. Each 
+#'   fixation point is joined by a label indicating how they are coded. The plot 
+#'   can be customized by providing graphical parameters to the '...' argument.
 #'   
 #'   By default this function considers the first three (3) fixations in any AOI 
 #'   as first pass fixations. And it does this regardless of whether the fixations
@@ -63,9 +77,10 @@
 #'   number of fixations considered as first pass can be changed through 
 #'   \code{fix_min}.
 #' 
-#' @return The function returns a character vector of the same length as the 
-#'   number of rows in data. Depending on the respecitve settings it contains the 
-#'   following values with their respective meanings.  
+#' @return If \code{plot} is \code{FALSE} (Default) the function returns a 
+#'   character vector of the same length as the number of rows in data. 
+#'   Depending on the respecitve settings it contains the following values with 
+#'   their respective meanings.  
 #'   
 #'   * \code{rereading} is \code{FALSE}:
 #'      + \code{FP_\#} First Pass
@@ -75,14 +90,22 @@
 #'      + \code{FPR_\#} First Pass Rereading
 #'      + \code{SP_\#} Second Pass
 #'   
-#'   Where \# stands for the name of the respecitve AOI.
+#'   Where \# stands for the name of the respecitve AOI.  
+#'   
+#'   If \code{plot} is \code{TRUE}, the function draws a plot.
+#'   
+#' @references HABER, R. N., & HERSHENSON, M. The psychology of visual perception. 
+#'   New York: Holt, Rinehart, and Winston, 1973.  
+#'   LLEWELLYN-THOMAS, E. Movements of the eye. Scientific American, 1968, 219, 
+#'   88-95. 
 #' 
 #' @export codePasses
 #' 
 
 codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
                         origin = c( "topLeft", "bottomLeft", "center", "topRight",
-                                    "bottomRight" ), fix_res = 20, fix_min = 3 )
+                                    "bottomRight" ), fix_size = 42, fix_min = 3,
+                        plot = FALSE, ... )
 {
   inputCheck_codePasses( data = data, AOI = AOI, rereading = rereading,
                          fpx = fpx, fpy = fpy, fix_min = fix_min )
@@ -160,15 +183,15 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
       lastPass[ data[ i, AOI ] ] <- "SP"
     }
     
-    if( rereading )#fix_res
+    if( rereading )
     {
       AOIrow <- which( row.names( prevCoords ) == data[ 1, AOI ] )
       
       if( firstPass )
       {
-        if( abs( prevCoords$y[ AOIrow ] - data[ i, fpy ] ) <= fix_res  )
+        if( abs( prevCoords$y[ AOIrow ] - data[ i, fpy ] ) <= fix_size  )
         {
-          if( abs( prevCoords$x[ AOIrow ] - data[ i, fpx ] ) <= fix_res )
+          if( abs( prevCoords$x[ AOIrow ] - data[ i, fpx ] ) <= fix_size )
           {
             passes[i] <- paste0( "FPF_", data[ i, AOI ] )
           }else if( prevCoords$x[ AOIrow] < data[ i, fpx ] )
@@ -209,7 +232,53 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   }
   rm(i)
   
-  passes
+  if( plot )
+  {
+    Args <- list( ... )
+    
+    if( any( names( Args ) == "type" ) )
+      warning( "setting 'type' for 'plot' is ignored by this function" )
+    
+    Args[[ "type" ]] <- "c"
+    
+    if( all( names( Args ) != "x" ) )
+      Args[[ "x" ]] <- data[ , fpx ]
+    
+    if( all( names( Args ) != "y" ) )
+      Args[[ "y"]] <- data[ , fpy ]
+    
+    if( all( names( Args ) != "xlab" ) )
+      Args[[ "xlab" ]] <- "x"
+    
+    if( all( names( Args ) != "ylab" ) )
+      Args[[ "ylab" ]] <- "y"
+    
+    if( all( names( Args ) != "xlim" ) )
+    {
+      xlim <- range( data[ , fpx ] )
+      xlim[1] <- xlim[1] - ( 2 * fix_size )
+      xlim[2] <- xlim[2] + ( 2 * fix_size )
+      rm( xlim )
+    }
+    
+    if( all( names( Args ) != "ylim" ) )
+    {
+      ylim <- range( data[ , fpy ] )
+      ylim[1] <- ylim[1] - ( 2 * fix_size )
+      ylim[2] <- ylim[2] + ( 2 * fix_size )
+      Args[[ "ylim" ]] <- rev( ylim )
+      rm( ylim )
+    }
+    
+    
+    do.call( "plot", Args )
+    
+    text( data[ , fpx ], data[ , fpy ], labels = 1:nrow( data ) )
+    text( data[ , fpx ], data[ , fpy ] - fix_size,
+          labels = substr( x = passes, start = 1, stop  = 3 ) )
+    
+  }else return( passes )
+  
 }
 
 inputCheck_codePasses <- function(data, AOI, rereading, fpx, fpy, fix_min)

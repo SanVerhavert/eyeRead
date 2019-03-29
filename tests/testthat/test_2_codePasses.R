@@ -113,7 +113,8 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
                 AOI = "AOI",
                 rereading = T,
                 fpx = "xcoord",
-                fpy = "ycoord" ),
+                fpy = "ycoord",
+                fix_size = 20 ),
     some_results$rereading
   )
 } )
@@ -125,7 +126,8 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
                 rereading = T,
                 fpx = "xcoord",
                 fpy = "ycoord",
-                origin = "topLeft" ),
+                origin = "topLeft",
+                fix_size = 20 ),
     some_results$rereading
   )
 } )
@@ -137,7 +139,8 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
                 rereading = T,
                 fpx = 3,
                 fpy = 4,
-                origin = "topLeft" ),
+                origin = "topLeft",
+                fix_size = 20 ),
     some_results$rereading
   )
 } )
@@ -149,7 +152,8 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
                 rereading = T,
                 fpx = "xcoord",
                 fpy = "ycoord",
-                origin = "bottomLeft" ),
+                origin = "bottomLeft",
+                fix_size = 20 ),
     some_results$rereading
   )
 } )
@@ -161,7 +165,8 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
                 rereading = T,
                 fpx = "xcoord",
                 fpy = "ycoord",
-                origin = "topRight" ),
+                origin = "topRight",
+                fix_size = 20 ),
     some_results$rereading
   )
 } )
@@ -173,7 +178,8 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
                 rereading = T,
                 fpx = "xcoord",
                 fpy = "ycoord",
-                origin = "bottomRight" ),
+                origin = "bottomRight",
+                fix_size = 20 ),
     some_results$rereading
   )
 } )
@@ -186,7 +192,51 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
                 fpx = "xcoord",
                 fpy = "ycoord",
                 origin = "center",
-                fix_res = 10 ),
+                fix_size = 10 ),
     some_results$rereading
   )
 } )
+
+#The following tests should not be run when building en checking
+# codePasses( data = some_Data$rereading$topLeft,
+#             AOI = "AOI",
+#             rereading = T,
+#             fpx = 3,
+#             fpy = 4,
+#             origin = "topLeft",
+#             fix_size = 20,
+#             plot = TRUE )
+# 
+# codePasses( data = some_Data$rereading$topLeft,
+#             AOI = "AOI",
+#             rereading = T,
+#             fpx = 3,
+#             fpy = 4,
+#             origin = "topLeft",
+#             fix_size = 20,
+#             plot = TRUE,
+#             type = "l" )
+# 
+# codePasses( data = some_Data$rereading$topLeft,
+#             AOI = "AOI",
+#             rereading = T,
+#             fpx = 3,
+#             fpy = 4,
+#             origin = "topLeft",
+#             fix_size = 20,
+#             plot = TRUE,
+#             xlab = "xlab",
+#             ylab = "ylab",
+#             xlim = c( 200, 600 ),
+#             ylim = c( 150, 0 ) )
+# 
+# codePasses( data = some_Data$rereading$topLeft,
+#             AOI = "AOI",
+#             rereading = T,
+#             fpx = 3,
+#             fpy = 4,
+#             origin = "topLeft",
+#             fix_size = 20,
+#             plot = TRUE,
+#             xlab = "xlab",
+#             xlim = c( 200, 600 ) )
