@@ -9,8 +9,10 @@
 #' 
 #' @param data A data frame containing fixation information of an eye tracing 
 #'   experiment. Each row indicates a fixation.
-#' @param AOI The name or number of the columns in \code{data} containing 
-#'   if the repsective AOI was fixated (1) or not (0).
+#' @param AOI A vector containing the name or number of the columns in \code{data} 
+#'   containing if the repsective AOI was fixated (1) or not (0).
+#' @param labels [optional] A vector containing the names of the AOI in the same 
+#'   order as the columnnames or -numbers provided to \code{AOI}
 #' 
 #' @details This function can be used to convert a wide format eye tracking data 
 #'   frame to a long format eye tracking data frame. It takes a data frame with 
@@ -30,7 +32,7 @@
 #' @export compileAIO
 #' 
 
-compileAIO <- function( data, AOI )
+compileAIO <- function( data, AOI, labels = NULL )
 {
   if( !is.data.frame( data ) ) stop( "data should be a data frame" )
   
@@ -40,6 +42,13 @@ compileAIO <- function( data, AOI )
       stop( "not all values provided to AOI are column names for data" )
     
     data <- data[ , match( AOI, colnames( data ) ) ]
+    AOI <- match( AOI, colnames( data ) )
+  }
+  
+  if( !is.null( labels ) )
+  { 
+    if( length( AOI ) != length( labels ) ) stop( "AOI and labels lengts differ" )
+    colnames( data )[ AOI ] <- labels
   }
   
   data <- data[ , AOI ]
