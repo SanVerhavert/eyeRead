@@ -4,14 +4,17 @@
 \alias{compileAIO}
 \title{compile AIO columns in one column}
 \usage{
-compileAIO(data, AOI)
+compileAIO(data, AOI, labels = NULL)
 }
 \arguments{
 \item{data}{A data frame containing fixation information of an eye tracing 
 experiment. Each row indicates a fixation.}
 
-\item{AOI}{The name or number of the columns in \code{data} containing 
-if the repsective AOI was fixated (1) or not (0).}
+\item{AOI}{A vector containing the name or number of the columns in \code{data} 
+containing if the repsective AOI was fixated (1) or not (0).}
+
+\item{labels}{[optional] A vector containing the names of the AOI in the same 
+order as the columnnames or -numbers provided to \code{AOI}}
 }
 \value{
 Vector that contains the AIO fixated on for each row in the data frame 

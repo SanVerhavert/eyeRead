@@ -6,7 +6,7 @@
 \usage{
 codePasses(data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   origin = c("topLeft", "bottomLeft", "center", "topRight",
-  "bottomRight"), fix_res = 20, fix_min = 3)
+  "bottomRight"), fix_size = 42, fix_min = 3, plot = FALSE, ...)
 }
 \arguments{
 \item{data}{A data frame containing fixation information of an eye tracing 
@@ -30,15 +30,21 @@ fixation point. Required if \code{Rereading} is \code{TRUE}.}
 coordinates \code{fpx} and \code{fpy} is located. The following values are
 possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight".}
 
-\item{fix_res}{The resolution of the saccade. (default = 20; see Details)}
+\item{fix_size}{The size or accuity of the saccade. (default = 42; see Details)}
 
 \item{fix_min}{[optional] minimal number of fixations for first pass. See Details.
 Default is 3.}
+
+\item{plot}{logical. If \code{FALSE} (default) returns a vector? If 
+\code{TRUE} plots the results. See Details.}
+
+\item{...}{Aditional parameters accepted by the \code{plot} function.}
 }
 \value{
-The function returns a character vector of the same length as the 
-  number of rows in data. Depending on the respecitve settings it contains the 
-  following values with their respective meanings.  
+If \code{plot} is \code{FALSE} (Default) the function returns a 
+  character vector of the same length as the number of rows in data. 
+  Depending on the respecitve settings it contains the following values with 
+  their respective meanings.  
   
   * \code{rereading} is \code{FALSE}:
      + \code{FP_\#} First Pass
@@ -48,7 +54,9 @@ The function returns a character vector of the same length as the
      + \code{FPR_\#} First Pass Rereading
      + \code{SP_\#} Second Pass
   
-  Where \# stands for the name of the respecitve AOI.
+  Where \# stands for the name of the respecitve AOI.  
+  
+  If \code{plot} is \code{TRUE}, the function draws a plot.
 }
 \description{
 The Fixations are coded as first pass and second pass.
@@ -76,18 +84,35 @@ This function takes a data frame containing information of an eye
   of the columns containing the x and y coordinates of the fixation point 
   should be suplied by \code{fpx} and \code{fpy} respectively. The unit of 
   these coordinates does not matter.
-  It is important to set the minimal distande between fixations via 
-  \code{fix_diff}. When this value is to small it is possible that some 
-  first-pass fixations are falsly categorized as rereading fixations. 
-  Specifically \code{fix_diff} determines what the minimal difference between 
-  fixations should be in order for fixations to be considered in a different 
-  location. It is recommended to play around with this value for every 
-  participant and inspect a subset of the results to see if categorization is 
-  logical.
+  
+  It is important to set the minimal distande between fixations (or the visual 
+  accuity) via \code{fix_size}. This value is used to determine if two 
+  fixations are on the same hight or width.When this value is to small it is 
+  possible that some first-pass fixations are falsly categorized as rereading 
+  fixations. Specifically \code{fix_size} determines what the minimal distance 
+  between fixations should be in order for fixations to be considered in a 
+  different  location or on a different hight of width. The default value is 
+  specified in pixels. The value is the number of pixels equivalent to 2 
+  visual degrees, taken a screen of 102DPI. (see \code{\link{deg.px.cm}} for 
+  conversions). The value of 2 visual degrees is the average visual angle of 
+  the fovea (Llewellyn-Thomas, 1968; Haber & Hershenson, 1973). It is 
+  recommended to play around with the \code{fix_size} value for every 
+  participant and inspect the results by setting \code{plot} to \code{TRUE}.
+  
+  When \code{plot} is set to \code{TRUE}, the function draws a plot where 
+  fixation points are numbered according to their order in \code{data}. Each 
+  fixation point is joined by a label indicating how they are coded. The plot 
+  can be customized by providing graphical parameters to the '...' argument.
   
   By default this function considers the first three (3) fixations in any AOI 
   as first pass fixations. And it does this regardless of whether the fixations
   are consecutive or interupted by fixations in a different AOI. The minimal 
   number of fixations considered as first pass can be changed through 
   \code{fix_min}.
+}
+\references{
+HABER, R. N., & HERSHENSON, M. The psychology of visual perception. 
+  New York: Holt, Rinehart, and Winston, 1973.  
+  LLEWELLYN-THOMAS, E. Movements of the eye. Scientific American, 1968, 219, 
+  88-95.
 }

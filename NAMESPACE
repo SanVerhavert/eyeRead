@@ -3,3 +3,4 @@
 export(AOItransitions)
 export(codePasses)
 export(compileAIO)
+importFrom(graphics,text)

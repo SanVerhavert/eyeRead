@@ -99,6 +99,7 @@
 #'   LLEWELLYN-THOMAS, E. Movements of the eye. Scientific American, 1968, 219, 
 #'   88-95. 
 #' 
+#' @importFrom graphics text
 #' @export codePasses
 #' 
 
