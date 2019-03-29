@@ -57,12 +57,10 @@ compileAIO <- function( data, AOI, labels = NULL )
   
   for(i in 1:nrow( data ) )
   {
-    if( rowSums( data[ i, ] ) == 0 ) out[i] <- 0
-    else out[i] <- colnames( data[ i, ] )[ which( data[ i, ] == 1 ) ]
+    out[i] <- ifelse( ( rowSums( data[ i, ] ) ) == 0,
+                      yes = 0,
+                      no = colnames( data[ i, ] )[ which( data[ i, ] == 1 ) ] )
   }
-  # Nog te testen: (want is sneller als het werkt)
-  # for(i in 1:nrow(data){
-  # ifelse((rowSums(data[i,]))==0, yes=0, no=colnames(data[i,])[which(data[i,] == 1)])}
   
   return( out )
 }
