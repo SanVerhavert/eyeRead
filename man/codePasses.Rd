@@ -5,8 +5,8 @@
 \title{Codes the Fixations as First Pass and Second Pass}
 \usage{
 codePasses(data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
-  origin = c("topLeft", "bottomLeft", "center", "topLeft", "topRight"),
-  fix_min = 3)
+  origin = c("topLeft", "bottomLeft", "center", "topRight",
+  "bottomRight"), fix_res = 20, fix_min = 3)
 }
 \arguments{
 \item{data}{A data frame containing fixation information of an eye tracing 
@@ -20,15 +20,17 @@ column per AOI, also a vector is accepted (see Details).}
 split accoring to forward and rereading (\code{TRUE}) or not 
 (\code{FALSE} [Default])}
 
-\item{fpx}{The name of the column containing the X coordinate of the fixation 
-point. Required if \code{Rereading} is \code{TRUE}.}
+\item{fpx}{The name or number of the column containing the X coordinate of the 
+fixation point. Required if \code{Rereading} is \code{TRUE}.}
 
-\item{fpy}{The name of the column containing the Y coordinate of the fixation 
-point. Required if \code{Rereading} is \code{TRUE}.}
+\item{fpy}{The name or number of the column containing the Y coordinate of the 
+fixation point. Required if \code{Rereading} is \code{TRUE}.}
 
 \item{origin}{Character string specifying where the origin of the fixation 
 coordinates \code{fpx} and \code{fpy} is located. The following values are
-possible: "topLeft" (default), "bottomLeft", "center", "topLeft", "topRight".}
+possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight".}
+
+\item{fix_res}{The resolution of the saccade. (default = 20; see Details)}
 
 \item{fix_min}{[optional] minimal number of fixations for first pass. See Details.
 Default is 3.}
@@ -74,6 +76,14 @@ This function takes a data frame containing information of an eye
   of the columns containing the x and y coordinates of the fixation point 
   should be suplied by \code{fpx} and \code{fpy} respectively. The unit of 
   these coordinates does not matter.
+  It is important to set the minimal distande between fixations via 
+  \code{fix_diff}. When this value is to small it is possible that some 
+  first-pass fixations are falsly categorized as rereading fixations. 
+  Specifically \code{fix_diff} determines what the minimal difference between 
+  fixations should be in order for fixations to be considered in a different 
+  location. It is recommended to play around with this value for every 
+  participant and inspect a subset of the results to see if categorization is 
+  logical.
   
   By default this function considers the first three (3) fixations in any AOI 
   as first pass fixations. And it does this regardless of whether the fixations

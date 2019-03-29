@@ -22,7 +22,7 @@
 #' @param origin Character string specifying where the origin of the fixation 
 #'   coordinates \code{fpx} and \code{fpy} is located. The following values are
 #'   possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight".
-#' @param fix_diff The resolution of the saccade. (default = 20; see Details)
+#' @param fix_res The resolution of the saccade. (default = 20; see Details)
 #' @param fix_min [optional] minimal number of fixations for first pass. See Details.
 #'   Default is 3.
 #' 
