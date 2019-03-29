@@ -100,8 +100,8 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
     data[ , fpy ] <- abs( data[ , fpy ] - max( data[ , fpy ] ) )
   }else if( origin == "center" )
   {
-    data[ , fpx ] <- data[ , fpx ] - max( data[ , fpx ] )
-    data[ , fpy ] <- data[ , fpy ] + min( abs( data[ , fpy ] ) )
+    data[ , fpx ] <- data[ , fpx ] - min( data[ , fpx ] )
+    data[ , fpy ] <- abs( data[ , fpy ] - max( data[ , fpy ] ) )
   }else if( origin == "topRight" )
   {
     data[ , fpx ] <- abs( data[ , fpx ] - max( data[ , fpx ] ) )
@@ -165,7 +165,7 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
       AOIrow <- which( row.names( prevCoords ) == data[ 1, AOI ] )
       
       if( firstPass )
-      {#if( origin == "bottomRight" & i == 8 ) browser()
+      {
         if( abs( prevCoords$y[ AOIrow ] - data[ i, fpy ] ) <= fix_res  )
         {
           if( abs( prevCoords$x[ AOIrow ] - data[ i, fpx ] ) <= fix_res )
@@ -224,7 +224,7 @@ inputCheck_codePasses <- function(data, AOI, rereading, fpx, fpy, fix_min)
     stop( "the value provide to AOI is not a column name of data" )
   
   if( fix_min <= 0 ) stop( "Fix min should be bigger than 0" )
-  # browser()
+  
   if( rereading )
   {
     if( is.null( fpx ) )
