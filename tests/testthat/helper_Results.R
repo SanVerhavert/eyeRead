@@ -12,7 +12,15 @@ some_errors <- list( no_data.frame_err = "data should be a data frame",
                              multiple = paste( "not all values provided to AOI ",
                                                "are column names for data" ) ),
                        fpx = "The value provided to fpx is not a column name of data",
-                       fpy = "The value provided to fpy is not a column name of data"
+                       fpy = "The value provided to fpy is not a column name of data",
+                       fixTime = "fixTime is not a column of data",
+                       passes = "passes is not a column of data",
+                       fixTimeVec = paste0("fixTime should be a single number or ",
+                                           "character, indicating the fixation time ",
+                                           "column" ),
+                       passesVec = paste0("passes should be a single number or ",
+                                          "character, indicating the coded passes ",
+                                          "column" )
                         ),
                      AOI_short = paste0("AOI should be a vector containing more ",
                                         "than 1 element" )
@@ -49,5 +57,13 @@ some_results <- list( compile_missing = c( "AOI1", "AOI1", "AOI2", "AOI2", 0,
                                       "AOI3-AOI7", "AOI7-AOI4", 0, 0, "AOI4-AOI5",
                                       "AOI5-AOI2", 0, "AOI2-AOI4",  "AOI4-AOI2",
                                       "AOI2-AOI1", 0, "AOI1-AOI6", 0, "AOI6-AOI3",
-                                      "AOI3-AOI5", "AOI5-AOI6" )
+                                      "AOI3-AOI5", "AOI5-AOI6" ),
+                     fixDur = list( 
+                       firstSecondPass = 
+                         data.frame( passes = c( "FP_AOI1", "FP_AOI2", "FP_AOI3",
+                                                   "FP_AOI4", "FP_AOI5", "FP_AOI6","FP_AOI7", "SP_AOI2", "SP_AOI3",  "SP_AOI4", "SP_AOI7" ), duration = c( 956, 967, 1070, 1183, 373, 870, 944, 323, 210, 157, 320 ), stringsAsFactors = F ),
+                       rereading = data.frame( passes = c( "FPF_AOI1", "FPF_AOI2", "FPF_AOI3", "FPR_AOI1", "FPR_AOI2", "FPR_AOI3", "SP_AOI1" ),
+                                               duration = c( 3446, 3163, 564, 830, 1043, 217, 447 ), stringsAsFactors = F ),
+                       AOI = data.frame( passes = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" ),
+                                         duration = c( 956, 1290, 1280, 1340, 373, 870, 1264 ), stringsAsFactors = F ) )
 )
