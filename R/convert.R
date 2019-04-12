@@ -22,8 +22,7 @@
 #' 
 #' @return Returns a value or vector of values indicating the corresponding visual 
 #'   degrees.
-#'
-#' @importFrom 
+#' 
 #' @export size2deg
 #' 
 
@@ -33,7 +32,6 @@ size2deg <- function( x, dist )
   rad * 180 / pi
 }
 
-#'
 #' @describeIn convert
 #' 
 #' @aliases px2deg
@@ -59,7 +57,6 @@ px2deg <- function( x, dist, res, screenW )
   size2deg( x, dist )
 }
 
-#' 
 #' @describeIn convert
 #' 
 #' @aliases deg2size
@@ -73,12 +70,11 @@ deg2size <- function( x, dist )
   tan( rad/2 ) * 2 * dist
 }
 
-#'
 #' @describeIn convert
 #' 
 #' @aliases deg2px
 #' 
-#' @export deg@px
+#' @export deg2px
 #' 
 
 deg2px <- function( x, dist, res, screenW )

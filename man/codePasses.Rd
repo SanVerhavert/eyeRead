@@ -92,12 +92,13 @@ This function takes a data frame containing information of an eye
   fixations. Specifically \code{fix_size} determines what the minimal distance 
   between fixations should be in order for fixations to be considered in a 
   different  location or on a different hight of width. The default value is 
-  specified in pixels. The value is the number of pixels equivalent to 2 
-  visual degrees, taken a screen of 102DPI. (see \code{\link{deg.px.cm}} for 
-  conversions). The value of 2 visual degrees is the average visual angle of 
-  the fovea (Llewellyn-Thomas, 1968; Haber & Hershenson, 1973). It is 
-  recommended to play around with the \code{fix_size} value for every 
-  participant and inspect the results by setting \code{plot} to \code{TRUE}.
+  specified in pixels(px). The value is the number of pixels equivalent to 2 
+  visual degrees, taken a screen of 1020px and about 54cm in width and a 
+  viewing distance of 60cm. (see \code{\link{px2deg}} for conversions). 
+  The value of 2 visual degrees is the average visual angle of the fovea 
+  (Llewellyn-Thomas, 1968; Haber & Hershenson, 1973). It is recommended to 
+  play around with the \code{fix_size} value for every participant and inspect 
+  the results by setting \code{plot} to \code{TRUE}.
   
   When \code{plot} is set to \code{TRUE}, the function draws a plot where 
   fixation points are numbered according to their order in \code{data}. Each 

@@ -3,4 +3,8 @@
 export(AOItransitions)
 export(codePasses)
 export(compileAIO)
+export(deg2px)
+export(deg2size)
+export(px2deg)
+export(size2deg)
 importFrom(graphics,text)
