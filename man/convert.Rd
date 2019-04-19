@@ -57,3 +57,41 @@ When converting from pixels to degrees (\code{px2deg}), the measurement
 \item \code{deg2px}: 
 }}
 
+\examples{
+### these functions convert between units
+  ## from size to degrees
+  # for single values
+  size2deg( x = 2, dist = 30 ) # 3.818304866
+  
+  # and multiple values
+  size2deg( x = c( 2, 0.5, 7, 2, 20, 0.5 ),
+            dist = c( 30, 30, 60, 15, 30, 15 ) )
+   # 3.818304866, 0.954907555, 6.676941008, 7.628149669, 36.86989765, 
+   # 1.909682508
+
+## from pixels to degrees
+  # for single values
+  px2deg( x = 2, dist = 30, res = 1024, screenW = 32 ) # 0.119366164
+  
+  # and multiple values
+  px2deg( x = c( 2, 8, 100 ), dist = 30, res = 1024, screenW = 32 )
+    # 0.119366164, 0.477462066, 5.96292244
+
+## from degrees to size
+  # for single values
+  deg2size( x = 2, dist = 30 ) # 1.047303896
+  
+  # and multiple values
+  deg2size( x = c( 2, 8, 100 ), dist = 30 )
+    # 1.047303896, 4.195608717, 71.50521556
+
+## from degrees to pixels
+  # for single values
+  deg2px( x = 0.119366164, dist = 30, res = 1024, screenW = 32 ) # 2
+  
+  # and multiple values
+   deg2px( x = c( 0.119366164, 0.477462066, 5.96292244 ), dist = 30,
+           res = 1024, screenW = 32 )
+     # 2, 8, 100
+
+}

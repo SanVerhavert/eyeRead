@@ -94,6 +94,142 @@
 #'   Where \# stands for the name of the respecitve AOI.  
 #'   
 #'   If \code{plot} is \code{TRUE}, the function draws a plot.
+#' 
+#' @examples #Firts lets generate some data
+#'   some_Data_single <- data.frame( fixationIndex = 1:28,
+#'                         AOI = c( "AOI1", "AOI1", "AOI2", "AOI2", "AOI3",
+#'                                  "AOI4", "AOI7", "AOI7", "AOI7", "AOI7",
+#'                                  "AOI3", "AOI3", "AOI7", "AOI4", "AOI4",
+#'                                  "AOI4", "AOI5", "AOI2", "AOI2", "AOI4",
+#'                                  "AOI2", "AOI1", "AOI1", "AOI6", "AOI6",
+#'                                  "AOI3", "AOI5", "AOI6" ),
+#'                        fixTime = c( 373, 113, 123, 150, 120, 563, 320, 
+#'                                     270, 147, 207, 320, 630, 320, 183,
+#'                                     207, 230, 210, 247, 447, 157, 323,
+#'                                     247, 223, 327, 200, 210, 163, 343 ),
+#'                        stringsAsFactors = FALSE )
+#'   
+#'   some_Data_multiple <- data.frame( fixationIndex = 1:28,
+#'                           AOI1 = c( 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0,
+#'                                     0, 0 ),
+#'                           AOI2 = c( 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0,
+#'                                     0, 0 ),
+#'                           AOI3 = c( 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0,
+#'                                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+#'                                     0, 0 ),
+#'                           AOI4 = c( 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+#'                                     1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0 ),
+#'                           AOI5 = c( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     1, 0 ),
+#'                           AOI6 = c( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,
+#'                                     0, 1 ),
+#'                           AOI7 = c( 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1,
+#'                                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0 ) )
+#'   
+#'   some_Data_topLeft <- data.frame( fixationIndex = 1:37,
+#'                          AOI = c( "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
+#'                                   "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
+#'                                   "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
+#'                                   "AOI1", "AOI2", "AOI2", "AOI1", "AOI2",
+#'                                   "AOI2", "AOI2", "AOI2", "AOI2", "AOI2",
+#'                                   "AOI2", "AOI2", "AOI2", "AOI2", "AOI2",
+#'                                   "AOI2", "AOI2", "AOI2", "AOI2", "AOI3",
+#'                                   "AOI3", "AOI3" ),
+#'                          xcoord = c( 331, 380, 461, 537, 405, 581, 658, 347,
+#'                                      391, 482, 563, 640, 363, 417, 509, 347,
+#'                                      585, 675, 351, 328, 399, 513, 590, 668,
+#'                                      337, 465, 629, 407, 684, 470, 378, 526,
+#'                                      549, 370, 390, 511, 434 ),
+#'                         ycoord = c( 65, 66, 67, 64, 68, 65, 67, 93, 97, 102,
+#'                                     98, 101, 94, 97, 99, 132, 221, 222, 65,
+#'                                     258, 253, 256, 257, 256, 301, 294, 294,
+#'                                     326, 330, 259, 299, 297, 331, 367, 431,
+#'                                     432, 430 ),
+#'                         fixTime = c( 373, 113, 123, 150, 120, 563, 320, 270,
+#'                                      147, 207, 320, 630, 320, 183, 207, 230,
+#'                                      210, 247, 447, 157, 323, 247, 223, 327,
+#'                                      200, 210, 163, 343, 233, 180, 173, 423,
+#'                                      267, 280, 397, 167, 217 ),
+#'                        stringsAsFactors = FALSE )
+#'   some_Data_bottomLeft <- data.frame( fixationIndex = 1:37,
+#'                             AOI = c( "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
+#'                                      "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
+#'                                      "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
+#'                                      "AOI1", "AOI2", "AOI2", "AOI1", "AOI2",
+#'                                      "AOI2", "AOI2", "AOI2", "AOI2", "AOI2",
+#'                                      "AOI2", "AOI2", "AOI2", "AOI2", "AOI2",
+#'                                      "AOI2", "AOI2", "AOI2", "AOI2", "AOI3",
+#'                                      "AOI3", "AOI3" ),
+#'                             xcoord = c( 331, 380, 461, 537, 405, 581, 658,
+#'                                         347, 391, 482, 563, 640, 363, 417,
+#'                                         509, 347, 585, 675, 351, 328, 399,
+#'                                         513, 590, 668, 337, 465, 629, 407,
+#'                                         684, 470, 378, 526, 549, 370, 390,
+#'                                         511, 434 ),
+#'                             ycoord = c( 433, 431, 430, 432, 429, 429, 430,
+#'                                         403, 400, 400, 397, 394, 402, 399,
+#'                                         397, 366, 276, 275, 432, 240, 245,
+#'                                         242, 240, 239, 197, 202, 203, 172,
+#'                                         167, 239, 199, 200, 165, 130, 65,
+#'                                         66, 67 ),
+#'                             stringsAsFactors = FALSE )
+#'   
+#'   ### codePasses calculates first and second  passes
+#'   ## if a single AOI column is provided
+#'   # by name
+#'   codePasses( data = some_Data_single, AOI = "AOI" )
+#'   
+#'   # by column number
+#'   codePasses( data = some_Data_single, AOI = 2 )
+#'   
+#'   ## and if multiple AOI columns are provided
+#'   # by name
+#'   codePasses( data = some_Data_multiple, 
+#'              AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" ) )
+#'   
+#'   # by number
+#'   codePasses( data = some_Data_multiple, AOI = 2:8 )
+#'   
+#'   ### it also calculates forward and backward first passes if the x and y
+#'   ### coordinates of the fixations are provided
+#'   resultA <- codePasses( data = some_Data_topLeft, AOI = "AOI",
+#'                          rereading = TRUE, fpx = "xcoord", fpy = "ycoord",
+#'                          fix_size = 20 )
+#'   
+#'   # and allows for different coordinate origins
+#'   codePasses( data = some_Data_bottomLeft, AOI = "AOI", rereading = TRUE,
+#'               fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
+#'                fix_size = 20 )
+#'   
+#'   ## mind that fix_size can influence the results
+#'   resultB <- codePasses( data = some_Data_topLeft, AOI = "AOI",
+#'                          rereading = TRUE, fpx = "xcoord", fpy = "ycoord",
+#'                          fix_size = 10 )
+#'   
+#'   result <- data.frame( fix_size20 = resultA, fix_size10 = resultB )
+#'   
+#'   ## therefore you can plot the results is you want to check the acuracy
+#'   ## of the coding
+#'   \dontrun{ codePasses( data = some_Data_topLeft, AOI = "AOI",
+#'                         rereading = TRUE, fpx = 3, fpy = 4, fix_size = 20,
+#'                         plot = TRUE )
+#'   
+#'   # but you need to plot the AOI poligins yourself
+#'   ?polygon #for details
+#'   
+#'   polygon( x = c( 320, 690, 690, 320 ), y = c(54, 54, 155, 155 ),
+#'            border = "red" )
+#'   polygon( x = c( 320, 580, 580, 690, 690, 390, 390, 320 ),
+#'            y = c( 245, 245, 218, 218, 355, 355, 384, 386 ),
+#'            border = "green" )
+#'   polygon( x = c( 370, 550, 550, 370 ), y = c(423, 423, 458, 458 ),
+#'            border = "blue" ) }
 #'   
 #' @references HABER, R. N., & HERSHENSON, M. The psychology of visual perception. 
 #'   New York: Holt, Rinehart, and Winston, 1973.  
@@ -277,7 +413,7 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
     
     text( data[ , fpx ], data[ , fpy ], labels = 1:nrow( data ) )
     text( data[ , fpx ], data[ , fpy ] - fix_size,
-          labels = substr( x = passes, start = 1, stop  = 3 ) )
+          labels = passes )
     
   }else return( passes )
   
