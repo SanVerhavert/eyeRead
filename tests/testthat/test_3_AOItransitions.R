@@ -17,7 +17,5 @@ test_that( "Function returns the correct error when AOI is contains less than tw
 
 test_that( "Function returns the correct results", {
   results <- AOItransitions( some_Data$single_AOI_col$AOI )
-  expect_true( is.vector( results ) )
-  expect_true( is.character( results ) )
   expect_equal( results, some_results$transitions )
 } )
