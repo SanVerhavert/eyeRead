@@ -245,6 +245,8 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
                                     "bottomRight" ), fix_size = 42, fix_min = 3,
                         plot = FALSE, ... )
 {
+  data <- as.data.frame( data )
+  
   inputCheck_codePasses( data = data, AOI = AOI, rereading = rereading,
                          fpx = fpx, fpy = fpy, fix_min = fix_min )
   
