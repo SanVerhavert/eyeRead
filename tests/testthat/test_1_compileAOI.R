@@ -31,16 +31,12 @@ test_that( "Function returns the correct results, if AOI are names", {
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ) )
-  expect_true( is.vector( results ) )
-  expect_length( object = results, n = nrow( some_Data$multiple_AOI_col ) )
   expect_equal( results, some_Data$single_AOI_col$AOI )
 } )
 
 test_that( "Function returns the correct results, if AOI are numbers", {
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = 2:8 )
-  expect_true( is.vector( results ) )
-  expect_length( object = results, n = nrow( some_Data$multiple_AOI_col ) )
   expect_equal( results, some_Data$single_AOI_col$AOI )
 } )
 
@@ -48,8 +44,6 @@ test_that( "Function returns the correct results, if AOI are names and some fixa
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = c( "AOI1", "AOI2", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ) )
-  expect_true( is.vector( results ) )
-  expect_length( object = results, n = nrow( some_Data$multiple_AOI_col ) )
   expect_equal( results, some_results$compile_missing )
 } )
 
@@ -58,8 +52,6 @@ test_that( "Function returns the correct results, if AOI are names and with labe
                          AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ),
                          labels = c( "1", "2", "3", "4", "5", "6", "7" ) )
-  expect_true( is.vector( results ) )
-  expect_length( object = results, n = length( some_results$compile_labels ) )
   expect_equal( results, some_results$compile_labels )
 } )
 
@@ -67,7 +59,5 @@ test_that( "Function returns the correct results, if AOI are numbers and with la
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = 2:8,
                          labels = c( "1", "2", "3", "4", "5", "6", "7" ) )
-  expect_true( is.vector( results ) )
-  expect_length( object = results, n = length( some_results$compile_labels ) )
   expect_equal( results, some_results$compile_labels )
 } )

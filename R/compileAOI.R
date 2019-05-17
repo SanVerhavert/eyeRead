@@ -26,6 +26,46 @@
 #' @return Vector that contains the AIO fixated on for each row in the data frame 
 #'   whereby absence of a fixation on AIO is coded as 0.
 #' 
+#' @examples # First we generate some data
+#'   some_Data <- data.frame( fixationIndex = 1:28,
+#'                           AOI1 = c( 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0,
+#'                                     0, 0 ),
+#'                           AOI2 = c( 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0,
+#'                                     0, 0 ),
+#'                           AOI3 = c( 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0,
+#'                                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+#'                                     0, 0 ),
+#'                           AOI4 = c( 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+#'                                     1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0 ),
+#'                           AOI5 = c( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     1, 0 ),
+#'                           AOI6 = c( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,
+#'                                     0, 1 ),
+#'                           AOI7 = c( 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1,
+#'                                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'                                     0, 0 ) )
+#'   
+#'   # compileAOI accepts AOI's as names
+#'   compileAIO( data = some_Data, AOI = c( "AOI1", "AOI2", "AOI3", "AOI4",
+#'                                          "AOI5", "AOI6", "AOI7" ) )
+#'   
+#'   # and as column numbers
+#'   compileAIO( data = some_Data, AOI = 2:8 )
+#'   
+#'   # and it returns 0 if some fixations are oitside the provided AOI's
+#'   compileAIO( data = some_Data, AOI = c( "AOI1", "AOI2", "AOI4", "AOI5",
+#'                                          "AOI6", "AOI7" ) )
+#'   
+#'   # it is also possible to suply different lables for the AOI's
+#'   compileAIO( data = some_Data, AOI = c( "AOI1", "AOI2", "AOI3", "AOI4",
+#'                                          "AOI5", "AOI6", "AOI7" ),
+#'               labels = c( "1", "2", "3", "4", "5", "6", "7" ) )
+#'   
 #' @author Tine van Daal [aut], \email{tine.vandaal@@uantwerpen.be}
 #'   San Verhavert [ctb], \email{san.verhavert@@uantwerpen.be}
 #' 
