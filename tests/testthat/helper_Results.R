@@ -22,6 +22,10 @@ some_errors <- list( no_data.frame_err = "data should be a data frame",
                                           "character, indicating the coded passes ",
                                           "column" )
                         ),
+                     coords_nonum = list(
+                       fpx = "the column specified in fpx is not of type numeric",
+                       fpy = "the column specified in fpy is not of type numeric"
+                     ),
                      AOI_short = paste0("AOI should be a vector containing more ",
                                         "than 1 element" )
 )

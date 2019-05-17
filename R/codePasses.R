@@ -237,6 +237,7 @@
 #'   88-95. 
 #' 
 #' @importFrom graphics text
+#' @importFrom tibble is_tibble
 #' @export codePasses
 #' 
 
@@ -245,7 +246,11 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
                                     "bottomRight" ), fix_size = 42, fix_min = 3,
                         plot = FALSE, ... )
 {
-  data <- as.data.frame( data )
+  if( is_tibble( data ) )
+  {
+    data <- as.data.frame( data )
+  }
+  
   
   inputCheck_codePasses( data = data, AOI = AOI, rereading = rereading,
                          fpx = fpx, fpy = fpy, fix_min = fix_min )
@@ -448,6 +453,12 @@ inputCheck_codePasses <- function(data, AOI, rereading, fpx, fpy, fix_min)
     } else if ( is.character (fpy ) & !( fpy %in% colnames( data ) ) )
     {
       stop( "The value provided to fpy is not a column name of data" )
+    } else if( !is.numeric( data[ , fpx ] ) )
+    {
+      stop( "the column specified in fpx is not of type numeric" )
+    } else if( !is.numeric( data[ , fpy ] ) )
+    {
+      stop( "the column specified in fpy is not of type numeric" )
     }
   }
 }
