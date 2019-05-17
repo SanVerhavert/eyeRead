@@ -108,11 +108,17 @@
 #'   \code{\link[base]{tapply}}
 #'
 #' @importFrom stats aggregate
+#' @importFrom tibble is_tibble
 #' @export fixDur
 #' 
 
 fixDur <- function( data, fixTime, passes )
 {
+  if( is_tibble( data ) )
+  {
+    data <- as.data.frame( data )
+  }
+  
   fixDur.inputChecks( data = data, fixTime, passes = passes )
   
   aggregate( list( duration = data[ , fixTime ] ),
