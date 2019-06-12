@@ -238,6 +238,7 @@
 #' 
 #' @importFrom graphics text
 #' @importFrom tibble is_tibble
+#' @importFrom data.table transpose
 #' @export codePasses
 #' 
 
@@ -330,7 +331,7 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
     
     if( rereading )
     {
-      AOIrow <- which( row.names( prevCoords ) == data[ 1, AOI ] )
+      AOIrow <- which( row.names( prevCoords ) == data[ i, AOI ] )
       
       if( firstPass )
       {
@@ -376,6 +377,14 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
     fixCount[ data[ i, AOI ] ] <- fixCount[ data[ i, AOI ] ] + 1
   }
   rm(i)
+  
+  splitted_pass <- transpose( 
+    as.data.frame( 
+      strsplit( passes, split = "_", fixed = T )
+      )
+  )
+  
+  passes[ splitted_pass[ , 2 ] == 0 ] <- 0
   
   if( plot )
   {
