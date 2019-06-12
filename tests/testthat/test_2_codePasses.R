@@ -48,6 +48,34 @@ test_that( "Function returns the correct error when fpy specifies a colname that
   )
 } )
 
+test_that( "Function returns the correct error when fpx is non numeric", {
+  someTestData <- some_Data$rereading$topLeft
+  someTestData$xcoord <- as.character( someTestData$xcoord )
+  expect_error(
+    codePasses( data = someTestData,
+                AOI = "AOI",
+                rereading = T,
+                fpx = "xcoord",
+                fpy = "ycoord" ),
+    regexp = some_results$coords_nonum$fpx
+  )
+  rm( someTestData )
+} )
+
+test_that( "Function returns the correct error when fpy is non numeric", {
+  someTestData <- some_Data$rereading$topLeft
+  someTestData$ycoord <- as.character( someTestData$ycoord )
+  expect_error(
+    codePasses( data = someTestData,
+                AOI = "AOI",
+                rereading = T,
+                fpx = "xcoord",
+                fpy = "ycoord" ),
+    regexp = some_results$coords_nonum$fpy
+  )
+  rm( someTestData )
+} )
+
 test_that( "Function returns the correct errors when fix_min is to small", {
   expect_error(
     codePasses( data = some_Data$single_AOI_col, AOI = "AOI",
