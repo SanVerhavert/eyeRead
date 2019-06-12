@@ -70,3 +70,5 @@ branch from witch it was branched
 |_ master  
 |\\_ release  
 |\\_ dev  
+| |\\_issueNA  
+| |\\_feat\_dur\_out  
