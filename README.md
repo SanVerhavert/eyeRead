@@ -70,5 +70,6 @@ branch from witch it was branched
 |_ master  
 |\\_ release  
 |\\_ dev  
-| |\\_issueNA  
+| |\\_issueNA 
+| |\\_issue_reread
 | |\\_feat\_dur\_out  
