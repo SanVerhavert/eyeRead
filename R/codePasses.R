@@ -331,7 +331,7 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
     
     if( rereading )
     {
-      AOIrow <- which( row.names( prevCoords ) == data[ 1, AOI ] )
+      AOIrow <- which( row.names( prevCoords ) == data[ i, AOI ] )
       
       if( firstPass )
       {
