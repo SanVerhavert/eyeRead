@@ -135,6 +135,14 @@ test_that( "Function correctly codes fixations as first pass and second pass wit
   )
 } )
 
+test_that( "Function correctly codes fixations as first pass and second pass with multiple AOI columns and non-AOI fixation [column name]", {
+  expect_equal(
+    codePasses( data = some_Data$multiple_AOI_col,
+                AOI = c( "AOI1", "AOI2",  "AOI4", "AOI5", "AOI6", "AOI7" ) ),
+    some_results$zeros
+  )
+} )
+
 test_that( "Function correctly codes fixations as forward and rereading first pass; origin topLeft [by default; column name]", {
   expect_equal(
     codePasses( data = some_Data$rereading$topLeft,
@@ -144,6 +152,18 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
                 fpy = "ycoord",
                 fix_size = 20 ),
     some_results$rereading
+  )
+} )
+
+test_that( "Function correctly codes fixations as forward and rereading first pass and non-AOI fixation; origin topLeft [by default; column name]", {
+  expect_equal(
+    codePasses( data = some_Data$rereading$zeros,
+                AOI =  c( "AOI1", "AOI3" ),
+                rereading = T,
+                fpx = "xcoord",
+                fpy = "ycoord",
+                fix_size = 20 ),
+    some_results$rereading_zeros
   )
 } )
 
