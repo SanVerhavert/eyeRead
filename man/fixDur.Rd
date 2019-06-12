@@ -4,7 +4,7 @@
 \alias{fixDur}
 \title{Fixation Duration}
 \usage{
-fixDur(data, fixTime, passes)
+fixDur(data, fixTime, passes, AOI_label = NULL, rereading = NULL)
 }
 \arguments{
 \item{data}{A data frame containing fixation information of an eye tracing 
@@ -13,6 +13,11 @@ experiment and the coded passes. Each row indicates a fixation.}
 \item{fixTime}{The name or number of the column containing the time per fixation.}
 
 \item{passes}{The name or number of the column containing the coded passes.}
+
+\item{AOI_label}{Optional. The names of the AOI's. See details.}
+
+\item{rereading}{Optional. Logical, indicating if rereading passes were coded.
+See details.}
 }
 \value{
 A vector containing the agregated fixation duration for the passes or 
@@ -32,6 +37,11 @@ This function is a wrapper for  \code{\link[stats]{aggregate}}
   for the AOI's only.
   The column of which the name or number is passed to \code{passes},will be 
   converted to a factor if it is not yet the case.
+  
+  You can provide the names of the AOI's to \code{AOI_label} and indicate if 
+  rereading passes were coded in \code{rereading}. This enures that the output 
+  contains all types of passes for each AOI, even if they did not occur. In 
+  that case the value in the output will be 0.
 }
 \examples{
 # first generate some data

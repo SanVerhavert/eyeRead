@@ -9,10 +9,11 @@
 #' 
 #' @param data A data frame containing fixation information of an eye tracing 
 #'   experiment and the coded passes. Each row indicates a fixation.
-#'   
 #' @param fixTime The name or number of the column containing the time per fixation.
-#' 
 #' @param passes The name or number of the column containing the coded passes.
+#' @param AOI_label Optional. The names of the AOI's. See details.
+#' @param rereading Optional. Logical, indicating if rereading passes were coded.
+#'    See details.
 #' 
 #' @details This function is a wrapper for  \code{\link[stats]{aggregate}} 
 #'   
@@ -23,6 +24,11 @@
 #'   for the AOI's only.
 #'   The column of which the name or number is passed to \code{passes},will be 
 #'   converted to a factor if it is not yet the case.
+#'   
+#'   You can provide the names of the AOI's to \code{AOI_label} and indicate if 
+#'   rereading passes were coded in \code{rereading}. This enures that the output 
+#'   contains all types of passes for each AOI, even if they did not occur. In 
+#'   that case the value in the output will be 0.
 #' 
 #' @return A vector containing the agregated fixation duration for the passes or 
 #'   AOI's, dependent upon what is provided to \code{passes}. The result will be 
@@ -112,21 +118,39 @@
 #' @export fixDur
 #' 
 
-fixDur <- function( data, fixTime, passes )
+fixDur <- function( data, fixTime, passes, AOI_label = NULL, rereading = NULL )
 {
   if( is_tibble( data ) )
   {
     data <- as.data.frame( data )
   }
   
-  fixDur.inputChecks( data = data, fixTime, passes = passes )
+  fixDur.inputChecks( data = data, fixTime, passes = passes, AOI_label = AOI_label, rereading = rereading )
   
-  aggregate( list( duration = data[ , fixTime ] ),
-             by = list( passes = data[ , passes ] ),
-             FUN = sum )
+  result <- aggregate( list( duration = data[ , fixTime ] ),
+                       by = list( passes = data[ , passes ] ),
+                       FUN = sum )
+  
+  if( !is.null(rereading ) )
+  {
+    if( rereading )
+    {
+      passLab <- c( paste0( "FPF_", AOI_label ),
+                    paste0( "FPR_", AOI_label ),
+                    paste0( "SP_", AOI_label ) )
+    } else
+    {
+      passLab <- c( paste0( "FP_", AOI_label ),
+                    paste0( "SP_", AOI_label ) )
+    }
+    
+    passes <- data.frame( passes = passLab )
+    
+    result <- merge( passes, result, all = T )
+  }
 }
 
-fixDur.inputChecks <- function( data, fixTime, passes )
+fixDur.inputChecks <- function( data, fixTime, passes, AOI_label, rereading )
 {
   if( !is.data.frame( data ) ) stop( "data should be a data frame" )
   
@@ -143,4 +167,10 @@ fixDur.inputChecks <- function( data, fixTime, passes )
   
   if( is.character( passes ) & !( passes %in% colnames( data ) ) )
     stop( "passes is not a column of data" )
+  
+  if( !is.null( rereading ) )
+  {
+    if( !is.logical( rereading ) ) stop( "rereading should be logical" )
+    if( is.null( AOI_label ) ) stop( "If rereading is provided, AOI-lable should be provided" )
+  }
 }
