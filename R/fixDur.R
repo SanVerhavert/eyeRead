@@ -127,9 +127,24 @@ fixDur <- function( data, fixTime, passes, AOI_label = NULL, rereading = NULL )
   
   fixDur.inputChecks( data = data, fixTime, passes = passes, AOI_label = AOI_label, rereading = rereading )
   
+  splitted_pass <- transpose( 
+    as.data.frame( 
+      strsplit( data[, passes], split = "_", fixed = T )
+    )
+  )
+  
+  if( any( splitted_pass [ , 1 ] == "FPF" ) )
+  {
+    passCol <- c( "FirstPassForward", "FirstPassRereading", "SecondPass" )
+  } else passCol <- c( "FirstPass", "SecondPass")
+  
   result <- aggregate( list( duration = data[ , fixTime ] ),
-                       by = list( passes = data[ , passes ] ),
-                       FUN = sum )
+                       by = list( AOI = splitted_pass[ , 2 ],
+                                  passes = splitted_pass[ , 1 ]),
+                       FUN = sum, simplify = F )
+  
+  
+  
   
   if( !is.null(rereading ) )
   {
