@@ -11,9 +11,6 @@
 #'   experiment and the coded passes. Each row indicates a fixation.
 #' @param fixTime The name or number of the column containing the time per fixation.
 #' @param passes The name or number of the column containing the coded passes.
-#' @param AOI_label Optional. The names of the AOI's. See details.
-#' @param rereading Optional. Logical, indicating if rereading passes were coded.
-#'    See details.
 #' 
 #' @details This function is a wrapper for  \code{\link[stats]{aggregate}} 
 #'   
@@ -30,9 +27,23 @@
 #'   contains all types of passes for each AOI, even if they did not occur. In 
 #'   that case the value in the output will be 0.
 #' 
-#' @return A vector containing the agregated fixation duration for the passes or 
-#'   AOI's, dependent upon what is provided to \code{passes}. The result will be 
-#'   in the same unit as the duration input.
+#' @return A data frame with the following comumns  
+#'  If the AOI column is provided to /code{passes}:  
+#'   $AOI: containing the AOI names  
+#'   $duration: containing the aggregated durations  
+#'  
+#'  If the passes column is provided to /code{passes} and there is no rereading:  
+#'   $AOI: containing the AOI names  
+#'   $FirstPass: containing the aggregated first pass durations  
+#'   $SecondPass: containing the aggregated second pass durations  
+#'   
+#'  If the passes column is provided to /code{passes} and there is rereading:  
+#'  $AOI: containing the AOI names  
+#'   $FirstPassForward: containing the aggregated first pass forward durations  
+#'   $FirstPassRereading: containing the aggregated first pass rereading durations  
+#'   $SecondPass: containing the aggregated second pass durations  
+#'   
+#'   The result will be in the same unit as the duration input.
 #' 
 #' @examples # first generate some data
 #'   some_Data_passes <- data.frame( fixationIndex = 1:28,
@@ -114,18 +125,21 @@
 #'   \code{\link[base]{tapply}}
 #'
 #' @importFrom stats aggregate
+#' @importFrom tidyr spread
 #' @importFrom tibble is_tibble
 #' @export fixDur
 #' 
 
-fixDur <- function( data, fixTime, passes, AOI_label = NULL, rereading = NULL )
+fixDur <- function( data, fixTime, passes )
 {
   if( is_tibble( data ) )
   {
     data <- as.data.frame( data )
   }
   
-  fixDur.inputChecks( data = data, fixTime, passes = passes, AOI_label = AOI_label, rereading = rereading )
+  fixDur.inputChecks( data = data, fixTime, passes = passes )
+  
+  if( !is.character( data[ , passes ] ) ) data[ , passes ] <- as.character( data[ , passes ] )
   
   splitted_pass <- transpose( 
     as.data.frame( 
@@ -133,39 +147,35 @@ fixDur <- function( data, fixTime, passes, AOI_label = NULL, rereading = NULL )
     )
   )
   
-  if( any( splitted_pass [ , 1 ] == "FPF" ) )
+  if( ncol( splitted_pass ) < 2 )
   {
-    passCol <- c( "FirstPassForward", "FirstPassRereading", "SecondPass" )
-  } else passCol <- c( "FirstPass", "SecondPass")
-  
-  result <- aggregate( list( duration = data[ , fixTime ] ),
+    result <- aggregate( list( duration = data[ , fixTime ] ),
+                         by = list( AOI = splitted_pass[ , 1 ]),
+                         FUN = sum )
+  }else 
+  {
+    if( any( splitted_pass [ , 1 ] == "FPF" ) )
+    {
+      passCol <- c( "FirstPassForward", "FirstPassRereading", "SecondPass" )
+    }else passCol <- c( "FirstPass", "SecondPass" )
+    
+    result <- aggregate( list( duration = data[ , fixTime ] ),
                        by = list( AOI = splitted_pass[ , 2 ],
                                   passes = splitted_pass[ , 1 ]),
-                       FUN = sum, simplify = F )
-  
-  
-  
-  
-  if( !is.null(rereading ) )
-  {
-    if( rereading )
-    {
-      passLab <- c( paste0( "FPF_", AOI_label ),
-                    paste0( "FPR_", AOI_label ),
-                    paste0( "SP_", AOI_label ) )
-    } else
-    {
-      passLab <- c( paste0( "FP_", AOI_label ),
-                    paste0( "SP_", AOI_label ) )
-    }
+                       FUN = sum )
     
-    passes <- data.frame( passes = passLab )
+    result <- spread( result, key = passes, value = duration, fill = 0, drop = F )
     
-    result <- merge( passes, result, all = T )
-  }
+    names( result )[ 2:4 ] <- passCol
+  } 
+  
+  result <- result[ result$AOI != 0, ]
+  
+  return( as.data.frame( result ) )
+  
 }
 
-fixDur.inputChecks <- function( data, fixTime, passes, AOI_label, rereading )
+fixDur.inputChecks <- function( data, fixTime, passes )
 {
   if( !is.data.frame( data ) ) stop( "data should be a data frame" )
   
@@ -183,9 +193,4 @@ fixDur.inputChecks <- function( data, fixTime, passes, AOI_label, rereading )
   if( is.character( passes ) & !( passes %in% colnames( data ) ) )
     stop( "passes is not a column of data" )
   
-  if( !is.null( rereading ) )
-  {
-    if( !is.logical( rereading ) ) stop( "rereading should be logical" )
-    if( is.null( AOI_label ) ) stop( "If rereading is provided, AOI-lable should be provided" )
-  }
 }

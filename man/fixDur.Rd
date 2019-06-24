@@ -4,7 +4,7 @@
 \alias{fixDur}
 \title{Fixation Duration}
 \usage{
-fixDur(data, fixTime, passes, AOI_label = NULL, rereading = NULL)
+fixDur(data, fixTime, passes)
 }
 \arguments{
 \item{data}{A data frame containing fixation information of an eye tracing 
@@ -13,16 +13,25 @@ experiment and the coded passes. Each row indicates a fixation.}
 \item{fixTime}{The name or number of the column containing the time per fixation.}
 
 \item{passes}{The name or number of the column containing the coded passes.}
-
-\item{AOI_label}{Optional. The names of the AOI's. See details.}
-
-\item{rereading}{Optional. Logical, indicating if rereading passes were coded.
-See details.}
 }
 \value{
-A vector containing the agregated fixation duration for the passes or 
-  AOI's, dependent upon what is provided to \code{passes}. The result will be 
-  in the same unit as the duration input.
+A data frame with the following comumns  
+ If the AOI column is provided to /code{passes}:  
+  $AOI: containing the AOI names  
+  $duration: containing the aggregated durations  
+ 
+ If the passes column is provided to /code{passes} and there is no rereading:  
+  $AOI: containing the AOI names  
+  $FirstPass: containing the aggregated first pass durations  
+  $SecondPass: containing the aggregated second pass durations  
+  
+ If the passes column is provided to /code{passes} and there is rereading:  
+ $AOI: containing the AOI names  
+  $FirstPassForward: containing the aggregated first pass forward durations  
+  $FirstPassRereading: containing the aggregated first pass rereading durations  
+  $SecondPass: containing the aggregated second pass durations  
+  
+  The result will be in the same unit as the duration input.
 }
 \description{
 Calculates the fixation durations for the first and second passes
