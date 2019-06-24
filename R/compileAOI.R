@@ -23,7 +23,7 @@
 #'   make shure to pass these as character for the function to work properly. The 
 #'   function does not check for this case.
 #' 
-#' @return Vector (Factor) that contains the AIO fixated on for each row in the 
+#' @return A factor that contains the AIO fixated on for each row in the 
 #'   data frame whereby absence of a fixation on AIO is coded as 0.
 #' 
 #' @examples # First we generate some data
