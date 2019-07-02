@@ -154,11 +154,6 @@ fixDur <- function( data, fixTime, passes )
                          FUN = sum )
   }else 
   {
-    if( any( splitted_pass [ , 1 ] == "FPF" ) )
-    {
-      passCol <- c( "FirstPassForward", "FirstPassRereading", "SecondPass" )
-    }else passCol <- c( "FirstPass", "SecondPass" )
-    
     result <- aggregate( list( duration = data[ , fixTime ] ),
                        by = list( AOI = splitted_pass[ , 2 ],
                                   passes = splitted_pass[ , 1 ]),
@@ -166,7 +161,10 @@ fixDur <- function( data, fixTime, passes )
     
     result <- spread( result, key = passes, value = duration, fill = 0, drop = F )
     
-    names( result )[ 2:4 ] <- passCol
+    if( any( splitted_pass [ , 1 ] == "FPF" ) )
+    {
+      names( result )[ 2:4 ] <- c( "FirstPassForward", "FirstPassRereading", "SecondPass" )
+    }else names( result )[ 2:3 ] <- c( "FirstPass", "SecondPass" )
   } 
   
   result <- result[ result$AOI != 0, ]
