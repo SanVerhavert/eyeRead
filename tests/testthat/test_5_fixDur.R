@@ -1,4 +1,4 @@
-context( "codePasses" )
+context( "fixDur" )
 
 test_that( "specFile is found", {
   expect_true( T )
