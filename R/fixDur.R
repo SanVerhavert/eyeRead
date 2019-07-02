@@ -139,6 +139,9 @@ fixDur <- function( data, fixTime, passes )
   
   fixDur.inputChecks( data = data, fixTime = fixTime, passes = passes )
   
+  
+  data <- data[ data[ , passes] != 0, ]
+  
   if( !is.character( data[ , passes ] ) ) data[ , passes ] <- as.character( data[ , passes ] )
   
   splitted_pass <- transpose( 
@@ -165,9 +168,7 @@ fixDur <- function( data, fixTime, passes )
     {
       names( result )[ 2:4 ] <- c( "FirstPassForward", "FirstPassRereading", "SecondPass" )
     }else names( result )[ 2:3 ] <- c( "FirstPass", "SecondPass" )
-  } 
-  
-  result <- result[ result$AOI != 0, ]
+  }
   
   return( as.data.frame( result ) )
   
