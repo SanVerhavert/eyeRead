@@ -86,10 +86,22 @@ some_results <- list( compile_missing = factor( c( "AOI1", "AOI1", "AOI2", "AOI2
                                       "AOI3-AOI5", "AOI5-AOI6" ),
                      fixDur = list( 
                        firstSecondPass = 
-                         data.frame( passes = c( "FP_AOI1", "FP_AOI2", "FP_AOI3",
-                                                   "FP_AOI4", "FP_AOI5", "FP_AOI6","FP_AOI7", "SP_AOI2", "SP_AOI3",  "SP_AOI4", "SP_AOI7" ), duration = c( 956, 967, 1070, 1183, 373, 870, 944, 323, 210, 157, 320 ), stringsAsFactors = F ),
-                       rereading = data.frame( passes = c( "FPF_AOI1", "FPF_AOI2", "FPF_AOI3", "FPR_AOI1", "FPR_AOI2", "FPR_AOI3", "SP_AOI1" ),
-                                               duration = c( 3446, 3163, 564, 830, 1043, 217, 447 ), stringsAsFactors = F ),
-                       AOI = data.frame( passes = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" ),
-                                         duration = c( 956, 1290, 1280, 1340, 373, 870, 1264 ), stringsAsFactors = F ) )
+                         data.frame( AOI = c( "AOI1", "AOI2", "AOI3", "AOI4",
+                                              "AOI5", "AOI6","AOI7" ),
+                                     FirstPass = c( 956, 967, 1070, 1183, 373,
+                                                    870, 944 ),
+                                     SecondPass = c( 0, 323, 210,  157, 0, 0, 320 ),
+                                     stringsAsFactors = F ),
+                       rereading = data.frame( AOI = c( "AOI1", "AOI2", "AOI3" ),
+                                               FirstPassForward = c( 3446, 3163,
+                                                                     564),
+                                               FirstPassRereading = c( 830, 1043,
+                                                                       217 ), 
+                                               SecondPass = c( 447, 0, 0 ),
+                                               stringsAsFactors = F ),
+                       AOI = data.frame( AOI = c( "AOI1", "AOI2", "AOI3", "AOI4",
+                                                  "AOI5", "AOI6", "AOI7" ),
+                                         duration = c( 956, 1290, 1280, 1340,
+                                                       373, 870, 1264 ),
+                                         stringsAsFactors = F ) )
 )
