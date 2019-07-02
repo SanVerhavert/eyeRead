@@ -21,4 +21,5 @@ Suggests:
 RoxygenNote: 6.1.1
 Imports: 
     tibble,
-    data.table
+    data.table,
+    tidyr

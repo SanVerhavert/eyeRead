@@ -106,7 +106,6 @@ test_that( "Function returns correct error if rereading is TRUE but fpy is not s
 } )
 
 test_that( "Function correctly codes fixations as first pass and second pass with a single AOI column [column name]", {
-  # browser()
   expect_equal(
     codePasses( data = some_Data$single_AOI_col, AOI = "AOI" ),
     some_results$regular

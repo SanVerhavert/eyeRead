@@ -137,7 +137,7 @@ fixDur <- function( data, fixTime, passes )
     data <- as.data.frame( data )
   }
   
-  fixDur.inputChecks( data = data, fixTime, passes = passes )
+  fixDur.inputChecks( data = data, fixTime = fixTime, passes = passes )
   
   if( !is.character( data[ , passes ] ) ) data[ , passes ] <- as.character( data[ , passes ] )
   
@@ -159,7 +159,7 @@ fixDur <- function( data, fixTime, passes )
                                   passes = splitted_pass[ , 1 ]),
                        FUN = sum )
     
-    result <- spread( result, key = passes, value = duration, fill = 0, drop = F )
+    result <- spread( result, key = "passes", value = "duration", fill = 0, drop = F )
     
     if( any( splitted_pass [ , 1 ] == "FPF" ) )
     {
