@@ -6,7 +6,7 @@
 \usage{
 codePasses(data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   origin = c("topLeft", "bottomLeft", "center", "topRight",
-  "bottomRight"), fix_size = 42, fix_min = 3, plot = FALSE, ...)
+  "bottomRight"), fix_size = 42, fix_min = 3)
 }
 \arguments{
 \item{data}{A data frame containing fixation information of an eye tracing 
@@ -34,17 +34,11 @@ possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight"
 
 \item{fix_min}{[optional] minimal number of fixations for first pass. See Details.
 Default is 3.}
-
-\item{plot}{logical. If \code{FALSE} (default) returns a vector? If 
-\code{TRUE} plots the results. See Details.}
-
-\item{...}{Aditional parameters accepted by the \code{plot} function.}
 }
 \value{
-If \code{plot} is \code{FALSE} (Default) the function returns a 
-  character vector of the same length as the number of rows in data. 
-  Depending on the respecitve settings it contains the following values with 
-  their respective meanings.  
+The function returns a character vector of the same length as the 
+  number of rows in data. Depending on the respecitve settings it contains 
+  the following values with their respective meanings.  
   
   * \code{rereading} is \code{FALSE}:
      + \code{FP_\#} First Pass
@@ -54,9 +48,7 @@ If \code{plot} is \code{FALSE} (Default) the function returns a
      + \code{FPR_\#} First Pass Rereading
      + \code{SP_\#} Second Pass
   
-  Where \# stands for the name of the respecitve AOI.  
-  
-  If \code{plot} is \code{TRUE}, the function draws a plot.
+  Where \# stands for the name of the respecitve AOI.
 }
 \description{
 The Fixations are coded as first pass and second pass.
@@ -97,13 +89,7 @@ This function takes a data frame containing information of an eye
   viewing distance of 60cm. (see \code{\link{px2deg}} for conversions). 
   The value of 2 visual degrees is the average visual angle of the fovea 
   (Llewellyn-Thomas, 1968; Haber & Hershenson, 1973). It is recommended to 
-  play around with the \code{fix_size} value for every participant and inspect 
-  the results by setting \code{plot} to \code{TRUE}.
-  
-  When \code{plot} is set to \code{TRUE}, the function draws a plot where 
-  fixation points are numbered according to their order in \code{data}. Each 
-  fixation point is joined by a label indicating how they are coded. The plot 
-  can be customized by providing graphical parameters to the '...' argument.
+  play around with the \code{fix_size} value for every participant.
   
   By default this function considers the first three (3) fixations in any AOI 
   as first pass fixations. And it does this regardless of whether the fixations
@@ -230,23 +216,6 @@ This function takes a data frame containing information of an eye
                          fix_size = 10 )
   
   result <- data.frame( fix_size20 = resultA, fix_size10 = resultB )
-  
-  ## therefore you can plot the results is you want to check the acuracy
-  ## of the coding
-  \dontrun{ codePasses( data = some_Data_topLeft, AOI = "AOI",
-                        rereading = TRUE, fpx = 3, fpy = 4, fix_size = 20,
-                        plot = TRUE )
-  
-  # but you need to plot the AOI poligins yourself
-  ?polygon #for details
-  
-  polygon( x = c( 320, 690, 690, 320 ), y = c(54, 54, 155, 155 ),
-           border = "red" )
-  polygon( x = c( 320, 580, 580, 690, 690, 390, 390, 320 ),
-           y = c( 245, 245, 218, 218, 355, 355, 384, 386 ),
-           border = "green" )
-  polygon( x = c( 370, 550, 550, 370 ), y = c(423, 423, 458, 458 ),
-           border = "blue" ) }
   
 }
 \references{
