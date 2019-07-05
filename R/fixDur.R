@@ -9,9 +9,7 @@
 #' 
 #' @param data A data frame containing fixation information of an eye tracing 
 #'   experiment and the coded passes. Each row indicates a fixation.
-#'   
 #' @param fixTime The name or number of the column containing the time per fixation.
-#' 
 #' @param passes The name or number of the column containing the coded passes.
 #' 
 #' @details This function is a wrapper for  \code{\link[stats]{aggregate}} 
@@ -23,10 +21,29 @@
 #'   for the AOI's only.
 #'   The column of which the name or number is passed to \code{passes},will be 
 #'   converted to a factor if it is not yet the case.
+#'   
+#'   You can provide the names of the AOI's to \code{AOI_label} and indicate if 
+#'   rereading passes were coded in \code{rereading}. This enures that the output 
+#'   contains all types of passes for each AOI, even if they did not occur. In 
+#'   that case the value in the output will be 0.
 #' 
-#' @return A vector containing the agregated fixation duration for the passes or 
-#'   AOI's, dependent upon what is provided to \code{passes}. The result will be 
-#'   in the same unit as the duration input.
+#' @return A data frame with the following comumns  
+#'  If the AOI column is provided to /code{passes}:  
+#'   $AOI: containing the AOI names  
+#'   $duration: containing the aggregated durations  
+#'  
+#'  If the passes column is provided to /code{passes} and there is no rereading:  
+#'   $AOI: containing the AOI names  
+#'   $FirstPass: containing the aggregated first pass durations  
+#'   $SecondPass: containing the aggregated second pass durations  
+#'   
+#'  If the passes column is provided to /code{passes} and there is rereading:  
+#'  $AOI: containing the AOI names  
+#'   $FirstPassForward: containing the aggregated first pass forward durations  
+#'   $FirstPassRereading: containing the aggregated first pass rereading durations  
+#'   $SecondPass: containing the aggregated second pass durations  
+#'   
+#'   The result will be in the same unit as the duration input.
 #' 
 #' @examples # first generate some data
 #'   some_Data_passes <- data.frame( fixationIndex = 1:28,
@@ -108,16 +125,53 @@
 #'   \code{\link[base]{tapply}}
 #'
 #' @importFrom stats aggregate
+#' @importFrom tidyr spread
+#' @importFrom tibble is_tibble
 #' @export fixDur
 #' 
 
 fixDur <- function( data, fixTime, passes )
 {
-  fixDur.inputChecks( data = data, fixTime, passes = passes )
+  if( is_tibble( data ) )
+  {
+    data <- as.data.frame( data )
+  }
   
-  aggregate( list( duration = data[ , fixTime ] ),
-             by = list( passes = data[ , passes ] ),
-             FUN = sum )
+  fixDur.inputChecks( data = data, fixTime = fixTime, passes = passes )
+  
+  
+  data <- data[ data[ , passes] != 0, ]
+  
+  # if( !is.character( data[ , passes ] ) ) data[ , passes ] <- as.character( data[ , passes ] )
+  
+  splitted_pass <- transpose( 
+    as.data.frame( 
+      strsplit( data[, passes], split = "_", fixed = T )
+    )
+  )
+  
+  if( ncol( splitted_pass ) < 2 )
+  {
+    result <- aggregate( list( duration = data[ , fixTime ] ),
+                         by = list( AOI = splitted_pass[ , 1 ]),
+                         FUN = sum )
+  }else 
+  {
+    result <- aggregate( list( duration = data[ , fixTime ] ),
+                       by = list( AOI = splitted_pass[ , 2 ],
+                                  passes = splitted_pass[ , 1 ]),
+                       FUN = sum )
+    
+    result <- spread( result, key = "passes", value = "duration", fill = 0, drop = F )
+    
+    if( any( splitted_pass [ , 1 ] == "FPF" ) )
+    {
+      names( result )[ 2:4 ] <- c( "FirstPassForward", "FirstPassRereading", "SecondPass" )
+    }else names( result )[ 2:3 ] <- c( "FirstPass", "SecondPass" )
+  }
+  
+  return( as.data.frame( result ) )
+  
 }
 
 fixDur.inputChecks <- function( data, fixTime, passes )
@@ -137,4 +191,5 @@ fixDur.inputChecks <- function( data, fixTime, passes )
   
   if( is.character( passes ) & !( passes %in% colnames( data ) ) )
     stop( "passes is not a column of data" )
+  
 }

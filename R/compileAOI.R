@@ -23,8 +23,8 @@
 #'   make shure to pass these as character for the function to work properly. The 
 #'   function does not check for this case.
 #' 
-#' @return Vector that contains the AIO fixated on for each row in the data frame 
-#'   whereby absence of a fixation on AIO is coded as 0.
+#' @return A factor that contains the AIO fixated on for each row in the 
+#'   data frame whereby absence of a fixation on AIO is coded as 0.
 #' 
 #' @examples # First we generate some data
 #'   some_Data <- data.frame( fixationIndex = 1:28,
@@ -89,7 +89,7 @@ compileAIO <- function( data, AOI, labels = NULL )
   { 
     if( length( AOI ) != length( labels ) ) stop( "AOI and labels lengts differ" )
     colnames( data )[ AOI ] <- labels
-  }
+  } else labels <- colnames( data )[ AOI ]
   
   data <- data[ , AOI ]
   
@@ -102,5 +102,7 @@ compileAIO <- function( data, AOI, labels = NULL )
                       no = colnames( data[ i, ] )[ which( data[ i, ] == 1 ) ] )
   }
   
-  return( out )
+  if( any( out == 0 ) ) labels <- c( "0", labels )
+  
+  return( factor( out, labels = labels ) )
 }
