@@ -25,9 +25,6 @@
 #' @param fix_size The size or accuity of the saccade. (default = 42; see Details)
 #' @param fix_min [optional] minimal number of fixations for first pass. See Details.
 #'   Default is 3.
-#' @param plot logical. If \code{FALSE} (default) returns a vector? If 
-#'   \code{TRUE} plots the results. See Details.
-#' @param ... Aditional parameters accepted by the \code{plot} function.
 #' 
 #' @details This function takes a data frame containing information of an eye 
 #'   tracking reading exersise Each row indicates a fixation and the columns at 
@@ -64,13 +61,7 @@
 #'   viewing distance of 60cm. (see \code{\link{px2deg}} for conversions). 
 #'   The value of 2 visual degrees is the average visual angle of the fovea 
 #'   (Llewellyn-Thomas, 1968; Haber & Hershenson, 1973). It is recommended to 
-#'   play around with the \code{fix_size} value for every participant and inspect 
-#'   the results by setting \code{plot} to \code{TRUE}.
-#'   
-#'   When \code{plot} is set to \code{TRUE}, the function draws a plot where 
-#'   fixation points are numbered according to their order in \code{data}. Each 
-#'   fixation point is joined by a label indicating how they are coded. The plot 
-#'   can be customized by providing graphical parameters to the '...' argument.
+#'   play around with the \code{fix_size} value for every participant.
 #'   
 #'   By default this function considers the first three (3) fixations in any AOI 
 #'   as first pass fixations. And it does this regardless of whether the fixations
@@ -78,10 +69,9 @@
 #'   number of fixations considered as first pass can be changed through 
 #'   \code{fix_min}.
 #' 
-#' @return If \code{plot} is \code{FALSE} (Default) the function returns a 
-#'   character vector of the same length as the number of rows in data. 
-#'   Depending on the respecitve settings it contains the following values with 
-#'   their respective meanings.  
+#' @return The function returns a character vector of the same length as the 
+#'   number of rows in data. Depending on the respecitve settings it contains 
+#'   the following values with their respective meanings.  
 #'   
 #'   * \code{rereading} is \code{FALSE}:
 #'      + \code{FP_\#} First Pass
@@ -92,8 +82,6 @@
 #'      + \code{SP_\#} Second Pass
 #'   
 #'   Where \# stands for the name of the respecitve AOI.  
-#'   
-#'   If \code{plot} is \code{TRUE}, the function draws a plot.
 #' 
 #' @examples #Firts lets generate some data
 #'   some_Data_single <- data.frame( fixationIndex = 1:28,
@@ -214,23 +202,6 @@
 #'   
 #'   result <- data.frame( fix_size20 = resultA, fix_size10 = resultB )
 #'   
-#'   ## therefore you can plot the results is you want to check the acuracy
-#'   ## of the coding
-#'   \dontrun{ codePasses( data = some_Data_topLeft, AOI = "AOI",
-#'                         rereading = TRUE, fpx = 3, fpy = 4, fix_size = 20,
-#'                         plot = TRUE )
-#'   
-#'   # but you need to plot the AOI poligins yourself
-#'   ?polygon #for details
-#'   
-#'   polygon( x = c( 320, 690, 690, 320 ), y = c(54, 54, 155, 155 ),
-#'            border = "red" )
-#'   polygon( x = c( 320, 580, 580, 690, 690, 390, 390, 320 ),
-#'            y = c( 245, 245, 218, 218, 355, 355, 384, 386 ),
-#'            border = "green" )
-#'   polygon( x = c( 370, 550, 550, 370 ), y = c(423, 423, 458, 458 ),
-#'            border = "blue" ) }
-#'   
 #' @references HABER, R. N., & HERSHENSON, M. The psychology of visual perception. 
 #'   New York: Holt, Rinehart, and Winston, 1973.  
 #'   LLEWELLYN-THOMAS, E. Movements of the eye. Scientific American, 1968, 219, 
@@ -244,8 +215,7 @@
 
 codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
                         origin = c( "topLeft", "bottomLeft", "center", "topRight",
-                                    "bottomRight" ), fix_size = 42, fix_min = 3,
-                        plot = FALSE, ... )
+                                    "bottomRight" ), fix_size = 42, fix_min = 3 )
 {
   if( is_tibble( data ) )
   {
@@ -386,52 +356,7 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   
   passes[ splitted_pass[ , 2 ] == 0 ] <- 0
   
-  if( plot )
-  {
-    Args <- list( ... )
-    
-    if( any( names( Args ) == "type" ) )
-      warning( "setting 'type' for 'plot' is ignored by this function" )
-    
-    Args[[ "type" ]] <- "c"
-    
-    if( all( names( Args ) != "x" ) )
-      Args[[ "x" ]] <- data[ , fpx ]
-    
-    if( all( names( Args ) != "y" ) )
-      Args[[ "y"]] <- data[ , fpy ]
-    
-    if( all( names( Args ) != "xlab" ) )
-      Args[[ "xlab" ]] <- "x"
-    
-    if( all( names( Args ) != "ylab" ) )
-      Args[[ "ylab" ]] <- "y"
-    
-    if( all( names( Args ) != "xlim" ) )
-    {
-      xlim <- range( data[ , fpx ] )
-      xlim[1] <- xlim[1] - ( 2 * fix_size )
-      xlim[2] <- xlim[2] + ( 2 * fix_size )
-      rm( xlim )
-    }
-    
-    if( all( names( Args ) != "ylim" ) )
-    {
-      ylim <- range( data[ , fpy ] )
-      ylim[1] <- ylim[1] - ( 2 * fix_size )
-      ylim[2] <- ylim[2] + ( 2 * fix_size )
-      Args[[ "ylim" ]] <- rev( ylim )
-      rm( ylim )
-    }
-    
-    
-    do.call( "plot", Args )
-    
-    text( data[ , fpx ], data[ , fpy ], labels = 1:nrow( data ) )
-    text( data[ , fpx ], data[ , fpy ] - fix_size,
-          labels = passes )
-    
-  }else return( passes )
+  return( passes )
   
 }
 

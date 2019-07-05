@@ -142,7 +142,7 @@ fixDur <- function( data, fixTime, passes )
   
   data <- data[ data[ , passes] != 0, ]
   
-  if( !is.character( data[ , passes ] ) ) data[ , passes ] <- as.character( data[ , passes ] )
+  # if( !is.character( data[ , passes ] ) ) data[ , passes ] <- as.character( data[ , passes ] )
   
   splitted_pass <- transpose( 
     as.data.frame( 

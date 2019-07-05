@@ -78,3 +78,12 @@ test_that( "Function correctly calculates fixation duration for AOI's", {
                 some_results$fixDur$AOI
   )
 } )
+
+test_that( "testing the workaround for tibble anomalies", {
+  theIn <- tibble::as_tibble( some_Data$single_AOI_col )
+  expect_equal( fixDur( data = theIn,
+                        fixTime = "fixTime",
+                        passes = "passes" ),
+                some_results$fixDur$firstSecondPass
+  )
+} )
