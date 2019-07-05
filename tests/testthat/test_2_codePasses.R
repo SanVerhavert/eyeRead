@@ -48,6 +48,34 @@ test_that( "Function returns the correct error when fpy specifies a colname that
   )
 } )
 
+test_that( "Function returns the correct error when fpx is non numeric", {
+  someTestData <- some_Data$rereading$topLeft
+  someTestData$xcoord <- as.character( someTestData$xcoord )
+  expect_error(
+    codePasses( data = someTestData,
+                AOI = "AOI",
+                rereading = T,
+                fpx = "xcoord",
+                fpy = "ycoord" ),
+    regexp = some_results$coords_nonum$fpx
+  )
+  rm( someTestData )
+} )
+
+test_that( "Function returns the correct error when fpy is non numeric", {
+  someTestData <- some_Data$rereading$topLeft
+  someTestData$ycoord <- as.character( someTestData$ycoord )
+  expect_error(
+    codePasses( data = someTestData,
+                AOI = "AOI",
+                rereading = T,
+                fpx = "xcoord",
+                fpy = "ycoord" ),
+    regexp = some_results$coords_nonum$fpy
+  )
+  rm( someTestData )
+} )
+
 test_that( "Function returns the correct errors when fix_min is to small", {
   expect_error(
     codePasses( data = some_Data$single_AOI_col, AOI = "AOI",
@@ -78,7 +106,6 @@ test_that( "Function returns correct error if rereading is TRUE but fpy is not s
 } )
 
 test_that( "Function correctly codes fixations as first pass and second pass with a single AOI column [column name]", {
-  # browser()
   expect_equal(
     codePasses( data = some_Data$single_AOI_col, AOI = "AOI" ),
     some_results$regular
@@ -107,6 +134,14 @@ test_that( "Function correctly codes fixations as first pass and second pass wit
   )
 } )
 
+test_that( "Function correctly codes fixations as first pass and second pass with multiple AOI columns and non-AOI fixation [column name]", {
+  expect_equal(
+    codePasses( data = some_Data$multiple_AOI_col,
+                AOI = c( "AOI1", "AOI2",  "AOI4", "AOI5", "AOI6", "AOI7" ) ),
+    some_results$zeros
+  )
+} )
+
 test_that( "Function correctly codes fixations as forward and rereading first pass; origin topLeft [by default; column name]", {
   expect_equal(
     codePasses( data = some_Data$rereading$topLeft,
@@ -116,6 +151,18 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
                 fpy = "ycoord",
                 fix_size = 20 ),
     some_results$rereading
+  )
+} )
+
+test_that( "Function correctly codes fixations as forward and rereading first pass and non-AOI fixation; origin topLeft [by default; column name]", {
+  expect_equal(
+    codePasses( data = some_Data$rereading$zeros,
+                AOI =  c( "AOI1", "AOI3" ),
+                rereading = T,
+                fpx = "xcoord",
+                fpy = "ycoord",
+                fix_size = 20 ),
+    some_results$rereading_zeros
   )
 } )
 
@@ -197,46 +244,10 @@ test_that( "Function correctly codes fixations as forward and rereading first pa
   )
 } )
 
-#The following tests should not be run when building en checking
-# codePasses( data = some_Data$rereading$topLeft,
-#             AOI = "AOI",
-#             rereading = T,
-#             fpx = 3,
-#             fpy = 4,
-#             origin = "topLeft",
-#             fix_size = 20,
-#             plot = TRUE )
-# 
-# codePasses( data = some_Data$rereading$topLeft,
-#             AOI = "AOI",
-#             rereading = T,
-#             fpx = 3,
-#             fpy = 4,
-#             origin = "topLeft",
-#             fix_size = 20,
-#             plot = TRUE,
-#             type = "l" )
-# 
-# codePasses( data = some_Data$rereading$topLeft,
-#             AOI = "AOI",
-#             rereading = T,
-#             fpx = 3,
-#             fpy = 4,
-#             origin = "topLeft",
-#             fix_size = 20,
-#             plot = TRUE,
-#             xlab = "xlab",
-#             ylab = "ylab",
-#             xlim = c( 200, 600 ),
-#             ylim = c( 150, 0 ) )
-# 
-# codePasses( data = some_Data$rereading$topLeft,
-#             AOI = "AOI",
-#             rereading = T,
-#             fpx = 3,
-#             fpy = 4,
-#             origin = "topLeft",
-#             fix_size = 20,
-#             plot = TRUE,
-#             xlab = "xlab",
-#             xlim = c( 200, 600 ) )
+test_that( "testing the workaround for tibble anomalies", {
+  theIn <- tibble::as_tibble( some_Data$single_AOI_col )
+  expect_equal(
+    codePasses( data = theIn, AOI = "AOI" ),
+    some_results$regular
+  )
+} )

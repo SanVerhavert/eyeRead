@@ -1,6 +1,6 @@
 Package: eyeRead
 Title: Prepare/Analyse Eye Tracking Data for Reading
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(
     person( given = "San",
             family = "Verhavert",
@@ -19,3 +19,7 @@ LazyData: true
 Suggests: 
     testthat
 RoxygenNote: 6.1.1
+Imports: 
+    tibble,
+    data.table,
+    tidyr
