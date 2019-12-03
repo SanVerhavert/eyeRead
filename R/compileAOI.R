@@ -104,5 +104,5 @@ compileAIO <- function( data, AOI, labels = NULL )
   
   if( any( out == 0 ) ) labels <- c( "0", labels )
   
-  return( factor( out, labels = labels ) )
+  return( factor( out, levels = labels ) )
 }

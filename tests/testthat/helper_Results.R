@@ -107,5 +107,10 @@ some_results <- list( compile_missing = factor( c( "AOI1", "AOI1", "AOI2", "AOI2
                                                    "AOI5", "AOI6", "AOI7" ),
                                           duration = c( 1089, 1290, 1280, 1340,
                                                         373, 870, 1264 ),
-                                          stringsAsFactors = F ) )
+                                          stringsAsFactors = F ) ),
+                      factorBug = c( "AOI1", "AOI1", "AOI2", "AOI2", "AOI3", "AOI4", "AOI7",
+                                             "AOI7", "AOI7", "AOI7", "AOI3", "AOI3", "AOI7", "AOI4",
+                                             "AOI4", "AOI4", "AOI5", "AOI2", "AOI2", "AOI4", "AOI2",
+                                             "AOI1", "AOI1", "AOI6", "AOI6", "AOI1", "AOI3", "AOI5",
+                                             "AOI6", "AOI1", "AOI12" )
 )
