@@ -119,10 +119,37 @@ test_that( "Function correctly codes fixations as first pass and second pass wit
   )
 } )
 
-test_that( "Function correctly codes fixations as first pass and second pass with multiple AOI columns [column name]", {
+test_that( "Function correctly codes fixations as first pass and second pass with a single AOI column and non-AOI fixation [column name]", {
   expect_equal(
-    codePasses( data = some_Data$multiple_AOI_col,
-                AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" ) ),
+    codePasses( data = some_Data$single_AOI_zeros, AOI = "AOI" ),
+    some_results$zeros
+  )
+} )
+
+test_that( "Function correctly codes fixations as first pass and second pass with a single AOI column and AOI column is factor [column name]", {
+  dataFactor <- some_Data$single_AOI_col
+  dataFactor$AOI <- factor( dataFactor$AOI )
+  expect_equal(
+    codePasses( data = dataFactor, AOI = "AOI" ),
+    some_results$regular
+  )
+} )
+
+test_that( "Function correctly codes fixations as first pass and second pass with a single AOI column and non-AOI fixation and AOI column is factor [column name]", {
+  dataFactor <- some_Data$single_AOI_zeros
+  dataFactor$AOI <- factor( dataFactor$AOI )
+  results <- codePasses( data = dataFactor, AOI = "AOI" )
+  expect_equal(
+    results,
+    some_results$zeros
+  )
+} )
+
+test_that( "Function correctly codes fixations as first pass and second pass with multiple AOI columns [column name]", {
+  result <- codePasses( data = some_Data$multiple_AOI_col,
+                        AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" ) )
+  expect_equal(
+    result,
     some_results$regular
   )
 } )

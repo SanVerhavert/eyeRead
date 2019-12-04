@@ -31,19 +31,19 @@ test_that( "Function returns the correct results, if AOI are names", {
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ) )
-  target <- factor( some_Data$single_AOI_col$AOI,
-                    labels = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
-                                "AOI7" ) )
-  expect_equal( results, target )
+  target <- factor( some_Data$single_AOI_col$AOI )
+  expect_equal( compileAIO( data = some_Data$multiple_AOI_col,
+                            AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5",
+                                     "AOI6", "AOI7" ) ), 
+                some_Data$single_AOI_col$AOI )
 } )
 
 test_that( "Function returns the correct results, if AOI are numbers", {
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = 2:8 )
-  target <- factor( some_Data$single_AOI_col$AOI,
-                    labels = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
-                                "AOI7" ) )
-  expect_equal( results, target )
+  target <- factor( some_Data$single_AOI_col$AOI )
+  expect_equal( compileAIO( data = some_Data$multiple_AOI_col,
+                            AOI = 2:8 ), some_Data$single_AOI_col$AOI )
 } )
 
 test_that( "Function returns the correct results, if AOI are names and some fixations outside AOI", {
