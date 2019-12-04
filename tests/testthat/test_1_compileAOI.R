@@ -32,14 +32,18 @@ test_that( "Function returns the correct results, if AOI are names", {
                          AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ) )
   target <- factor( some_Data$single_AOI_col$AOI )
-  expect_equal( results, target )
+  expect_equal( compileAIO( data = some_Data$multiple_AOI_col,
+                            AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5",
+                                     "AOI6", "AOI7" ) ), 
+                some_Data$single_AOI_col$AOI )
 } )
 
 test_that( "Function returns the correct results, if AOI are numbers", {
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = 2:8 )
   target <- factor( some_Data$single_AOI_col$AOI )
-  expect_equal( results, target )
+  expect_equal( compileAIO( data = some_Data$multiple_AOI_col,
+                            AOI = 2:8 ), some_Data$single_AOI_col$AOI )
 } )
 
 test_that( "Function returns the correct results, if AOI are names and some fixations outside AOI", {
@@ -62,12 +66,4 @@ test_that( "Function returns the correct results, if AOI are numbers and with la
                          AOI = 2:8,
                          labels = c( "1", "2", "3", "4", "5", "6", "7" ) )
   expect_equal( results, some_results$compile_labels )
-} )
-
-test_that( "Bugfix; factor reorders labels and so links wrong lables", {
-  results <- compileAIO( data = some_Data$factorBug,
-                         AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
-                                  "AOI7", "AOI12" ) )
-  target <- factor( some_results$factorBug )
-  expect_equal( results, target, check.attributes = F )
 } )
