@@ -228,8 +228,12 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   
   if( length( AOI ) > 1 )
   {
-    data <- data.frame( data, AOI = compileAIO( data = data, AOI = AOI ) )
+    data <- data.frame( data, AOI = compileAIO( data = data, AOI = AOI ),
+                        stringsAsFactors = F )
     AOI <- "AOI"
+  } else if( is.factor( data[ , AOI ] ) )
+  {
+    data[ , AOI ] <- as.character( data[ , AOI ] )
   }
   
   origin <- match.arg( origin )
@@ -278,10 +282,10 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   } else  passes[1] <- paste0( "FP_", data[ 1, AOI ] )
   
   for( i in 2:length( passes ) )
-  {
+  { 
     if( lastPass[ data[ i, AOI ] ] == "SP" )
     {
-      passes[i] <- paste0( "SP_", data[ i, AOI ] ) 
+      passes[i] <- paste0( "SP_", data[ i, AOI ]  ) 
     } else if( data[ i, AOI ] == data[ i - 1, AOI ] )
     {
       passes[i] <- paste0( "FP_", data[ i, AOI ] )
