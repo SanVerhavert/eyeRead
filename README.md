@@ -17,7 +17,7 @@ This package is not yet on CRAN.
 The development version of the package can be downloaded after installing
 `devtools` and by running  
 ```
-devtools::install_github( "SanVerhavert/fixatioDuration", ref = "dev" )
+devtools::install_github( "SanVerhavert/fixationDuration", ref = "dev" )
 ```   
 It cannot be guaranteed this is a stable version. Check the dev build badge to see
 if the development version is stable (passing).  
