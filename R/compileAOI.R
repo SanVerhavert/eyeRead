@@ -104,5 +104,5 @@ compileAIO <- function( data, AOI, labels = NULL )
   
   if( any( out == 0 ) ) labels <- c( "0", labels )
   
-  return( out )
+  return( factor( out, levels = labels ) ) #Factor to allow not fixed AOI to be included in duration table
 }

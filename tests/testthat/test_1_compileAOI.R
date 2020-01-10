@@ -28,29 +28,40 @@ test_that( "Function returns the correct error when AOI and labels have differen
 } )
 
 test_that( "Function returns the correct results, if AOI are names", {
+  # browser()
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ) )
-  target <- factor( some_Data$single_AOI_col$AOI )
+  target <- factor( some_Data$single_AOI_col$AOI, levels = c( "AOI1", "AOI2",
+                                                              "AOI3", "AOI4", 
+                                                              "AOI5", "AOI6",
+                                                              "AOI7" ) )
   expect_equal( compileAIO( data = some_Data$multiple_AOI_col,
                             AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5",
                                      "AOI6", "AOI7" ) ), 
-                some_Data$single_AOI_col$AOI )
+                target )
 } )
 
 test_that( "Function returns the correct results, if AOI are numbers", {
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = 2:8 )
-  target <- factor( some_Data$single_AOI_col$AOI )
+  target <- factor( some_Data$single_AOI_col$AOI, levels = c( "AOI1", "AOI2",
+                                                              "AOI3", "AOI4", 
+                                                              "AOI5", "AOI6",
+                                                              "AOI7" ) )
   expect_equal( compileAIO( data = some_Data$multiple_AOI_col,
-                            AOI = 2:8 ), some_Data$single_AOI_col$AOI )
+                            AOI = 2:8 ), target )
 } )
 
 test_that( "Function returns the correct results, if AOI are names and some fixations outside AOI", {
-  results <- compileAIO( data = some_Data$multiple_AOI_col,
-                         AOI = c( "AOI1", "AOI2", "AOI4", "AOI5", "AOI6",
+  results <- compileAIO( data = some_Data$multiple_AOI_col_out,
+                         AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ) )
-  expect_equal( results, some_results$compile_missing )
+  target <- factor( some_results$compile_missing, levels = c( "AOI1", "AOI2",
+                                                              "AOI3", "AOI4", 
+                                                              "AOI5", "AOI6",
+                                                              "AOI7" ) )
+  expect_equal( results, target )
 } )
 
 test_that( "Function returns the correct results, if AOI are names and with labels provided", {
@@ -58,12 +69,16 @@ test_that( "Function returns the correct results, if AOI are names and with labe
                          AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ),
                          labels = c( "1", "2", "3", "4", "5", "6", "7" ) )
-  expect_equal( results, some_results$compile_labels )
+  target <- factor( some_results$compile_labels, levels = c( "1", "2", "3", "4",
+                                                             "5", "6", "7" ) )
+  expect_equal( results, target )
 } )
 
 test_that( "Function returns the correct results, if AOI are numbers and with labels provided", {
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = 2:8,
                          labels = c( "1", "2", "3", "4", "5", "6", "7" ) )
-  expect_equal( results, some_results$compile_labels )
+  target <- factor( some_results$compile_labels, levels = c( "1", "2", "3", "4",
+                                                             "5", "6", "7" ) )
+  expect_equal( results, target )
 } )
