@@ -43,7 +43,7 @@
 #'   $FirstPassRereading: containing the aggregated first pass rereading durations  
 #'   $SecondPass: containing the aggregated second pass durations  
 #'   
-#'   The result will be in the same unit as the duration input.
+#'  The result will be in the same unit as the duration input.
 #' 
 #' @examples # first generate some data
 #'   some_Data_passes <- data.frame( fixationIndex = 1:28,
@@ -142,7 +142,16 @@ fixDur <- function( data, fixTime, passes )
   
   data <- data[ data[ , passes] != 0, ]
   
-  # if( !is.character( data[ , passes ] ) ) data[ , passes ] <- as.character( data[ , passes ] )
+  if( !is.character( data[ , passes ] ) )
+  {
+    data[ , passes ] <- as.character( data[ , passes ] ) #needed because of quirky matching of factor labels
+    
+    if( is.factor( data[ , passes ] ) )
+    {
+      AOIs <- data.frame( AOIs = labels( data[ , passes ] ) ) #needed to have non fixed AOI's in output
+    }
+  }
+    
   
   splitted_pass <- transpose( 
     as.data.frame( 
@@ -163,6 +172,11 @@ fixDur <- function( data, fixTime, passes )
                        FUN = sum )
     
     result <- spread( result, key = "passes", value = "duration", fill = 0, drop = F )
+    
+    if( exists( "AOIs" ) )
+    {
+      result <- merge( result, AOIs, by.x = "AOI", by.y = "AOIs" all.y = T )
+    }
     
     if( any( splitted_pass [ , 1 ] == "FPF" ) )
     {
