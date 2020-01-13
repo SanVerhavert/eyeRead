@@ -57,7 +57,7 @@ test_that( "Function returns the correct results, if AOI are names and some fixa
   results <- compileAIO( data = some_Data$multiple_AOI_col_out,
                          AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ) )
-  target <- factor( some_results$compile_missing, levels = c( "AOI1", "AOI2",
+  target <- factor( some_results$compile_missing, levels = c( "0", "AOI1", "AOI2",
                                                               "AOI3", "AOI4", 
                                                               "AOI5", "AOI6",
                                                               "AOI7" ) )
