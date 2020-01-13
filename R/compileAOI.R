@@ -23,7 +23,7 @@
 #'   make shure to pass these as character for the function to work properly. The 
 #'   function does not check for this case.
 #' 
-#' @return A character vector that contains the AIO fixated on for each row in
+#' @return A factor that contains the AIO fixated on for each row in
 #'   the data frame whereby absence of a fixation on AIO is coded as 0.
 #' 
 #' @examples # First we generate some data
@@ -104,5 +104,5 @@ compileAIO <- function( data, AOI, labels = NULL )
   
   if( any( out == 0 ) ) labels <- c( "0", labels )
   
-  return( out )
+  return( factor( out, levels = labels ) ) #Factor to allow not fixed AOI to be included in duration table
 }
