@@ -85,6 +85,10 @@ compileAIO <- function( data, AOI, labels = NULL )
     AOI <- match( AOI, colnames( data ) )
   }
   
+  if( any( rowSums( data[ ,AOI ] ) > 1 ) ) 
+    warning( paste0( "Some rows have a fixation in more than one AOI. Only the ",
+                    "first will be used" ) )
+  
   if( !is.null( labels ) )
   { 
     if( length( AOI ) != length( labels ) ) stop( "AOI and labels lengts differ" )

@@ -29,6 +29,10 @@ some_errors <- list( no_data.frame_err = "data should be a data frame",
                      AOI_short = paste0("AOI should be a vector containing more ",
                                         "than 1 element" )
 )
+some_warning <- list( more_fixations = paste0( "Some rows have a fixation in ",
+                                               "more than one AOI. Only the ",
+                                               "first will be used" ) )
+
 some_results <- list( compile_missing = c( "AOI1", "AOI1", "AOI2", "AOI2",
                                                    0, "AOI4", "AOI7", "AOI7",
                                                    "AOI7", "AOI7", "AOI3", 0, "AOI7",

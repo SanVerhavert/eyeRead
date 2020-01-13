@@ -27,6 +27,14 @@ test_that( "Function returns the correct error when AOI and labels have differen
   )
 } )
 
+test_that( "Function returns the correct error when more than one AOI fixated", {
+  expect_warning(
+    compileAIO( data = some_Data$two_AOI_Fix,
+                AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" )),
+    regexp = some_warning$more_fixations
+  )
+} )
+
 test_that( "Function returns the correct results, if AOI are names", {
   # browser()
   results <- compileAIO( data = some_Data$multiple_AOI_col,
