@@ -9,7 +9,7 @@ some_errors <- list( no_data.frame_err = "data should be a data frame",
                      missing_colname_err = list(
                        AOI = list( single = paste0( "the value provide to AOI is not a ",
                                                     "column name of data"),
-                                   multiple = paste( "not all values provided to AOI ",
+                                   multiple = paste0( "not all values provided to AOI ",
                                                      "are column names for data" ) ),
                        fpx = "The value provided to fpx is not a column name of data",
                        fpy = "The value provided to fpy is not a column name of data",
@@ -29,6 +29,7 @@ some_errors <- list( no_data.frame_err = "data should be a data frame",
                      AOI_short = paste0("AOI should be a vector containing more ",
                                         "than 1 element" )
 )
+
 some_warning <- list( more_fixations = paste0( "Some rows have a fixation in ",
                                                "more than one AOI. Only the ",
                                                "first will be used" ) )

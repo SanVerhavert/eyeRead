@@ -14,7 +14,7 @@ test_that( "Function returns the correct error when data is no data frame", {
 test_that( "Function returns the correct error when AOI specifies a colname that is not in data [single AOI]", {
   expect_error(
     codePasses( data = some_Data$single_AOI_col, AOI = "ABC"),
-    regexp = some_results$missing_colname_err$AOI$single
+    regexp = some_errors$missing_colname_err$AOI$single
   )
 } )
 
@@ -22,7 +22,7 @@ test_that( "Function returns the correct error when AOI specifies a colname that
   expect_error(
     codePasses( data = some_Data$single_AOI_col,
                 AOI = c( "AOI1", "AOI2", "AOI3", "ABC", "AOI5", "AOI6", "AOI7" ) ),
-    regexp = some_results$missing_colname_err$AOI$multiple
+    regexp = some_errors$missing_colname_err$AOI$multiple
   )
 } )
 
@@ -33,7 +33,7 @@ test_that( "Function returns the correct error when fpx specifies a colname that
                 rereading = T,
                 fpx = "ABC",
                 fpy = "ycoord" ),
-    regexp = some_results$missing_colname_err$fpx
+    regexp = some_errors$missing_colname_err$fpx
   )
 } )
 
@@ -44,7 +44,7 @@ test_that( "Function returns the correct error when fpy specifies a colname that
                 rereading = T,
                 fpx = "xcoord",
                 fpy = "ABC" ),
-    regexp = some_results$missing_colname_err$fpy
+    regexp = some_errors$missing_colname_err$fpy
   )
 } )
 
@@ -57,7 +57,7 @@ test_that( "Function returns the correct error when fpx is non numeric", {
                 rereading = T,
                 fpx = "xcoord",
                 fpy = "ycoord" ),
-    regexp = some_results$coords_nonum$fpx
+    regexp = some_errors$coords_nonum$fpx
   )
   rm( someTestData )
 } )
@@ -71,7 +71,7 @@ test_that( "Function returns the correct error when fpy is non numeric", {
                 rereading = T,
                 fpx = "xcoord",
                 fpy = "ycoord" ),
-    regexp = some_results$coords_nonum$fpy
+    regexp = some_errors$coords_nonum$fpy
   )
   rm( someTestData )
 } )
@@ -80,12 +80,12 @@ test_that( "Function returns the correct errors when fix_min is to small", {
   expect_error(
     codePasses( data = some_Data$single_AOI_col, AOI = "AOI",
                 fix_min = 0 ),
-    regexp = some_results$fix_min_err
+    regexp = some_errors$fix_min_err
   )
   expect_error(
     codePasses( data = some_Data$single_AOI_col, AOI = "AOI",
                 fix_min = -1 ),
-    regexp = some_results$fix_min_err
+    regexp = some_errors$fix_min_err
   )
 } )
 
@@ -93,7 +93,7 @@ test_that( "Function returns correct error if rereading is TRUE but fpx is not s
   expect_error(
     codePasses( data = some_Data$single_AOI_col,
                 AOI = "AOI", rereading = T ),
-    regexp = some_results$missing_fpx_err
+    regexp = some_errors$missing_fpx_err
   )
 } )
 
@@ -101,7 +101,7 @@ test_that( "Function returns correct error if rereading is TRUE but fpy is not s
   expect_error(
     codePasses( data = some_Data$rereading$topLeft,
                 AOI = "AOI", rereading = T, fpx = "xcoord" ),
-    regexp = some_results$missing_fpy_err
+    regexp = some_errors$missing_fpy_err
   )
 } )
 

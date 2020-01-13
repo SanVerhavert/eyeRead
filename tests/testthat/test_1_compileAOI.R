@@ -14,20 +14,21 @@ test_that( "Function returns the correct error when data is no data frame", {
 test_that( "Function returns the correct error when AOI specifies a colname that is not in data", {
   expect_error(
     compileAIO( data = some_Data$multiple_AOI_col,
-                AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" ),
-                labels = "ABC" ),
-    regexp = some_results$wrong_label_length
+                AOI = "ABC" ),
+    regexp = some_errors$missing_colname_err$AOI$multiple
   )
 } )
 
 test_that( "Function returns the correct error when AOI and labels have different lengths", {
   expect_error(
-    compileAIO( data = some_Data$multiple_AOI_col, AOI = "ABC"),
-    regexp = some_results$no_colname_err$single
+    compileAIO( data = some_Data$multiple_AOI_col,
+                AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" ),
+                labels = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6" ) ),
+    regexp = some_errors$wrong_label_length
   )
 } )
 
-test_that( "Function returns the correct error when more than one AOI fixated", {
+test_that( "Function returns the correct warning when more than one AOI fixated", {
   expect_warning(
     compileAIO( data = some_Data$two_AOI_Fix,
                 AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" )),
@@ -36,7 +37,6 @@ test_that( "Function returns the correct error when more than one AOI fixated", 
 } )
 
 test_that( "Function returns the correct results, if AOI are names", {
-  # browser()
   results <- compileAIO( data = some_Data$multiple_AOI_col,
                          AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6",
                                   "AOI7" ) )
