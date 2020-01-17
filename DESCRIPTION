@@ -1,6 +1,6 @@
 Package: eyeRead
 Title: Prepare/Analyse Eye Tracking Data for Reading
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: c(
     person( given = "San",
             family = "Verhavert",
