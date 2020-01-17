@@ -139,10 +139,13 @@ fixDur <- function( data, fixTime, passes )
   
   fixDur.inputChecks( data = data, fixTime = fixTime, passes = passes )
   
+  if( any( data[ , passes] == 0 ) )
+    data0 <- data[ data[ , passes] == 0, ]
   
   data <- data[ data[ , passes] != 0, ]
   
-  # if( !is.character( data[ , passes ] ) ) data[ , passes ] <- as.character( data[ , passes ] )
+  if( !is.character( data[ , passes ] ) )
+    data[ , passes ] <- as.character( data[ , passes ] ) #needed for odd behaviour of factors
   
   splitted_pass <- transpose( 
     as.data.frame( 
@@ -155,12 +158,25 @@ fixDur <- function( data, fixTime, passes )
     result <- aggregate( list( duration = data[ , fixTime ] ),
                          by = list( AOI = splitted_pass[ , 1 ]),
                          FUN = sum )
+    if( exists( "data0" ) )
+    {
+      result0 <- sum( data0[ , fixTime ] )
+      result <- rbind( dataframe( AOI = 0, duration = result0 ),
+                       result )
+    }
   }else 
   {
     result <- aggregate( list( duration = data[ , fixTime ] ),
                        by = list( AOI = splitted_pass[ , 2 ],
                                   passes = splitted_pass[ , 1 ]),
                        FUN = sum )
+    
+    if( exists( "data0" ) )
+    {
+      result0 <- sum( data0[ , fixTime ] )
+      result <- rbind( dataframe( AOI = 0, FPF = result0, FPR = NA, SP = NA ),
+                       result )
+    }
     
     result <- spread( result, key = "passes", value = "duration", fill = 0, drop = F )
     
