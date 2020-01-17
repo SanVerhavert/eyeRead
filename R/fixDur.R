@@ -164,7 +164,7 @@ fixDur <- function( data, fixTime, passes )
     if( exists( "data0" ) )
     {
       result0 <- sum( data0[ , fixTime ] )
-      result <- rbind( dataframe( AOI = 0, duration = result0 ),
+      result <- rbind( data.frame( AOI = 0, duration = result0 ),
                        result )
     }
   }else 
