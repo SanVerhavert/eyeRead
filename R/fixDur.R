@@ -44,6 +44,9 @@
 #'   $SecondPass: containing the aggregated second pass durations  
 #'   
 #'   The result will be in the same unit as the duration input.
+#'   
+#'   If the data contains fixations that were outside the AOI, the first line of 
+#'   the results will contain the total fixation duration outside the AOI's.
 #' 
 #' @examples # first generate some data
 #'   some_Data_passes <- data.frame( fixationIndex = 1:28,
