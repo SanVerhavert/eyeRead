@@ -9,7 +9,7 @@ some_errors <- list( no_data.frame_err = "data should be a data frame",
                      missing_colname_err = list(
                        AOI = list( single = paste0( "the value provide to AOI is not a ",
                                                     "column name of data"),
-                                   multiple = paste( "not all values provided to AOI ",
+                                   multiple = paste0( "not all values provided to AOI ",
                                                      "are column names for data" ) ),
                        fpx = "The value provided to fpx is not a column name of data",
                        fpy = "The value provided to fpy is not a column name of data",
@@ -29,13 +29,18 @@ some_errors <- list( no_data.frame_err = "data should be a data frame",
                      AOI_short = paste0("AOI should be a vector containing more ",
                                         "than 1 element" )
 )
+
+some_warning <- list( more_fixations = paste0( "Some rows have a fixation in ",
+                                               "more than one AOI. Only the ",
+                                               "first will be used" ) )
+
 some_results <- list( compile_missing = c( "AOI1", "AOI1", "AOI2", "AOI2",
                                                    0, "AOI4", "AOI7", "AOI7",
-                                                   "AOI7", "AOI7", 0, 0, "AOI7",
+                                                   "AOI7", "AOI7", "AOI3", 0, "AOI7",
                                                    "AOI4", "AOI4", "AOI4", "AOI5",
                                                    "AOI2", "AOI2", "AOI4", "AOI2",
                                                    "AOI1", "AOI1", "AOI6", "AOI6",
-                                                   "AOI1", 0, "AOI5", "AOI6",
+                                                   "AOI1", "AOI3", "AOI5", "AOI6",
                                                    "AOI1" ),
                       compile_labels = c( "1", "1", "2", "2", "3", "4",
                                                   "7", "7", "7", "7", "3", "3",
@@ -99,14 +104,17 @@ some_results <- list( compile_missing = c( "AOI1", "AOI1", "AOI2", "AOI2",
                                                                         217 ), 
                                                 SecondPass = c( 447, 0, 0 ),
                                                 stringsAsFactors = F ),
+                        notFixed = data.frame( AOI = c( "0", "AOI1", "AOI2", "AOI3" ),
+                                               FirstPassForward = c( 988, 3446, 3163,
+                                                                     564),
+                                               FirstPassRereading = c( NA, 830, 1043,
+                                                                       217 ), 
+                                               SecondPass = c( NA, 447, 0, 0 ),
+                                               stringsAsFactors = F ),
                         AOI = data.frame( AOI = c( "AOI1", "AOI2", "AOI3", "AOI4",
                                                    "AOI5", "AOI6", "AOI7" ),
                                           duration = c( 1089, 1290, 1280, 1340,
                                                         373, 870, 1264 ),
-                                          stringsAsFactors = F ) ),
-                      factorBug = c( "AOI1", "AOI1", "AOI2", "AOI2", "AOI3", "AOI4", "AOI7",
-                                             "AOI7", "AOI7", "AOI7", "AOI3", "AOI3", "AOI7", "AOI4",
-                                             "AOI4", "AOI4", "AOI5", "AOI2", "AOI2", "AOI4", "AOI2",
-                                             "AOI1", "AOI1", "AOI6", "AOI6", "AOI1", "AOI3", "AOI5",
-                                             "AOI6", "AOI1", "AOI12" )
+                                          stringsAsFactors = F )
+                        )
 )

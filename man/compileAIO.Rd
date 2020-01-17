@@ -17,7 +17,7 @@ containing if the repsective AOI was fixated (1) or not (0).}
 order as the columnnames or -numbers provided to \code{AOI}}
 }
 \value{
-A character vector that contains the AIO fixated on for each row in
+A factor that contains the AIO fixated on for each row in
   the data frame whereby absence of a fixation on AIO is coded as 0.
 }
 \description{

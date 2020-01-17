@@ -1,6 +1,6 @@
 Package: eyeRead
 Title: Prepare/Analyse Eye Tracking Data for Reading
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: c(
     person( given = "San",
             family = "Verhavert",
@@ -22,5 +22,5 @@ Suggests:
 RoxygenNote: 6.1.1
 Imports: 
     tibble (>= 2.1.3),
-    data.table (>= 1.12.2),
-    tidyr (>= 0.8.3)
+    data.table (>= 1.12.8),
+    tidyr (>= 1.0.0)
