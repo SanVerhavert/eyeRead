@@ -171,14 +171,16 @@ fixDur <- function( data, fixTime, passes )
                                   passes = splitted_pass[ , 1 ]),
                        FUN = sum )
     
+    result <- spread( result, key = "passes", value = "duration", fill = 0, drop = F )
+    
     if( exists( "data0" ) )
     {
       result0 <- sum( data0[ , fixTime ] )
-      result <- rbind( dataframe( AOI = 0, FPF = result0, FPR = NA, SP = NA ),
+      result <- rbind( data.frame( AOI = 0, FPF = result0, FPR = NA, SP = NA ),
                        result )
     }
     
-    result <- spread( result, key = "passes", value = "duration", fill = 0, drop = F )
+    
     
     if( any( splitted_pass [ , 1 ] == "FPF" ) )
     {
