@@ -71,6 +71,14 @@ test_that( "Function correctly calculates fixation duration for first pass forwa
   )
 } )
 
+test_that( "Function correctly calculates fixation duration with unfixated AOI", {
+  expect_equal( fixDur( data = some_Data$rereading$notFixed,
+                        fixTime = "fixTime",
+                        passes = "passes" ),
+                some_results$fixDur$notFixed
+  )
+} )
+
 test_that( "Function correctly calculates fixation duration for AOI's", {
   expect_equal( fixDur( data = some_Data$single_AOI_col,
                         fixTime = "fixTime",
