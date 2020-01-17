@@ -44,6 +44,9 @@
 #'   $SecondPass: containing the aggregated second pass durations  
 #'   
 #'   The result will be in the same unit as the duration input.
+#'   
+#'   If the data contains fixations that were outside the AOI, the first line of 
+#'   the results will contain the total fixation duration outside the AOI's.
 #' 
 #' @examples # first generate some data
 #'   some_Data_passes <- data.frame( fixationIndex = 1:28,
@@ -139,10 +142,13 @@ fixDur <- function( data, fixTime, passes )
   
   fixDur.inputChecks( data = data, fixTime = fixTime, passes = passes )
   
+  if( any( data[ , passes] == 0 ) )
+    data0 <- data[ data[ , passes] == 0, ]
   
   data <- data[ data[ , passes] != 0, ]
   
-  # if( !is.character( data[ , passes ] ) ) data[ , passes ] <- as.character( data[ , passes ] )
+  if( !is.character( data[ , passes ] ) )
+    data[ , passes ] <- as.character( data[ , passes ] ) #needed for odd behaviour of factors
   
   splitted_pass <- transpose( 
     as.data.frame( 
@@ -155,6 +161,12 @@ fixDur <- function( data, fixTime, passes )
     result <- aggregate( list( duration = data[ , fixTime ] ),
                          by = list( AOI = splitted_pass[ , 1 ]),
                          FUN = sum )
+    if( exists( "data0" ) )
+    {
+      result0 <- sum( data0[ , fixTime ] )
+      result <- rbind( data.frame( AOI = 0, duration = result0 ),
+                       result )
+    }
   }else 
   {
     result <- aggregate( list( duration = data[ , fixTime ] ),
@@ -163,6 +175,15 @@ fixDur <- function( data, fixTime, passes )
                        FUN = sum )
     
     result <- spread( result, key = "passes", value = "duration", fill = 0, drop = F )
+    
+    if( exists( "data0" ) )
+    {
+      result0 <- sum( data0[ , fixTime ] )
+      result <- rbind( data.frame( AOI = 0, FPF = result0, FPR = NA, SP = NA ),
+                       result )
+    }
+    
+    
     
     if( any( splitted_pass [ , 1 ] == "FPF" ) )
     {
