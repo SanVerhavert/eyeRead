@@ -133,14 +133,25 @@
 #' @export fixDur
 #' 
 
-fixDur <- function( data, fixTime, passes )
+fixDur <- function( data, fixTime, passes, AOI = NULL )
 {
   if( is_tibble( data ) )
   {
     data <- as.data.frame( data )
   }
   
-  fixDur.inputChecks( data = data, fixTime = fixTime, passes = passes )
+  fixDur.inputChecks( data = data, fixTime = fixTime, passes = passes, AOI = AOI )
+  
+  if( !is.null( AOI ) )
+  {
+    if( length( AOI ) == 1 ) AOI <- data[ , AOI ]
+    
+    if( is.factor( AOI ) )
+    {
+      AOI <- data.frame( AOI = levels( AOI ),
+                       stringsAsFactors = F )
+    } else AOI <- data.frame( AOI = unique( AOI ), stringsAsFactors = F )
+  }
   
   if( any( data[ , passes] == 0 ) )
     data0 <- data[ data[ , passes] == 0, ]
@@ -183,7 +194,10 @@ fixDur <- function( data, fixTime, passes )
                        result )
     }
     
+    if( !is.null( AOI ) )
+      result <- merge( result, AOI, by = "AOI", all = T )
     
+    result[ is.na( result ) ] <- 0
     
     if( any( splitted_pass [ , 1 ] == "FPF" ) )
     {
@@ -195,7 +209,7 @@ fixDur <- function( data, fixTime, passes )
   
 }
 
-fixDur.inputChecks <- function( data, fixTime, passes )
+fixDur.inputChecks <- function( data, fixTime, passes, AOI )
 {
   if( !is.data.frame( data ) ) stop( "data should be a data frame" )
   
@@ -212,5 +226,11 @@ fixDur.inputChecks <- function( data, fixTime, passes )
   
   if( is.character( passes ) & !( passes %in% colnames( data ) ) )
     stop( "passes is not a column of data" )
+  
+  if( !is.null( AOI ) & is.character( AOI ) & length( AOI ) == 1 )
+  {
+   if(  !( AOI %in% colnames( data ) ) )
+        stop( "the value provide to AOI is not a column name of data" )
+  }
   
 }
