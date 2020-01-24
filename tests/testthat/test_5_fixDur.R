@@ -25,6 +25,16 @@ test_that( "Function returns the correct error when passes in not in data", {
                 regexp = some_errors$missing_colname_err$passes )
 } )
 
+test_that( "Function returns the correct error when AOI specifies a colname that is not in data", {
+  expect_error(
+    fixDur( data = some_Data$single_AOI_col,
+            fixTime = "fixTime",
+            passes = "passes",
+            AOI = "ABC" ),
+    regexp = some_errors$missing_colname_err$AOI$single
+  )
+} )
+
 test_that( "Function returns the correct error when fixTime contains more than one element", {
   expect_error( fixDur( data = some_Data$single_AOI_col,
                         fixTime = c( "fixTime", "A", "B"),
@@ -71,11 +81,20 @@ test_that( "Function correctly calculates fixation duration for first pass forwa
   )
 } )
 
-test_that( "Function correctly calculates fixation duration with unfixated AOI", {
-  expect_equal( fixDur( data = some_Data$rereading$notFixed,
+test_that( "Function correctly calculates fixation duration full with AOIs unfixed [factor]", {
+  expect_equal( fixDur( data = some_Data$rereading$unFixed$factor,
+                        fixTime = "fixTime",
+                        passes = "passes",
+                        AOI = "AOI" ),
+                some_results$fixDur$unFixed$factor
+  )
+} )
+
+test_that( "Function correctly calculates fixation duration with fixation outside AOI", {
+  expect_equal( fixDur( data = some_Data$rereading$outFix,
                         fixTime = "fixTime",
                         passes = "passes" ),
-                some_results$fixDur$notFixed
+                some_results$fixDur$outFix
   )
 } )
 
