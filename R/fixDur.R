@@ -144,10 +144,13 @@ fixDur <- function( data, fixTime, passes, AOI = NULL )
   
   if( !is.null( AOI ) )
   {
-    if( length( AOI ) == 1 )
+    if( length( AOI ) == 1 ) AOI <- data[ , AOI ]
+    
+    if( is.factor( AOI ) )
     {
-      AOI <- unique( as.character( data[ , AOI ] ) ) #needed for odd behaviour of factors
-    } else AOI <- unique( AOI )
+      AOI <- data.frame( AOI = levels( AOI ),
+                       stringsAsFactors = F )
+    } else AOI <- data.frame( AOI = unique( AOI ), stringsAsFactors = F )
   }
   
   if( any( data[ , passes] == 0 ) )
