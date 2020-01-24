@@ -227,9 +227,9 @@ fixDur.inputChecks <- function( data, fixTime, passes, AOI )
   if( is.character( passes ) & !( passes %in% colnames( data ) ) )
     stop( "passes is not a column of data" )
   
-  if( !is.null( AOI ) & is.character( AOI ) )
+  if( !is.null( AOI ) & is.character( AOI ) & length( AOI ) == 1 )
   {
-   if( length( AOI ) == 1 & !( AOI %in% colnames( data ) ) )
+   if(  !( AOI %in% colnames( data ) ) )
         stop( "the value provide to AOI is not a column name of data" )
   }
   
