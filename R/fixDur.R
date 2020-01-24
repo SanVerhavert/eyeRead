@@ -146,7 +146,7 @@ fixDur <- function( data, fixTime, passes, AOI = NULL )
   
   if( !is.null( AOI ) )
   {
-    if( length( AOI ) == 1 ) AOI <- data[ , AOI ]
+    AOI <- data[ , AOI ]
     
     if( is.factor( AOI ) )
     {

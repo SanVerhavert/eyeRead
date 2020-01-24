@@ -147,17 +147,6 @@ test_that( "Function correctly calculates fixation duration full with AOIs unfix
                 target )
 } )
 
-test_that( "Function correctly calculates fixation duration full with AOIs unfixed [vector]", {
-target <-  some_results$fixDur$unFixed
-target <- target[ -which( target$AOI == "AOI4" ), ]
-
-expect_equal( fixDur( data = some_Data$rereading$unFixed,
-                      fixTime = "fixTime",
-                      passes = "passes",
-                      AOI = some_Data$rereading$unFixed$AOI ),
-              target )
-} )
-
 test_that( "Function correctly calculates fixation duration with fixation outside AOI", {
   expect_equal( fixDur( data = some_Data$rereading$outFix,
                         fixTime = "fixTime",
