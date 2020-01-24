@@ -4,7 +4,7 @@
 \alias{fixDur}
 \title{Fixation Duration}
 \usage{
-fixDur(data, fixTime, passes)
+fixDur(data, fixTime, passes, AOI = NULL)
 }
 \arguments{
 \item{data}{A data frame containing fixation information of an eye tracing 
@@ -13,6 +13,9 @@ experiment and the coded passes. Each row indicates a fixation.}
 \item{fixTime}{The name or number of the column containing the time per fixation.}
 
 \item{passes}{The name or number of the column containing the coded passes.}
+
+\item{AOI}{The name or number of the column in \code{data} containing the name
+of the area of interest (AOI) that was fixated.}
 }
 \value{
 A data frame with the following comumns  
