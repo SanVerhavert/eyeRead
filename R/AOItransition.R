@@ -19,9 +19,9 @@
 #'   X = ID of AOI left
 #'   Y = ID of AOI entered
 #' @examples # The function accepts a single AOI column
-#'   some_Data <- data(SimData )
+#'   data(SimData )
 #'   
-#'   AOItransitions( some_Data$AOI )
+#'   AOItransitions( SimData$AOI )
 #' 
 #' @author Tine van Daal [aut], \email{tine.vandaal@@uantwerpen.be}
 #'   San Verhavert [ctb], \email{san.verhavert@@uantwerpen.be}
