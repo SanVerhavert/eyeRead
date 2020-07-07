@@ -5,16 +5,16 @@
 #' it also contains expected results from functions.  
 #' 
 #' @format A data set with 37 rows and 8 variables
-#' /describe{
-#'   /item{fixationIndex}{a unique numerical index for each fixation}
-#'   /item{AOI1}{1 if AOI1 was fixated at that time and 0 otherwise}
-#'   /item{AOI2}{1 if AOI2 was fixated at that time and 0 otherwise}
-#'   /item{AOI3}{1 if AOI3 was fixated at that time and 0 otherwise}
-#'   /item{AOI}{the name of the AOI that was fixated at that time; expected outcome of codePasses}
-#'   /item{xcoord}{the x coordinate of the fixation position; origin top left}
-#'   /item{ycoord}{the y coordinate of the fixation position; origin top left}
-#'   /item{fixTime}{the time duration that the AOI was fixated}
-#'   /item{passes}{the result of codePasses with rereading = TRUE}
+#' \describe{
+#'   \item{fixationIndex}{a unique numerical index for each fixation}
+#'   \item{AOI1}{1 if AOI1 was fixated at that time and 0 otherwise}
+#'   \item{AOI2}{1 if AOI2 was fixated at that time and 0 otherwise}
+#'   \item{AOI3}{1 if AOI3 was fixated at that time and 0 otherwise}
+#'   \item{AOI}{the name of the AOI that was fixated at that time; expected outcome of codePasses}
+#'   \item{xcoord}{the x coordinate of the fixation position; origin top left}
+#'   \item{ycoord}{the y coordinate of the fixation position; origin top left}
+#'   \item{fixTime}{the time duration that the AOI was fixated}
+#'   \item{passes}{the result of codePasses with \code{rereading = TRUE}}
 #'   }
 #'   
 
