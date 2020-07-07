@@ -4,7 +4,7 @@
 #' It has the correct data structure for use with the package eyeRead. Mind that 
 #' it also contains expected results from functions.  
 #' 
-#' @format A data set with 37 rows and 8 variables
+#' @format A data set with 37 rows and 10 variables
 #' \describe{
 #'   \item{fixationIndex}{a unique numerical index for each fixation}
 #'   \item{AOI1}{1 if AOI1 was fixated at that time and 0 otherwise}
@@ -14,7 +14,8 @@
 #'   \item{xcoord}{the x coordinate of the fixation position; origin top left}
 #'   \item{ycoord}{the y coordinate of the fixation position; origin top left}
 #'   \item{fixTime}{the time duration that the AOI was fixated}
-#'   \item{passes}{the result of codePasses with \code{rereading = TRUE}}
+#'   \item{passes}{the result of codePasses with \code{fix_min = 3}}
+#'   \item{passesReread}{the result of codePasses with  \code{fix_min = 3} and \code{rereading = TRUE}}
 #'   }
 #'   
 
