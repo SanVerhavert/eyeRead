@@ -99,28 +99,28 @@ This function takes a data frame containing information of an eye
   \code{fix_min}.
 }
 \examples{
-  some_Data <- data( "SimData" )
+  data( "SimData" )
   
   ### codePasses calculates first and second  passes
   ## if a single AOI column is provided
   # by name
-  codePasses( data = some_Data, AOI = "AOI" )
+  codePasses( data = SimData, AOI = "AOI" )
   
   # by column number
-  codePasses( data = some_Data, AOI = 5 )
+  codePasses( data = SimData, AOI = 5 )
   
   ## and if multiple AOI columns are provided
   # by name
-  resultA <- codePasses( data = some_Data, 
+  resultA <- codePasses( data = SimData, 
                          AOI = c( "AOI1", "AOI2", "AOI3" ) )
   resultA
   
   # by number
-  codePasses( data = some_Data_multiple, AOI = 2:4 )
+  codePasses( data = SimData, AOI = 2:4 )
   
   ## \\code{fix_min} influences how many fixations are needed in an AOI  
   ## independent of any fixations in between.  
-  resultB <- codePasses( data = some_Data, 
+  resultB <- codePasses( data = SimData, 
                          AOI = c( "AOI1", "AOI2", "AOI3" ), fix_min = 1 )
                          
   data.frame( fix_min3 = resultA, fix_min1 = resultB )
@@ -129,20 +129,20 @@ This function takes a data frame containing information of an eye
   
   ### it also calculates forward and backward first passes if the x and y
   ### coordinates of the fixations are provided and \\code{rereading} is \\code{TRUE}
-  resultA <- codePasses( data = some_Data_topLeft, AOI = "AOI",
+  resultA <- codePasses( data = SimData, AOI = "AOI",
                          rereading = TRUE, fpx = "xcoord", fpy = "ycoord",
                          fix_size = 20 )
   resultA
   
   # and allows for different coordinate origins
   \dontrun{
-    codePasses( data = some_Data_bottomLeft, AOI = "AOI", rereading = TRUE,
+    codePasses( data = SimData, AOI = "AOI", rereading = TRUE,
                 fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
                 fix_size = 20 )
   }
   
   ## mind that fix_size can influence the results
-  resultB <- codePasses( data = some_Data_topLeft, AOI = "AOI",
+  resultB <- codePasses( data = SimData, AOI = "AOI",
                          rereading = TRUE, fpx = "xcoord", fpy = "ycoord",
                          fix_size = 10 )
   

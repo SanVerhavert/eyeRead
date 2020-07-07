@@ -59,23 +59,23 @@ This function is a wrapper for  \code{\link[stats]{aggregate}}
   that case the value in the output will be 0.
 }
 \examples{
-  some_Data <- SimData
+  data( SimData )
                          
   ### This function compiles fixation durations
   ## for first and second passes
   # when the column name is given
-  fixDur( data = some_Data, fixTime = "fixTime", 
+  fixDur( data = SimData, fixTime = "fixTime", 
           passes = "passes" )
           
   # and when column number is given
-  fixDur( data = some_Data, fixTime = 8, passes = 9 )
+  fixDur( data = SimData, fixTime = 8, passes = 9 )
   
   ## for forward and rereading passes
-  fixDur( data = some_Data, fixTime = "fixTime",
+  fixDur( data = SimData, fixTime = "fixTime",
           passes = "passesReread" )
           
   ## and for AOI's
-  fixDur( data = some_Data_passes, fixTime = "fixTime", 
+  fixDur( data = SimData, fixTime = "fixTime", 
           passes = "AOI" )
 
 }

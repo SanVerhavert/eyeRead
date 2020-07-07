@@ -27,9 +27,9 @@ Indicates each time a participant's fixation moves from one AOI to
 }
 \examples{
 # The function accepts a single AOI column
-  some_Data <- data(SimData )
+  data(SimData )
   
-  AOItransitions( some_Data$AOI )
+  AOItransitions( SimData$AOI )
 
 }
 \author{

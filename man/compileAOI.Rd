@@ -34,19 +34,19 @@ This function can be used to convert a wide format eye tracking data
   function does not check for this case.
 }
 \examples{
-  some_Data <- data( SimData )
+  data( SimData )
   
   # compileAOI accepts AOI's as names
-  compileAOI( data = some_Data, AOI = c( "AOI1", "AOI2", "AOI3" ) )
+  compileAOI( data = SimData, AOI = c( "AOI1", "AOI2", "AOI3" ) )
   
   # and as column numbers
-  compileAOI( data = some_Data, AOI = 2:4 )
+  compileAOI( data = SimData, AOI = 2:4 )
   
   # and it returns 0 if some fixations are oitside the provided AOI's
-  compileAOI( data = some_Data, AOI = c( "AOI1", "AOI2" ) )
+  compileAOI( data = SimData, AOI = c( "AOI1", "AOI2" ) )
   
   # it is also possible to suply different lables for the AOI's
-  compileAOI( data = some_Data, AOI = c( "AOI1", "AOI2", "AOI3" ),
+  compileAOI( data = SimData, AOI = c( "AOI1", "AOI2", "AOI3" ),
               labels = c( "1", "2", "3" ) )
   
 }
