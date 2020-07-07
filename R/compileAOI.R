@@ -1,11 +1,11 @@
 #'
-#' @rdname compileAIO
+#' @rdname compileAOI
 #' 
-#' @name compileAIO
+#' @name compileAOI
 #' 
-#' @title compile AIO columns in one column
+#' @title compile AOI columns in one column
 #' 
-#' @description Compiles the information on AIO's in separate variables to one variable
+#' @description Compiles the information on AOI's in separate variables to one variable
 #' 
 #' @param data A data frame containing fixation information of an eye tracing 
 #'   experiment. Each row indicates a fixation.
@@ -16,15 +16,15 @@
 #' 
 #' @details This function can be used to convert a wide format eye tracking data 
 #'   frame to a long format eye tracking data frame. It takes a data frame with 
-#'   multiple binary variables that indicate whether an AIO is fixated on (=1) or 
+#'   multiple binary variables that indicate whether an AOI is fixated on (=1) or 
 #'   not (=0) and returns a vector with the AOI's that were fixated on.  
 #'   
 #'   NOTE: if the names of the AOI columns passed to the function are just numbers, 
 #'   make shure to pass these as character for the function to work properly. The 
 #'   function does not check for this case.
 #' 
-#' @return A factor that contains the AIO fixated on for each row in
-#'   the data frame whereby absence of a fixation on AIO is coded as 0.
+#' @return A factor that contains the AOI fixated on for each row in
+#'   the data frame whereby absence of a fixation on AOI is coded as 0.
 #' 
 #' @examples # First we generate some data
 #'   some_Data <- data.frame( fixationIndex = 1:28,
@@ -69,10 +69,10 @@
 #' @author Tine van Daal [aut], \email{tine.vandaal@@uantwerpen.be}
 #'   San Verhavert [ctb], \email{san.verhavert@@uantwerpen.be}
 #' 
-#' @export compileAIO
+#' @export compileAOI
 #' 
 
-compileAIO <- function( data, AOI, labels = NULL )
+compileAOI <- function( data, AOI, labels = NULL )
 {
   if( !is.data.frame( data ) ) stop( "data should be a data frame" )
   

@@ -228,7 +228,7 @@ codePasses <- function( data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
   
   if( length( AOI ) > 1 )
   {
-    data <- data.frame( data, AOI = compileAIO( data = data, AOI = AOI ),
+    data <- data.frame( data, AOI = compileAOI( data = data, AOI = AOI ),
                         stringsAsFactors = F )
     AOI <- "AOI"
   } else if( is.factor( data[ , AOI ] ) )
