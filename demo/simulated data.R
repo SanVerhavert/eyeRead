@@ -67,6 +67,6 @@ resultCompare
 fixDur( data = SimData, fixTime = "fixTime", 
         passes = "AOI" )
 
-# 2/ the total time of first pass forwar dan rereading and second pass per AOI
+# 2/ the total time of first pass forward and rereading and of second pass per AOI
 fixDur( data = SimData, fixTime = "fixTime", 
         passes = "passes" )
