@@ -9,7 +9,11 @@ Authors@R: c(
     person( given = "Tine",
             family = "van Daal",
             role = c( "aut" ),
-            email = "tine.vandaal@uantwerpen.be" ) )
+            email = "tine.vandaal@uantwerpen.be" ),
+    person( given = "Leen",
+            family = "Catrysse",
+            role = c( "aut" ),
+            email = "Leen.Catrysse@uantwerpen.be" ) )
 Description: This package contains some functions to prepare and analyse eye 
   tracking data of reading exersises. Essentially it identifies first pass and
   second pass fixations and their respective total durations.
