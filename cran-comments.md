@@ -4,7 +4,7 @@
 * ubuntu 16.4 (on Travis-ci), R4.0.0 and devel??
 
 ## R CMD check results
-
+There were no ERRORs, WARNINGs or NOTEs.
 
 ## downstream dependencies
 NONE
