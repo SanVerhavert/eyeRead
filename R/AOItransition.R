@@ -19,12 +19,9 @@
 #'   X = ID of AOI left
 #'   Y = ID of AOI entered
 #' @examples # The function accepts a single AOI column
-#'   some_Data <- c( "AOI1", "AOI1", "AOI2", "AOI2", "AOI3", "AOI4", "AOI7",
-#'                   "AOI7", "AOI7", "AOI7", "AOI3", "AOI3", "AOI7", "AOI4",
-#'                   "AOI4", "AOI4", "AOI5", "AOI2", "AOI2", "AOI4", "AOI2",
-#'                   "AOI1", "AOI1", "AOI6", "AOI6", "AOI3", "AOI5", "AOI6" )
+#'   data(SimData )
 #'   
-#'   AOItransitions( some_Data )
+#'   AOItransitions( SimData$AOI )
 #' 
 #' @author Tine van Daal [aut], \email{tine.vandaal@@uantwerpen.be}
 #'   San Verhavert [ctb], \email{san.verhavert@@uantwerpen.be}

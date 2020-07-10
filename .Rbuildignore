@@ -2,10 +2,19 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 
+# other R files
+^\.Rhistory$
+^tests/testthat/helper_DatRes_hidden\.R$
+^tests/testthat/test_full_hidden\.R$
+^tests/testthat/testdata$
+
+# CRAN submission files
+^cran-comments\.md$
+
 # git and github files
-.gitignore
-README.md
-LICENSE.md
+^\.gitignore$
+^LICENSE\.md$
 
 # Travis CI files
-.travis.yml
+^\.travis\.yml$
+

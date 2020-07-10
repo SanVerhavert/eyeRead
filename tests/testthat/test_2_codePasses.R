@@ -169,6 +169,13 @@ test_that( "Function correctly codes fixations as first pass and second pass wit
   )
 } )
 
+test_that( "Function correctly codes fixations as first pass and second pass with different fix_min", {
+  expect_equal(
+    codePasses( data = some_Data$single_AOI_col, AOI = "AOI", fix_min = 1 ),
+    some_results$fix_min
+  )
+} )
+
 test_that( "Function correctly codes fixations as forward and rereading first pass; origin topLeft [by default; column name]", {
   expect_equal(
     codePasses( data = some_Data$rereading$topLeft,
