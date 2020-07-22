@@ -14,9 +14,7 @@ Authors@R: c(
             family = "Catrysse",
             role = c( "aut" ),
             email = "Leen.Catrysse@uantwerpen.be" ) )
-Description: This package contains some functions to prepare and analyse eye 
-  tracking data of reading exersises. Essentially it identifies first pass and
-  second pass fixations and their respective total durations.
+Description: Functions to prepare and analyse eye tracking data of reading exersises.
 Depends: R (>= 3.6)
 License: GPL-3
 Encoding: UTF-8
