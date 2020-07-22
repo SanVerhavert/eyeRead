@@ -1,7 +1,7 @@
 #' eyeRead: A Package to Prepare/Analyse Eye Tracking Data for Reading
 #' 
 #' This package contains some functions to prepare and analyse eye 
-#' tracking data of reading exersises. Essentially it identifies first pass and 
+#' tracking data of reading exercises. Essentially it identifies first pass and 
 #' second pass fixations and their respective total durations.
 #' 
 #' @section eyeRead functions:  

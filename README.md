@@ -7,7 +7,7 @@
 
 # eyeRead
 `eyeRead` is an R package contains some functions to prepare and analyse eye 
-tracking data of reading exersises. Essentially it identifies first pass and
+tracking data of reading exercises. Essentially it identifies first pass and
 second pass fixations and their respective total durations.  
 
 This package is not yet on CRAN.  
@@ -55,7 +55,7 @@ Mind that gitflow only uses non-fast-forward merges.
 This repository follows the [gitflow logic](https://nvie.com/posts/a-successful-git-branching-model/).  
 
 ### Branch logic
-These are the main banches:
+These are the main branches:
 - master &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Branch containing stable versions; do not commit to this branch;
 Only merge from release branch.
 - release &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Branch for preparing releases; commits to this branch only contain

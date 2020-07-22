@@ -5,7 +5,7 @@ Authors@R: c(
     person( given = "San",
             family = "Verhavert",
             role = c("aut", "cre"),
-            email = "verhavertsan@gmail.be" ),
+            email = "verhavertsan@gmail.com" ),
     person( given = "Tine",
             family = "van Daal",
             role = c( "aut" ),
@@ -14,7 +14,7 @@ Authors@R: c(
             family = "Catrysse",
             role = c( "aut" ),
             email = "Leen.Catrysse@uantwerpen.be" ) )
-Description: Functions to prepare and analyse eye tracking data of reading exersises.
+Description: Functions to prepare and analyse eye tracking data of reading exercises.
 Depends: R (>= 3.6)
 License: GPL-3
 Encoding: UTF-8
@@ -22,7 +22,7 @@ LazyData: true
 Suggests: 
     testthat,
     dplyr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Imports: 
     tibble (>= 2.1.3),
     data.table (>= 1.12.8),
