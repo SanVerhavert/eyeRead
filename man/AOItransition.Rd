@@ -19,7 +19,7 @@ This function retuns a vector containin the transitions from one to
   Y = ID of AOI entered
 }
 \description{
-function to calculate transitions for eye-tracking data
+function to calculate transitions between AOI's for eye-tracking data
 }
 \details{
 Indicates each time a participant's fixation moves from one AOI to 
@@ -27,12 +27,9 @@ Indicates each time a participant's fixation moves from one AOI to
 }
 \examples{
 # The function accepts a single AOI column
-  some_Data <- c( "AOI1", "AOI1", "AOI2", "AOI2", "AOI3", "AOI4", "AOI7",
-                  "AOI7", "AOI7", "AOI7", "AOI3", "AOI3", "AOI7", "AOI4",
-                  "AOI4", "AOI4", "AOI5", "AOI2", "AOI2", "AOI4", "AOI2",
-                  "AOI1", "AOI1", "AOI6", "AOI6", "AOI3", "AOI5", "AOI6" )
+  data(SimData )
   
-  AOItransitions( some_Data )
+  AOItransitions( SimData$AOI )
 
 }
 \author{

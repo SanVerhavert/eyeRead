@@ -4,9 +4,16 @@
 \alias{codePasses}
 \title{Codes the Fixations as First Pass and Second Pass}
 \usage{
-codePasses(data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
-  origin = c("topLeft", "bottomLeft", "center", "topRight",
-  "bottomRight"), fix_size = 42, fix_min = 3)
+codePasses(
+  data,
+  AOI,
+  rereading = FALSE,
+  fpx = NULL,
+  fpy = NULL,
+  origin = c("topLeft", "bottomLeft", "center", "topRight", "bottomRight"),
+  fix_size = 42,
+  fix_min = 3
+)
 }
 \arguments{
 \item{data}{A data frame containing fixation information of an eye tracing 
@@ -20,10 +27,10 @@ column per AOI, also a vector is accepted (see Details).}
 split accoring to forward and rereading (\code{TRUE}) or not 
 (\code{FALSE} [Default])}
 
-\item{fpx}{The name or number of the column containing the X coordinate of the 
+\item{fpx}{The name or number of the column containing the x coordinate of the 
 fixation point. Required if \code{Rereading} is \code{TRUE}.}
 
-\item{fpy}{The name or number of the column containing the Y coordinate of the 
+\item{fpy}{The name or number of the column containing the y coordinate of the 
 fixation point. Required if \code{Rereading} is \code{TRUE}.}
 
 \item{origin}{Character string specifying where the origin of the fixation 
@@ -32,8 +39,7 @@ possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight"
 
 \item{fix_size}{The size or accuity of the saccade. (default = 42; see Details)}
 
-\item{fix_min}{[optional] minimal number of fixations for first pass. See Details.
-Default is 3.}
+\item{fix_min}{[optional] minimal number of fixations for first pass. (default = 3; see Details)}
 }
 \value{
 The function returns a character vector of the same length as the 
@@ -51,13 +57,13 @@ The function returns a character vector of the same length as the
   Where \# stands for the name of the respecitve AOI.
 }
 \description{
-The Fixations are coded as first pass and second pass.
+The fixations are coded as first pass and second pass with or without rereading.
 }
 \details{
 This function takes a data frame containing information of an eye 
   tracking reading exersise Each row indicates a fixation and the columns at 
   least indicate the AOI that was fixated or if a specific AOI was fixated or not. 
-  Optionally it can indicate the X and Y coordinates of the fixation point.  
+  Optionally it can indicate the x and y coordinates of the fixation point.  
   The fixations in this dataset are then coded according to their pass status: 
   first pass and second pass.
   
@@ -75,21 +81,23 @@ This function takes a data frame containing information of an eye
   fixations if \code{rereading} is set to \code{TRUE}. In this case the names 
   of the columns containing the x and y coordinates of the fixation point 
   should be suplied by \code{fpx} and \code{fpy} respectively. The unit of 
-  these coordinates does not matter.
+  these coordinates does not matter as long as it is the same for both and for the 
+  vanue of \code{fix_size}.
   
   It is important to set the minimal distande between fixations (or the visual 
   accuity) via \code{fix_size}. This value is used to determine if two 
-  fixations are on the same hight or width.When this value is to small it is 
-  possible that some first-pass fixations are falsly categorized as rereading 
-  fixations. Specifically \code{fix_size} determines what the minimal distance 
-  between fixations should be in order for fixations to be considered in a 
-  different  location or on a different hight of width. The default value is 
-  specified in pixels(px). The value is the number of pixels equivalent to 2 
-  visual degrees, taken a screen of 1020px and about 54cm in width and a 
-  viewing distance of 60cm. (see \code{\link{px2deg}} for conversions). 
-  The value of 2 visual degrees is the average visual angle of the fovea 
-  (Llewellyn-Thomas, 1968; Haber & Hershenson, 1973). It is recommended to 
-  play around with the \code{fix_size} value for every participant.
+  fixations are on the same line and/or on the same position in the line. 
+  When this value is to small it is possible that some first-pass fixations 
+  are falsly categorized as rereading fixations. Specifically \code{fix_size} 
+  determines what the minimal distance between fixations should be in order 
+  for fixations to be considered in a different  podition on the line or on 
+  a different line. The default value is specified in pixels(px). The value is 
+  the number of pixels equivalent to 2 visual degrees, taken a screen of 
+  1020px and about 54cm in width and a viewing distance of 60cm. 
+  (see \code{\link{px2deg}} for conversions). The value of 2 visual degrees 
+  is the average visual angle of the fovea (Llewellyn-Thomas, 1968; Haber & 
+  Hershenson, 1973). It is recommended to play around with the \code{fix_size} 
+  value for every participant.
   
   By default this function considers the first three (3) fixations in any AOI 
   as first pass fixations. And it does this regardless of whether the fixations
@@ -98,124 +106,54 @@ This function takes a data frame containing information of an eye
   \code{fix_min}.
 }
 \examples{
-#Firts lets generate some data
-  some_Data_single <- data.frame( fixationIndex = 1:28,
-                        AOI = c( "AOI1", "AOI1", "AOI2", "AOI2", "AOI3",
-                                 "AOI4", "AOI7", "AOI7", "AOI7", "AOI7",
-                                 "AOI3", "AOI3", "AOI7", "AOI4", "AOI4",
-                                 "AOI4", "AOI5", "AOI2", "AOI2", "AOI4",
-                                 "AOI2", "AOI1", "AOI1", "AOI6", "AOI6",
-                                 "AOI3", "AOI5", "AOI6" ),
-                       fixTime = c( 373, 113, 123, 150, 120, 563, 320, 
-                                    270, 147, 207, 320, 630, 320, 183,
-                                    207, 230, 210, 247, 447, 157, 323,
-                                    247, 223, 327, 200, 210, 163, 343 ),
-                       stringsAsFactors = FALSE )
-  
-  some_Data_multiple <- data.frame( fixationIndex = 1:28,
-                          AOI1 = c( 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                    0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0,
-                                    0, 0 ),
-                          AOI2 = c( 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                    0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0,
-                                    0, 0 ),
-                          AOI3 = c( 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0,
-                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-                                    0, 0 ),
-                          AOI4 = c( 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-                                    1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
-                                    0, 0 ),
-                          AOI5 = c( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                    0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                    1, 0 ),
-                          AOI6 = c( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,
-                                    0, 1 ),
-                          AOI7 = c( 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1,
-                                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                    0, 0 ) )
-  
-  some_Data_topLeft <- data.frame( fixationIndex = 1:37,
-                         AOI = c( "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
-                                  "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
-                                  "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
-                                  "AOI1", "AOI2", "AOI2", "AOI1", "AOI2",
-                                  "AOI2", "AOI2", "AOI2", "AOI2", "AOI2",
-                                  "AOI2", "AOI2", "AOI2", "AOI2", "AOI2",
-                                  "AOI2", "AOI2", "AOI2", "AOI2", "AOI3",
-                                  "AOI3", "AOI3" ),
-                         xcoord = c( 331, 380, 461, 537, 405, 581, 658, 347,
-                                     391, 482, 563, 640, 363, 417, 509, 347,
-                                     585, 675, 351, 328, 399, 513, 590, 668,
-                                     337, 465, 629, 407, 684, 470, 378, 526,
-                                     549, 370, 390, 511, 434 ),
-                        ycoord = c( 65, 66, 67, 64, 68, 65, 67, 93, 97, 102,
-                                    98, 101, 94, 97, 99, 132, 221, 222, 65,
-                                    258, 253, 256, 257, 256, 301, 294, 294,
-                                    326, 330, 259, 299, 297, 331, 367, 431,
-                                    432, 430 ),
-                        fixTime = c( 373, 113, 123, 150, 120, 563, 320, 270,
-                                     147, 207, 320, 630, 320, 183, 207, 230,
-                                     210, 247, 447, 157, 323, 247, 223, 327,
-                                     200, 210, 163, 343, 233, 180, 173, 423,
-                                     267, 280, 397, 167, 217 ),
-                       stringsAsFactors = FALSE )
-  some_Data_bottomLeft <- data.frame( fixationIndex = 1:37,
-                            AOI = c( "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
-                                     "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
-                                     "AOI1", "AOI1", "AOI1", "AOI1", "AOI1",
-                                     "AOI1", "AOI2", "AOI2", "AOI1", "AOI2",
-                                     "AOI2", "AOI2", "AOI2", "AOI2", "AOI2",
-                                     "AOI2", "AOI2", "AOI2", "AOI2", "AOI2",
-                                     "AOI2", "AOI2", "AOI2", "AOI2", "AOI3",
-                                     "AOI3", "AOI3" ),
-                            xcoord = c( 331, 380, 461, 537, 405, 581, 658,
-                                        347, 391, 482, 563, 640, 363, 417,
-                                        509, 347, 585, 675, 351, 328, 399,
-                                        513, 590, 668, 337, 465, 629, 407,
-                                        684, 470, 378, 526, 549, 370, 390,
-                                        511, 434 ),
-                            ycoord = c( 433, 431, 430, 432, 429, 429, 430,
-                                        403, 400, 400, 397, 394, 402, 399,
-                                        397, 366, 276, 275, 432, 240, 245,
-                                        242, 240, 239, 197, 202, 203, 172,
-                                        167, 239, 199, 200, 165, 130, 65,
-                                        66, 67 ),
-                            stringsAsFactors = FALSE )
+  data( "SimData" )
   
   ### codePasses calculates first and second  passes
   ## if a single AOI column is provided
   # by name
-  codePasses( data = some_Data_single, AOI = "AOI" )
+  codePasses( data = SimData, AOI = "AOI" )
   
   # by column number
-  codePasses( data = some_Data_single, AOI = 2 )
+  codePasses( data = SimData, AOI = 5 )
   
   ## and if multiple AOI columns are provided
   # by name
-  codePasses( data = some_Data_multiple, 
-             AOI = c( "AOI1", "AOI2", "AOI3", "AOI4", "AOI5", "AOI6", "AOI7" ) )
+  resultA <- codePasses( data = SimData, 
+                         AOI = c( "AOI1", "AOI2", "AOI3" ) )
+  resultA
   
   # by number
-  codePasses( data = some_Data_multiple, AOI = 2:8 )
+  codePasses( data = SimData, AOI = 2:4 )
+  
+  ## \code{fix_min} influences how many fixations are needed in an AOI  
+  ## independent of any fixations in between.  
+  resultB <- codePasses( data = SimData, 
+                         AOI = c( "AOI1", "AOI2", "AOI3" ), fix_min = 1 )
+                         
+  data.frame( fix_min3 = resultA, fix_min1 = resultB )
+  
+  rm( resultA, resultB )
   
   ### it also calculates forward and backward first passes if the x and y
-  ### coordinates of the fixations are provided
-  resultA <- codePasses( data = some_Data_topLeft, AOI = "AOI",
+  ### coordinates of the fixations are provided and \code{rereading} is \code{TRUE}
+  resultA <- codePasses( data = SimData, AOI = "AOI",
                          rereading = TRUE, fpx = "xcoord", fpy = "ycoord",
                          fix_size = 20 )
+  resultA
   
   # and allows for different coordinate origins
-  codePasses( data = some_Data_bottomLeft, AOI = "AOI", rereading = TRUE,
-              fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
-               fix_size = 20 )
+  \dontrun{
+    codePasses( data = SimData, AOI = "AOI", rereading = TRUE,
+                fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
+                fix_size = 20 )
+  }
   
   ## mind that fix_size can influence the results
-  resultB <- codePasses( data = some_Data_topLeft, AOI = "AOI",
+  resultB <- codePasses( data = SimData, AOI = "AOI",
                          rereading = TRUE, fpx = "xcoord", fpy = "ycoord",
                          fix_size = 10 )
   
-  result <- data.frame( fix_size20 = resultA, fix_size10 = resultB )
+  data.frame( fix_size20 = resultA, fix_size10 = resultB )
   
 }
 \references{

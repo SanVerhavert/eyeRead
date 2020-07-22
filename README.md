@@ -22,6 +22,14 @@ devtools::install_github( "SanVerhavert/fixationDuration", ref = "dev" )
 It cannot be guaranteed this is a stable version. Check the dev build badge to see
 if the development version is stable (passing).  
 
+## Use
+
+An example on how to use the package can be found in the demo file.  
+You can run a demo after installing the package by running  
+```
+demo( "simulated data", package = "eyeRead" )
+```
+
 
 ## Contribute
 
