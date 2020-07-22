@@ -10,9 +10,9 @@
 #' @param data A data frame containing fixation information of an eye tracking 
 #'   experiment. Each row indicates a fixation.
 #' @param AOI A vector containing the name or number of the columns in \code{data} 
-#'   indicating if the repsective AOI was fixated (1) or not (0).
+#'   indicating if the respective AOI was fixated (1) or not (0).
 #' @param labels [optional] A vector containing the names of the AOI in the same 
-#'   order as the columnnames or -numbers provided to \code{AOI}
+#'   order as the column names or -numbers provided to \code{AOI}
 #' 
 #' @details This function can be used to convert a wide format eye tracking data 
 #'   frame to a long format eye tracking data frame. It takes a data frame with 
@@ -20,7 +20,7 @@
 #'   not (=0) and returns a vector with the AOI's that were fixated on.  
 #'   
 #'   NOTE: if the names of the AOI columns passed to the function are just numbers, 
-#'   make shure to pass these as character for the function to work properly. The 
+#'   make sure to pass these as character for the function to work properly. The 
 #'   function does not check for this case.
 #' 
 #' @return A factor that contains the AOI fixated on for each row in

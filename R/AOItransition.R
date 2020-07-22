@@ -5,7 +5,7 @@
 #' 
 #' @title calculate transitions for eye-tracking data
 #' 
-#' @description function to calculate transitions for eye-tracking data
+#' @description function to calculate transitions between AOI's for eye-tracking data
 #' 
 #' @param AOI character vector with one entry per fixation, containing AOI's upon 
 #'   which was fixated
@@ -13,7 +13,6 @@
 #' @details Indicates each time a participant's fixation moves from one AOI to 
 #'   another
 #' 
-#' @return This function retuns a vector containin the transitions from one to 
 #'   another AOI whereby absence of transition is coded as 0 and transitions are 
 #'   coded as X-Y whereby
 #'   X = ID of AOI left
