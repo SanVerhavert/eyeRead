@@ -18,7 +18,7 @@ experiment and the coded passes. Each row indicates a fixation.}
 of the area of interest (AOI) that was fixated.}
 }
 \value{
-A data frame with the following comumns  
+A data frame with the following columns  
  If the AOI column is provided to \code{passes}:  
   $AOI: containing the AOI names  
   $duration: containing the aggregated durations  
@@ -54,7 +54,7 @@ This function is a wrapper for  \code{\link[stats]{aggregate}}
   converted to a factor if it is not yet the case.
   
   You can provide the names of the AOI's to \code{AOI_label} and indicate if 
-  rereading passes were coded in \code{rereading}. This enures that the output 
+  rereading passes were coded in \code{rereading}. This ensures that the output 
   contains all types of passes for each AOI, even if they did not occur. In 
   that case the value in the output will be 0.
 }

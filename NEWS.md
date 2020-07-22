@@ -1,6 +1,6 @@
 # eyeRead 0.0.5
 
-This is a new package on CRAN aimed to analize eye tracking data for reading experiments.
+This is a new package on CRAN aimed to analyse eye tracking data for reading experiments.
 Suggestions for other applications are always welcome ;)
 
 ## List of functions
@@ -14,4 +14,4 @@ Suggestions for other applications are always welcome ;)
 ## List of datasets and demo's
 
 -simData [dataset]
--sumulated_data [demo]
+-simulated_data [demo]

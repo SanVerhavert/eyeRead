@@ -11,19 +11,17 @@ AOItransitions(AOI)
 \item{AOI}{character vector with one entry per fixation, containing AOI's upon 
 which was fixated}
 }
-\value{
-This function retuns a vector containin the transitions from one to 
-  another AOI whereby absence of transition is coded as 0 and transitions are 
-  coded as X-Y whereby
-  X = ID of AOI left
-  Y = ID of AOI entered
-}
 \description{
 function to calculate transitions between AOI's for eye-tracking data
 }
 \details{
 Indicates each time a participant's fixation moves from one AOI to 
   another
+
+  another AOI whereby absence of transition is coded as 0 and transitions are 
+  coded as X-Y whereby
+  X = ID of AOI left
+  Y = ID of AOI entered
 }
 \examples{
 # The function accepts a single AOI column

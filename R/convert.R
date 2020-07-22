@@ -16,7 +16,7 @@
 #' 
 #' @details When converting from size to degrees (\code{size2deg}), the measurement 
 #'   unit of the distance to the screen (\code{dist}) should be consistent with 
-#'   the measurement unit of the size you are converting rf--from (\code{x}. 
+#'   the measurement unit of the size you are converting from (\code{x}. 
 #'   Namely if the size is in centimeters, then the distance should be to, and if 
 #'   the size is in inches, then the distance should be in inches.
 #' 

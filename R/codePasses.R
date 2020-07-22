@@ -13,7 +13,7 @@
 #'   of the area of interest (AOI) that was fixated. If \code{data} contains one 
 #'   column per AOI, also a vector is accepted (see Details).
 #' @param rereading Logical. Indicating if the first pass fixations should be 
-#'   split accoring to forward and rereading (\code{TRUE}) or not 
+#'   split according to forward and rereading (\code{TRUE}) or not 
 #'   (\code{FALSE} [Default])
 #' @param fpx The name or number of the column containing the x coordinate of the 
 #'   fixation point. Required if \code{Rereading} is \code{TRUE}.
@@ -22,7 +22,7 @@
 #' @param origin Character string specifying where the origin of the fixation 
 #'   coordinates \code{fpx} and \code{fpy} is located. The following values are
 #'   possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight".
-#' @param fix_size The size or accuity of the saccade. (default = 42; see Details)
+#' @param fix_size The size or acuity of the saccade. (default = 42; see Details)
 #' @param fix_min [optional] minimal number of fixations for first pass. (default = 3; see Details)
 #' 
 #' @details This function takes a data frame containing information of an eye 
@@ -39,23 +39,23 @@
 #'   In this case the AOI columns indicate if the respective fixation was in the 
 #'   corresponding AOI (1) or not (0).  
 #'   NOTE: if the names of the AOI columns passed to the function are just numbers, 
-#'   make shure to pass these as character for the function to work properly. The 
+#'   make sure to pass these as character for the function to work properly. The 
 #'   function does not check for this case.
 #'   
-#'   First pass fixations are further devided into forward and rereading 
+#'   First pass fixations are further divided into forward and rereading 
 #'   fixations if \code{rereading} is set to \code{TRUE}. In this case the names 
 #'   of the columns containing the x and y coordinates of the fixation point 
-#'   should be suplied by \code{fpx} and \code{fpy} respectively. The unit of 
+#'   should be supplied by \code{fpx} and \code{fpy} respectively. The unit of 
 #'   these coordinates does not matter as long as it is the same for both and for the 
-#'   vanue of \code{fix_size}.
+#'   value of \code{fix_size}.
 #'   
-#'   It is important to set the minimal distande between fixations (or the visual 
+#'   It is important to set the minimal distance between fixations (or the visual 
 #'   accuity) via \code{fix_size}. This value is used to determine if two 
 #'   fixations are on the same line and/or on the same position in the line. 
 #'   When this value is to small it is possible that some first-pass fixations 
-#'   are falsly categorized as rereading fixations. Specifically \code{fix_size} 
+#'   are falsely categorized as rereading fixations. Specifically \code{fix_size} 
 #'   determines what the minimal distance between fixations should be in order 
-#'   for fixations to be considered in a different  podition on the line or on 
+#'   for fixations to be considered in a different  position on the line or on 
 #'   a different line. The default value is specified in pixels(px). The value is 
 #'   the number of pixels equivalent to 2 visual degrees, taken a screen of 
 #'   1020px and about 54cm in width and a viewing distance of 60cm. 
@@ -66,12 +66,12 @@
 #'   
 #'   By default this function considers the first three (3) fixations in any AOI 
 #'   as first pass fixations. And it does this regardless of whether the fixations
-#'   are consecutive or interupted by fixations in a different AOI. The minimal 
+#'   are consecutive or interrupted by fixations in a different AOI. The minimal 
 #'   number of fixations considered as first pass can be changed through 
 #'   \code{fix_min}.
 #' 
 #' @return The function returns a character vector of the same length as the 
-#'   number of rows in data. Depending on the respecitve settings it contains 
+#'   number of rows in data. Depending on the respective settings it contains 
 #'   the following values with their respective meanings.  
 #'   
 #'   * \code{rereading} is \code{FALSE}:
