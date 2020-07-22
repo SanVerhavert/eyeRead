@@ -26,7 +26,7 @@
 #' @param fix_min [optional] minimal number of fixations for first pass. (default = 3; see Details)
 #' 
 #' @details This function takes a data frame containing information of an eye 
-#'   tracking reading exersise Each row indicates a fixation and the columns at 
+#'   tracking reading exercise Each row indicates a fixation and the columns at 
 #'   least indicate the AOI that was fixated or if a specific AOI was fixated or not. 
 #'   Optionally it can indicate the x and y coordinates of the fixation point.  
 #'   The fixations in this dataset are then coded according to their pass status: 

@@ -14,7 +14,7 @@ Authors@R: c(
             family = "Catrysse",
             role = c( "aut" ),
             email = "Leen.Catrysse@uantwerpen.be" ) )
-Description: Functions to prepare and analyse eye tracking data of reading exersises.
+Description: Functions to prepare and analyse eye tracking data of reading exercises.
 Depends: R (>= 3.6)
 License: GPL-3
 Encoding: UTF-8
