@@ -19,7 +19,7 @@ This function retuns a vector containin the transitions from one to
   Y = ID of AOI entered
 }
 \description{
-function to calculate transitions for eye-tracking data
+function to calculate transitions between AOI's for eye-tracking data
 }
 \details{
 Indicates each time a participant's fixation moves from one AOI to 

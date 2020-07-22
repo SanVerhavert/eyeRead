@@ -40,7 +40,7 @@ A data frame with the following comumns
   the results will contain the total fixation duration outside the AOI's.
 }
 \description{
-Calculates the fixation durations for the first and second passes
+Calculates the fixation durations for the passes or the AOI's
 }
 \details{
 This function is a wrapper for  \code{\link[stats]{aggregate}} 

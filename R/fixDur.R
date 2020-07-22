@@ -5,7 +5,7 @@
 #' 
 #' @title Fixation Duration
 #' 
-#' @description Calculates the fixation durations for the first and second passes
+#' @description Calculates the fixation durations for the passes or the AOI's
 #' 
 #' @param data A data frame containing fixation information of an eye tracing 
 #'   experiment and the coded passes. Each row indicates a fixation.

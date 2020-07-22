@@ -5,7 +5,7 @@
 #' 
 #' @title Codes the Fixations as First Pass and Second Pass
 #' 
-#' @description The Fixations are coded as first pass and second pass.
+#' @description The fixations are coded as first pass and second pass with or without rereading.
 #' 
 #' @param data A data frame containing fixation information of an eye tracing 
 #'   experiment. Each row indicates a fixation.

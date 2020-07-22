@@ -4,9 +4,16 @@
 \alias{codePasses}
 \title{Codes the Fixations as First Pass and Second Pass}
 \usage{
-codePasses(data, AOI, rereading = FALSE, fpx = NULL, fpy = NULL,
-  origin = c("topLeft", "bottomLeft", "center", "topRight",
-  "bottomRight"), fix_size = 42, fix_min = 3)
+codePasses(
+  data,
+  AOI,
+  rereading = FALSE,
+  fpx = NULL,
+  fpy = NULL,
+  origin = c("topLeft", "bottomLeft", "center", "topRight", "bottomRight"),
+  fix_size = 42,
+  fix_min = 3
+)
 }
 \arguments{
 \item{data}{A data frame containing fixation information of an eye tracing 
@@ -50,7 +57,7 @@ The function returns a character vector of the same length as the
   Where \# stands for the name of the respecitve AOI.
 }
 \description{
-The Fixations are coded as first pass and second pass.
+The fixations are coded as first pass and second pass with or without rereading.
 }
 \details{
 This function takes a data frame containing information of an eye 
@@ -118,7 +125,7 @@ This function takes a data frame containing information of an eye
   # by number
   codePasses( data = SimData, AOI = 2:4 )
   
-  ## \\code{fix_min} influences how many fixations are needed in an AOI  
+  ## \code{fix_min} influences how many fixations are needed in an AOI  
   ## independent of any fixations in between.  
   resultB <- codePasses( data = SimData, 
                          AOI = c( "AOI1", "AOI2", "AOI3" ), fix_min = 1 )
@@ -128,7 +135,7 @@ This function takes a data frame containing information of an eye
   rm( resultA, resultB )
   
   ### it also calculates forward and backward first passes if the x and y
-  ### coordinates of the fixations are provided and \\code{rereading} is \\code{TRUE}
+  ### coordinates of the fixations are provided and \code{rereading} is \code{TRUE}
   resultA <- codePasses( data = SimData, AOI = "AOI",
                          rereading = TRUE, fpx = "xcoord", fpy = "ycoord",
                          fix_size = 20 )

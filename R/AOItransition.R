@@ -5,7 +5,7 @@
 #' 
 #' @title calculate transitions for eye-tracking data
 #' 
-#' @description function to calculate transitions for eye-tracking data
+#' @description function to calculate transitions between AOI's for eye-tracking data
 #' 
 #' @param AOI character vector with one entry per fixation, containing AOI's upon 
 #'   which was fixated

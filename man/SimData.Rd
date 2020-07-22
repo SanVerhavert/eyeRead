@@ -4,7 +4,8 @@
 \name{SimData}
 \alias{SimData}
 \title{A simulated dataset with eye tracking data}
-\format{A data set with 37 rows and 10 variables
+\format{
+A data set with 37 rows and 10 variables
 \describe{
   \item{fixationIndex}{a unique numerical index for each fixation}
   \item{AOI1}{1 if AOI1 was fixated at that time and 0 otherwise}
@@ -16,7 +17,8 @@
   \item{fixTime}{the time duration that the AOI was fixated}
   \item{passes}{the result of codePasses with \code{fix_min = 3}}
   \item{passesReread}{the result of codePasses with  \code{fix_min = 3} and \code{rereading = TRUE}}
-  }}
+  }
+}
 \usage{
 SimData
 }
