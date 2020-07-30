@@ -1,3 +1,10 @@
+## resubmission
+This is a resubmission. In this version I have:
+
+* Updated the Description field in DESCRIPTION to
+** include some more details on the package functionalitiy
+** include some details on the usefullness of the package
+
 ## test environments
 * Local Windows 10, R4.0.2
 * ubuntu 16.4 (on Travis-ci), R4.0.0 and devel
