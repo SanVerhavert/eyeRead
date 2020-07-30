@@ -121,11 +121,10 @@
 #'   resultA
 #'   
 #'   # and allows for different coordinate origins
-#'   \dontrun{
-#'     codePasses( data = SimData, AOI = "AOI", rereading = TRUE,
-#'                 fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
-#'                 fix_size = 20 )
-#'   }
+#'   resultB <- codePasses( data = SimData, AOI = "AOI", rereading = TRUE,
+#'                          fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
+#'                          fix_size = 20 )
+#'    data.frame( topLeft = resultA, bottomLeft = resultB )
 #'   
 #'   ## mind that fix_size can influence the results
 #'   resultB <- codePasses( data = SimData, AOI = "AOI",

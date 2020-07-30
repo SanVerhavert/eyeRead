@@ -2,8 +2,9 @@
 This is a resubmission. In this version I have:
 
 * Updated the Description field in DESCRIPTION to
-** include some more details on the package functionalitiy
-** include some details on the usefullness of the package
+** include some more details on the package functionalitiy usefullness
+
+* Removed the \dontrun{}
 
 ## test environments
 * Local Windows 10, R4.0.2
