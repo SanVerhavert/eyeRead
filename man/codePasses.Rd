@@ -61,7 +61,7 @@ The fixations are coded as first pass and second pass with or without rereading.
 }
 \details{
 This function takes a data frame containing information of an eye 
-  tracking reading exersise Each row indicates a fixation and the columns at 
+  tracking reading exercise Each row indicates a fixation and the columns at 
   least indicate the AOI that was fixated or if a specific AOI was fixated or not. 
   Optionally it can indicate the x and y coordinates of the fixation point.  
   The fixations in this dataset are then coded according to their pass status: 
@@ -85,7 +85,7 @@ This function takes a data frame containing information of an eye
   value of \code{fix_size}.
   
   It is important to set the minimal distance between fixations (or the visual 
-  accuity) via \code{fix_size}. This value is used to determine if two 
+  acuity) via \code{fix_size}. This value is used to determine if two 
   fixations are on the same line and/or on the same position in the line. 
   When this value is to small it is possible that some first-pass fixations 
   are falsely categorized as rereading fixations. Specifically \code{fix_size} 
@@ -142,11 +142,10 @@ This function takes a data frame containing information of an eye
   resultA
   
   # and allows for different coordinate origins
-  \dontrun{
-    codePasses( data = SimData, AOI = "AOI", rereading = TRUE,
-                fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
-                fix_size = 20 )
-  }
+  resultB <- codePasses( data = SimData, AOI = "AOI", rereading = TRUE,
+                         fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
+                         fix_size = 20 )
+   data.frame( topLeft = resultA, bottomLeft = resultB )
   
   ## mind that fix_size can influence the results
   resultB <- codePasses( data = SimData, AOI = "AOI",

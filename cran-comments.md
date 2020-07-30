@@ -2,7 +2,7 @@
 This is a resubmission. In this version I have:
 
 * Updated the Description field in DESCRIPTION to
-** include some more details on the package functionalitiy usefullness
+** include some more details on the package functionality and usefullness
 
 * Removed the \dontrun{}
 

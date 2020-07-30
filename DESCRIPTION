@@ -17,7 +17,7 @@ Authors@R: c(
 Description: Functions to prepare and analyse eye tracking data of reading
   exercises. The functions allow some basic data preparations and code fixations 
   as first and second pass. First passes can be further devided into forward and 
-  reading. The package further allows for agregating fixation times per AOI or 
+  reading. The package further allows for aggregating fixation times per AOI or 
   per AOI and per type of pass (first forward, first rereading, second). It is 
   also possible to convert between metric length and visual degrees.
 Depends: R (>= 3.6)

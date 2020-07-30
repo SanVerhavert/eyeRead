@@ -50,7 +50,7 @@
 #'   value of \code{fix_size}.
 #'   
 #'   It is important to set the minimal distance between fixations (or the visual 
-#'   accuity) via \code{fix_size}. This value is used to determine if two 
+#'   acuity) via \code{fix_size}. This value is used to determine if two 
 #'   fixations are on the same line and/or on the same position in the line. 
 #'   When this value is to small it is possible that some first-pass fixations 
 #'   are falsely categorized as rereading fixations. Specifically \code{fix_size} 
