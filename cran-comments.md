@@ -13,6 +13,7 @@ This is a resubmission. In this version I have:
 ** Windows Server 2008 R2 SP1, R-devel
 ** Ubuntu 16.04 LTS, R-release
 ** Fedora, R-devel
+** MacOS 10.13.6, R-release, CRAN setup
 
 
 ## R CMD check results
