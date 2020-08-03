@@ -5,7 +5,8 @@
 #' 
 #' @title Codes the Fixations as First Pass and Second Pass
 #' 
-#' @description The fixations are coded as first pass and second pass with or without rereading.
+#' @description The fixations are coded as first pass and second pass with or without rereading 
+#'   as discussed in Hyönä, Lorch, and Rinck (2003) and Hyönä, and Lorch (2004).
 #' 
 #' @param data A data frame containing fixation information of an eye tracing 
 #'   experiment. Each row indicates a fixation.
@@ -23,7 +24,8 @@
 #'   coordinates \code{fpx} and \code{fpy} is located. The following values are
 #'   possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight".
 #' @param fix_size The size or acuity of the saccade. (default = 42; see Details)
-#' @param fix_min [optional] minimal number of fixations for first pass. (default = 3; see Details)
+#' @param fix_min [optional] minimal number of fixations for first pass. (default = 3; 
+#'   see Details)
 #' 
 #' @details This function takes a data frame containing information of an eye 
 #'   tracking reading exercise Each row indicates a fixation and the columns at 
@@ -137,6 +139,13 @@
 #'   New York: Holt, Rinehart, and Winston, 1973.  
 #'   LLEWELLYN-THOMAS, E. Movements of the eye. Scientific American, 1968, 219, 
 #'   88-95. 
+#'   Hyönä, J., Lorch, R. F., & Rinck, M. (2003). Eye movement measures to study 
+#'   global text processing. In J. Hyönä, R. Radach, & H. Deubel (Eds.), The mind's 
+#'   eye: cognitive and applied aspects of eye movement research (pp. 313-334). 
+#'   Amsterdam: Elsevier Science.
+#'   Hyönä, J., & Lorch, R. F. (2004). Effects of topic headings on text processing: 
+#'   evidence from adult readers’ eye fixation patterns. Learning and Instruction, 
+#'   14(2), 131-152. doi:10.1016/j.learninstruc.2004.01.001
 #' 
 #' @importFrom tibble is_tibble
 #' @importFrom data.table transpose

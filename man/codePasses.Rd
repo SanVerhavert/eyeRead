@@ -39,7 +39,8 @@ possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight"
 
 \item{fix_size}{The size or acuity of the saccade. (default = 42; see Details)}
 
-\item{fix_min}{[optional] minimal number of fixations for first pass. (default = 3; see Details)}
+\item{fix_min}{[optional] minimal number of fixations for first pass. (default = 3; 
+see Details)}
 }
 \value{
 The function returns a character vector of the same length as the 
@@ -57,7 +58,8 @@ The function returns a character vector of the same length as the
   Where \# stands for the name of the respecitve AOI.
 }
 \description{
-The fixations are coded as first pass and second pass with or without rereading.
+The fixations are coded as first pass and second pass with or without rereading 
+  as discussed in Hyönä, Lorch, and Rinck (2003) and Hyönä, and Lorch (2004).
 }
 \details{
 This function takes a data frame containing information of an eye 
@@ -159,5 +161,12 @@ This function takes a data frame containing information of an eye
 HABER, R. N., & HERSHENSON, M. The psychology of visual perception. 
   New York: Holt, Rinehart, and Winston, 1973.  
   LLEWELLYN-THOMAS, E. Movements of the eye. Scientific American, 1968, 219, 
-  88-95.
+  88-95. 
+  Hyönä, J., Lorch, R. F., & Rinck, M. (2003). Eye movement measures to study 
+  global text processing. In J. Hyönä, R. Radach, & H. Deubel (Eds.), The mind's 
+  eye: cognitive and applied aspects of eye movement research (pp. 313-334). 
+  Amsterdam: Elsevier Science.
+  Hyönä, J., & Lorch, R. F. (2004). Effects of topic headings on text processing: 
+  evidence from adult readers’ eye fixation patterns. Learning and Instruction, 
+  14(2), 131-152. doi:10.1016/j.learninstruc.2004.01.001
 }
