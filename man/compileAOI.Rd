@@ -52,5 +52,6 @@ This function can be used to convert a wide format eye tracking data
 }
 \author{
 Tine van Daal [aut], \email{tine.vandaal@uantwerpen.be}
+  
   San Verhavert [ctb], \email{san.verhavert@uantwerpen.be}
 }

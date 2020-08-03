@@ -47,13 +47,19 @@ The function returns a character vector of the same length as the
   number of rows in data. Depending on the respective settings it contains 
   the following values with their respective meanings.  
   
-  * \code{rereading} is \code{FALSE}:
-     + \code{FP_\#} First Pass
-     + \code{SP_\#} Second Pass
-  * \code{rereading} is \code{TRUE}
-     + \code{FPF_\#} First Pass Forward
-     + \code{FPR_\#} First Pass Rereading
-     + \code{SP_\#} Second Pass
+  \itemize{
+    \item \code{rereading} is \code{FALSE}:
+    \itemize{
+      \item \code{FP_\#} First Pass
+      \item \code{SP_\#} Second Pass
+     }
+    \item \code{rereading} is \code{TRUE}
+    \itemize{
+      \item \code{FPF_\#} First Pass Forward
+      \item \code{FPR_\#} First Pass Rereading
+      \item \code{SP_\#} Second Pass
+     }
+  }
   
   Where \# stands for the name of the respecitve AOI.
 }
@@ -158,15 +164,18 @@ This function takes a data frame containing information of an eye
   
 }
 \references{
-Haber, R. N., & Hershenson, M. The psychology of visual perception. 
-    New York: Holt, Rinehart, and Winston, 1973.  
-  Llewellyn-Thomas, E. Movements of the eye. Scientific American, 1968, 219, 
-    88-95. 
+Haber, R. N., & Hershenson, M. (1973) \emph{The psychology of visual perception.} 
+  New York: Holt, Rinehart, and Winston.
+    
+  Llewellyn-Thomas, E. (1968) Movements of the eye. \emph{Scientific American, 219}(2), 
+  88-95.  
+    
   Hyönä, J., Lorch, R. F., & Rinck, M. (2003). Eye movement measures to study 
-    global text processing. In J. Hyönä, R. Radach, & H. Deubel (Eds.), The mind's 
-    eye: cognitive and applied aspects of eye movement research (pp. 313-334). 
-    Amsterdam: Elsevier Science.
+  global text processing. In J. Hyönä, R. Radach, & H. Deubel (Eds.), \emph{The mind's 
+  eye: cognitive and applied aspects of eye movement research} (pp. 313-334). 
+  Amsterdam: Elsevier Science.  
+    
   Hyönä, J., & Lorch, R. F. (2004). Effects of topic headings on text processing: 
-    evidence from adult readers’ eye fixation patterns. Learning and Instruction, 
-    14(2), 131-152. doi:10.1016/j.learninstruc.2004.01.001
+  evidence from adult readers’ eye fixation patterns. \emph{Learning and Instruction, 
+  14}, 131-152. doi:10.1016/j.learninstruc.2004.01.001
 }

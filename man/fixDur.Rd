@@ -81,13 +81,14 @@ This function is a wrapper for  \code{\link[stats]{aggregate}}
 
 }
 \references{
-Hyönä, J., Lorch, R. F., & Rinck, M. (2003). Eye movement measures 
-  to study global text processing. In J. Hyönä, R. Radach, & H. Deubel (Eds.), 
-  The mind's eye: cognitive and applied aspects of eye movement research 
-  (pp. 313-334). Amsterdam: Elsevier Science.
+Hyönä, J., Lorch, R. F., & Rinck, M. (2003). Eye movement measures to study 
+  global text processing. In J. Hyönä, R. Radach, & H. Deubel (Eds.), \emph{The mind's 
+  eye: cognitive and applied aspects of eye movement research} (pp. 313-334). 
+  Amsterdam: Elsevier Science.  
+    
   Hyönä, J., & Lorch, R. F. (2004). Effects of topic headings on text processing: 
-  evidence from adult readers’ eye fixation patterns. Learning and Instruction, 
-  14(2), 131-152. doi:10.1016/j.learninstruc.2004.01.001
+  evidence from adult readers’ eye fixation patterns. \emph{Learning and Instruction, 
+  14}, 131-152. doi:10.1016/j.learninstruc.2004.01.001
 }
 \seealso{
 \code{\link[stats]{aggregate}}, \code{\link[base]{by}}, 
