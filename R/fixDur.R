@@ -5,7 +5,8 @@
 #' 
 #' @title Fixation Duration
 #' 
-#' @description Calculates the fixation durations for the passes or the AOI's
+#' @description Calculates the fixation durations for the passes (Hyönä, Lorch, 
+#'   and Rinck, 2003; Hyönä, and Lorch, 2004) or the AOI's
 #' 
 #' @param data A data frame containing fixation information of an eye tracing 
 #'   experiment and the coded passes. Each row indicates a fixation.
@@ -72,6 +73,16 @@
 #' 
 #' @seealso \code{\link[stats]{aggregate}}, \code{\link[base]{by}}, 
 #'   \code{\link[base]{tapply}}
+#' 
+#' @references
+#'   Hyönä, J., Lorch, R. F., & Rinck, M. (2003). Eye movement measures to study 
+#'   global text processing. In J. Hyönä, R. Radach, & H. Deubel (Eds.), \emph{The mind's 
+#'   eye: cognitive and applied aspects of eye movement research} (pp. 313-334). 
+#'   Amsterdam: Elsevier Science.  
+#'     
+#'   Hyönä, J., & Lorch, R. F. (2004). Effects of topic headings on text processing: 
+#'   evidence from adult readers’ eye fixation patterns. \emph{Learning and Instruction, 
+#'   14}, 131-152. doi:10.1016/j.learninstruc.2004.01.001
 #'
 #' @importFrom stats aggregate
 #' @importFrom tidyr spread

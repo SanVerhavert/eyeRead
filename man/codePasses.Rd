@@ -39,29 +39,37 @@ possible: "topLeft" (default), "bottomLeft", "center", "topRight", "bottomRight"
 
 \item{fix_size}{The size or acuity of the saccade. (default = 42; see Details)}
 
-\item{fix_min}{[optional] minimal number of fixations for first pass. (default = 3; see Details)}
+\item{fix_min}{[optional] minimal number of fixations for first pass. (default = 3; 
+see Details)}
 }
 \value{
 The function returns a character vector of the same length as the 
   number of rows in data. Depending on the respective settings it contains 
   the following values with their respective meanings.  
   
-  * \code{rereading} is \code{FALSE}:
-     + \code{FP_\#} First Pass
-     + \code{SP_\#} Second Pass
-  * \code{rereading} is \code{TRUE}
-     + \code{FPF_\#} First Pass Forward
-     + \code{FPR_\#} First Pass Rereading
-     + \code{SP_\#} Second Pass
+  \itemize{
+    \item \code{rereading} is \code{FALSE}:
+    \itemize{
+      \item \code{FP_\#} First Pass
+      \item \code{SP_\#} Second Pass
+     }
+    \item \code{rereading} is \code{TRUE}
+    \itemize{
+      \item \code{FPF_\#} First Pass Forward
+      \item \code{FPR_\#} First Pass Rereading
+      \item \code{SP_\#} Second Pass
+     }
+  }
   
   Where \# stands for the name of the respecitve AOI.
 }
 \description{
-The fixations are coded as first pass and second pass with or without rereading.
+The fixations are coded as first pass and second pass with or without rereading 
+  as discussed in Hyönä, Lorch, and Rinck (2003) and Hyönä, and Lorch (2004).
 }
 \details{
 This function takes a data frame containing information of an eye 
-  tracking reading exersise Each row indicates a fixation and the columns at 
+  tracking reading exercise Each row indicates a fixation and the columns at 
   least indicate the AOI that was fixated or if a specific AOI was fixated or not. 
   Optionally it can indicate the x and y coordinates of the fixation point.  
   The fixations in this dataset are then coded according to their pass status: 
@@ -85,7 +93,7 @@ This function takes a data frame containing information of an eye
   value of \code{fix_size}.
   
   It is important to set the minimal distance between fixations (or the visual 
-  accuity) via \code{fix_size}. This value is used to determine if two 
+  acuity) via \code{fix_size}. This value is used to determine if two 
   fixations are on the same line and/or on the same position in the line. 
   When this value is to small it is possible that some first-pass fixations 
   are falsely categorized as rereading fixations. Specifically \code{fix_size} 
@@ -142,11 +150,10 @@ This function takes a data frame containing information of an eye
   resultA
   
   # and allows for different coordinate origins
-  \dontrun{
-    codePasses( data = SimData, AOI = "AOI", rereading = TRUE,
-                fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
-                fix_size = 20 )
-  }
+  resultB <- codePasses( data = SimData, AOI = "AOI", rereading = TRUE,
+                         fpx = "xcoord", fpy = "ycoord", origin = "bottomLeft",
+                         fix_size = 20 )
+   data.frame( topLeft = resultA, bottomLeft = resultB )
   
   ## mind that fix_size can influence the results
   resultB <- codePasses( data = SimData, AOI = "AOI",
@@ -157,8 +164,18 @@ This function takes a data frame containing information of an eye
   
 }
 \references{
-HABER, R. N., & HERSHENSON, M. The psychology of visual perception. 
-  New York: Holt, Rinehart, and Winston, 1973.  
-  LLEWELLYN-THOMAS, E. Movements of the eye. Scientific American, 1968, 219, 
-  88-95.
+Haber, R. N., & Hershenson, M. (1973) \emph{The psychology of visual perception.} 
+  New York: Holt, Rinehart, and Winston.
+    
+  Llewellyn-Thomas, E. (1968) Movements of the eye. \emph{Scientific American, 219}(2), 
+  88-95.  
+    
+  Hyönä, J., Lorch, R. F., & Rinck, M. (2003). Eye movement measures to study 
+  global text processing. In J. Hyönä, R. Radach, & H. Deubel (Eds.), \emph{The mind's 
+  eye: cognitive and applied aspects of eye movement research} (pp. 313-334). 
+  Amsterdam: Elsevier Science.  
+    
+  Hyönä, J., & Lorch, R. F. (2004). Effects of topic headings on text processing: 
+  evidence from adult readers’ eye fixation patterns. \emph{Learning and Instruction, 
+  14}, 131-152. doi:10.1016/j.learninstruc.2004.01.001
 }

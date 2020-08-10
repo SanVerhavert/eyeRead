@@ -3,11 +3,15 @@
 #' 
 #' @name convert
 #' 
-#' @aliases size2deg
-#' 
 #' @title convert between units in eye-tracking
 #' 
 #' @description The functions convert  between visual degrees and centimeters, inches or pixels. 
+#'
+NULL 
+
+#' @describeIn convert converts from centimeters to visual degrees
+#' 
+#' @aliases size2deg
 #' 
 #' @param x The value to convert. This can be a single number or a numerical 
 #'   vector.
@@ -43,7 +47,7 @@ size2deg <- function( x, dist )
   rad * 180 / pi
 }
 
-#' @describeIn convert
+#' @describeIn convert converts from pixels to visual degrees
 #' 
 #' @aliases px2deg
 #' 
@@ -76,7 +80,7 @@ px2deg <- function( x, dist, res, screenW )
   size2deg( x, dist )
 }
 
-#' @describeIn convert
+#' @describeIn convert converts from visual degrees to centimeters
 #' 
 #' @aliases deg2size
 #' 
@@ -97,7 +101,7 @@ deg2size <- function( x, dist )
   tan( rad/2 ) * 2 * dist
 }
 
-#' @describeIn convert
+#' @describeIn convert converts from visual degrees to pixels
 #' 
 #' @aliases deg2px
 #' 
