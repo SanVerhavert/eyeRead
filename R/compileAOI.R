@@ -42,7 +42,9 @@
 #'   compileAOI( data = SimData, AOI = c( "AOI1", "AOI2", "AOI3" ),
 #'               labels = c( "1", "2", "3" ) )
 #'   
-#' @author Tine van Daal [aut], \email{tine.vandaal@@uantwerpen.be}
+#' @author
+#'   Tine van Daal [aut], \email{tine.vandaal@@uantwerpen.be}
+#'   
 #'   San Verhavert [ctb], \email{san.verhavert@@uantwerpen.be}
 #' 
 #' @export compileAOI

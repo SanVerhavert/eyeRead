@@ -50,11 +50,13 @@ When converting from pixels to degrees (\code{px2deg}), the measurement
 }
 \section{Functions}{
 \itemize{
-\item \code{px2deg}: 
+\item \code{size2deg}: converts from centimeters to visual degrees
 
-\item \code{deg2size}: 
+\item \code{px2deg}: converts from pixels to visual degrees
 
-\item \code{deg2px}: 
+\item \code{deg2size}: converts from visual degrees to centimeters
+
+\item \code{deg2px}: converts from visual degrees to pixels
 }}
 
 \examples{
