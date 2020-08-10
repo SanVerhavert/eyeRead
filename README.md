@@ -3,7 +3,7 @@
 ##### development version (in dev branch)
 [![Dev Build](https://travis-ci.org/SanVerhavert/eyeRead.png?branch=dev)](https://travis-ci.org/SanVerhavert/eyeRead) [![Dev codecov](https://codecov.io/gh/SanVerhavert/eyeRead/branch/dev/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/eyeRead)
 ##### Release version (in master branch)
-[![Build](https://travis-ci.org/SanVerhavert/eyeRead.png?branch=master)](https://travis-ci.org/SanVerhavert/eyeRead) [![codecov](https://codecov.io/gh/SanVerhavert/eyeRead/branch/master/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/eyeRead)
+[![version](https://img.shields.io/github/v/release/SanVerhavert/eyeRead)]() [![Build](https://travis-ci.org/SanVerhavert/eyeRead.png?branch=master)](https://travis-ci.org/SanVerhavert/eyeRead) [![codecov](https://codecov.io/gh/SanVerhavert/eyeRead/branch/master/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/eyeRead)
 
 LICENSE [![license](https://img.shields.io/github/license/SanVerhavert/eyeRead)](https://github.com/SanVerhavert/eyeRead/blob/master/LICENSE)
 
