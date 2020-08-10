@@ -1,9 +1,11 @@
 
-![CRAN_Version](http://www.r-pkg.org/badges/version/eyeRead)  
+[![CRAN_Version](http://www.r-pkg.org/badges/version/eyeRead)](https://CRAN.R-project.org/package=eyeRead) [![CRAN_Date](https://www.r-pkg.org/badges/last-release/eyeRead)]()  
 ##### development version (in dev branch)
 [![Dev Build](https://travis-ci.org/SanVerhavert/eyeRead.png?branch=dev)](https://travis-ci.org/SanVerhavert/eyeRead) [![Dev codecov](https://codecov.io/gh/SanVerhavert/eyeRead/branch/dev/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/eyeRead)
 ##### Release version (in master branch)
 [![Build](https://travis-ci.org/SanVerhavert/eyeRead.png?branch=master)](https://travis-ci.org/SanVerhavert/eyeRead) [![codecov](https://codecov.io/gh/SanVerhavert/eyeRead/branch/master/graph/badge.svg)](https://codecov.io/gh/SanVerhavert/eyeRead)
+
+LICENSE [![license](https://img.shields.io/github/license/SanVerhavert/eyeRead)](https://github.com/SanVerhavert/eyeRead/blob/master/LICENSE)
 
 # eyeRead
 `eyeRead` is an R package contains some functions to prepare and analyse eye 
